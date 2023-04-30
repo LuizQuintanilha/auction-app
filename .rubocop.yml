@@ -1,0 +1,58 @@
+require: 
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.0.3
+  NewCops: enable
+  SuggestExtensions: false
+  CacheRootDirectory: ./tmp/rubocop/
+  Exclude:
+    - 'bin//*'
+    - 'vendor//'
+    - 'db/**/'
+    - 'node_modules//*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+    - 'config/spring.rb'
+    - 'config/puma.rb'
+    - 'config/initializers/'
+    - 'config/environments/'
+    - 'config/boot.rb'
+    - 'config/application.rb'
+    - 'Rakefile'
+    - 'Gemfile'
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
+  Exclude: 
+    - 'config/environments//*'
+
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Enabled: false
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+Metrics/ParameterLists:
+  Enabled: false
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Layout/EndOfLine:
+  Enabled: False
+
+Style/ClassAndModuleChildren:
+  Enabled: false

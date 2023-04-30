@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'Admin authenticate itself' do 
-  it 'sucessely' do
+  it 'successfully' do
     #arrange
-    admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
+    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
     #act
     visit root_path
     click_on 'Login'
@@ -18,8 +18,8 @@ describe 'Admin authenticate itself' do
     expect(page).to have_content 'Signed in successfully.'
   end
 
-  it 'and logout' do 
-    admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
+  it 'and logout' do
+    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
 
     visit root_path
     click_on 'Login'
