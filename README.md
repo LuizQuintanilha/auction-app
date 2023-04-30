@@ -7,7 +7,7 @@ https://github.com/users/LuizQuintanilha/projects/2
 
 ## Gems
 
-| Ressource | Version|
+| Resource | Version|
 |:---|:---:|
 | bootsnap | 1.4.4 |
 | puma | 5.0 |
