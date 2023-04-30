@@ -1,16 +1,16 @@
 require 'rails_helper'
 
-describe 'Admin authenticate itself' do 
+describe 'Admin authenticate itself' do
   it 'successfully' do
-    #arrange
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
-    #act
+    # arrange
+    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+    # act
     visit root_path
     click_on 'Login'
     fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
-    #assert
+    # assert
     expect(current_path).to eq root_path
     expect(page).not_to have_link 'Login'
     expect(page).to have_button 'Sair'
@@ -19,7 +19,7 @@ describe 'Admin authenticate itself' do
   end
 
   it 'and logout' do
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456')
+    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
     visit root_path
     click_on 'Login'
