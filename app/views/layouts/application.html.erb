@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AuctionApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application" %>
+  </head>
+
+  <body>
+    <header>
+      <h1>Leilão de Estoque</h1>
+    </header>
+
+    <nav>
+     <% if admin_signed_in? %>
+        <%= current_admin.email  %>
+        <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Login', new_admin_session_path  %>
+      <% end %>
+    </nav>
+
+    <main>
+      <div>
+        <%= notice %>
+      </div>
+      <%= yield %>
+    </main>
+    
+  </body>
+</html>
