@@ -5,6 +5,8 @@ Este projeto se trata de uma aplicação  web com Ruby on Rails que servirá par
 ## Projeto Treinadev - Fluxo de atividades
 https://github.com/users/LuizQuintanilha/projects/2
 
+https://github.com/LuizQuintanilha/auction-app/issues/3
+
 ## Gems
 
 | Resource | Version|

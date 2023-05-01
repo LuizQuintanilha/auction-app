@@ -1,0 +1,9 @@
+pt-BR:
+  activerecord:
+    models:
+      admin: 'Administrador'
+    attributes:
+      admin:
+        cpf: "CPF"  
+    
+      

@@ -49,7 +49,6 @@ class CpfValidator < ActiveModel::EachValidator
     validation = sum % 11
     valid = 11 - validation
     verification = valid > 9 ? 0 : valid
-
     verification == cpf_splitted[9].to_i
   end
 
