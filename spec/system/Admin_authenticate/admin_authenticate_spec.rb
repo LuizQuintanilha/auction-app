@@ -24,6 +24,7 @@ describe 'Admin authenticate itself' do
 
   it 'and logout' do
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -35,7 +36,7 @@ describe 'Admin authenticate itself' do
     end
     click_on 'Sair'
 
-    # expect(page).to have_content 'Signed out successfully.'
+    #expect(page).to have_content 'Signed out successfully.'
     expect(page).to have_link 'Entrar'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'luiz@leilaodogalpao.com.br'

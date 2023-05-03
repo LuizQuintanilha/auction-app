@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :show]
+  before_action :authenticate_admin!, only: [:new, :create, :show, :edit, :update]
 
   def new
     @product = Product.new
@@ -20,6 +20,22 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+  end
+
+  def edit
+    @product = Product.find(params[:id])
+    @categories = Category.all
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      flash[:notice] = 'Produto atualizado com sucesso.'
+      redirect_to @product
+    else
+      flash.now[:notice] = 'Não foi possível atualizar dados do produto.'
+      render 'edit'
+    end
   end
 
   private

@@ -17,6 +17,7 @@ describe 'Admin view all products registered' do
       fill_in 'Password', with: '123456'
       click_on 'Entrar'
     end
+    
     expect(current_path).to eq root_path
     expect(page).to have_content 'Leilão de Estoque'
     expect(page).to have_content 'Produto:'
@@ -24,6 +25,7 @@ describe 'Admin view all products registered' do
   end
   it 'and dont exist products registered' do
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+
     visit root_path
     within('nav') do
       click_on 'Entrar'
@@ -33,6 +35,7 @@ describe 'Admin view all products registered' do
       fill_in 'Password', with: '123456'
       click_on 'Entrar'
     end
+
     expect(current_path).to eq root_path
     expect(page).to have_content 'Sem produtos cadastrados.'
   end

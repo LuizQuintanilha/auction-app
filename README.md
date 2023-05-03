@@ -2,6 +2,8 @@
 ## Sobre:
 Este projeto se trata de uma aplicação  web com Ruby on Rails que servirá para conectar o público em geral com o estoque de itens abandonados, permitindo que estes itens sejam comercializados com preços atrativos e que, ao mesmo tempo, os galpões tenham seus espaços melhor aproveitados. O formato escolido foi o de leilão de itens.
 
+Projeto criado com --minimal e --skip -test
+
 ## Projeto Treinadev - Fluxo de atividades
 https://github.com/users/LuizQuintanilha/projects/2
 
@@ -21,6 +23,7 @@ https://github.com/LuizQuintanilha/auction-app/issues/3
 | sqlite | 1.4 |
 | capybara ||
 | pry-byebug ||
+| 
 
 ## Instalando projeto: 
 ### Instalando gems:

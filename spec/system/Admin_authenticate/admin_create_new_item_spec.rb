@@ -4,6 +4,7 @@ describe 'Admin access the itens form' do
   context 'and view the form' do
     it 'from the homepage' do
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+
       visit root_path
       within('nav') do
         click_on 'Entrar'
@@ -26,7 +27,9 @@ describe 'Admin access the itens form' do
       expect(page).to have_button 'Salvar'
     end
     it 'and has not access' do
+
       visit new_product_path
+
       expect(current_path).to eq new_admin_session_path
       expect(page).not_to have_link 'Cadastrar Produto'
       expect(page).to have_field 'Email'
@@ -37,6 +40,7 @@ describe 'Admin access the itens form' do
     it 'sucessfully' do
       Category.create!(name: 'Informática')
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+
       visit root_path
       within('nav') do
         click_on 'Entrar'
@@ -65,6 +69,7 @@ describe 'Admin access the itens form' do
     it 'unsucessfully' do
       Category.create!(name: 'Informática')
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+
       visit root_path
       within('nav') do
         click_on 'Entrar'
@@ -78,6 +83,7 @@ describe 'Admin access the itens form' do
       fill_in 'Name', with: ''
       fill_in 'Description', with: ''
       click_on 'Salvar'
+      
       expect(page).to have_content 'Não foi possível cadastrar produto.'
     end
   end

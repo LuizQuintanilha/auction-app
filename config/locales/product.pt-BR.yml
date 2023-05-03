@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      product: 'Produto'
+      product: Produto
     attributes:
       product:
         name: "Nome"
@@ -12,7 +12,3 @@ pt-BR:
         depth: "Profundiade"
         description: "Descrição"
         code: "Código"
-      category: "Categoria"
-    attributes:
-      category:
-        name: 'Categoria'

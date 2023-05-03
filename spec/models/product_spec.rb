@@ -4,7 +4,8 @@ RSpec.describe Product, type: :model do
   describe '#valid?' do
     context 'presence' do
       it 'true when all fields are filled in' do
-        allow(SecureRandom).to receive(:alphanumeric).with(10).and_return 'luizab1234'
+        allow(SecureRandom).to receive(:alphanumeric).with(10).and_return 'luizBb1234'
+        aleatorio = SecureRandom.alphanumeric(10)
         product_category = Category.create!(name: 'Informática')
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', photo: '3x4', weight: 90, width: 12, height: 4,
@@ -13,7 +14,7 @@ RSpec.describe Product, type: :model do
         result = produto.valid?
         expect(result).to eq true
         produto.save
-        expect(produto.code).to eq 'luizab1234'
+        expect(produto.code).to eq 'luizBb1234'
       end
       it 'false when name is empty' do
         product_category = Category.create!(name: 'Informática')
