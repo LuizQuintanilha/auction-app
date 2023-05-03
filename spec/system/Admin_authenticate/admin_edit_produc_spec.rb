@@ -53,6 +53,5 @@ describe 'Admin edit a product' do
     click_on 'Salvar'
 
     expect(page).to have_content 'Não foi possível atualizar dados do produto.'
-  
   end
 end

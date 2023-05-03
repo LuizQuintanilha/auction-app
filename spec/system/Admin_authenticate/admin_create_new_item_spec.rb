@@ -14,6 +14,7 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
+      click_on 'Produtos Cadastrados'
       click_on 'Cadastrar Produto'
       # Assert
       expect(current_path).to eq new_product_path
@@ -28,7 +29,7 @@ describe 'Admin access the itens form' do
     end
     it 'and has not access' do
 
-      visit new_product_path
+      visit products_path
 
       expect(current_path).to eq new_admin_session_path
       expect(page).not_to have_link 'Cadastrar Produto'
@@ -50,6 +51,7 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
+      click_on 'Produtos Cadastrados'
       click_on 'Cadastrar Produto'
       fill_in 'Name', with: 'Monitor AOC 21 polegadas'
       fill_in 'Photo', with: '3x4'
@@ -62,7 +64,7 @@ describe 'Admin access the itens form' do
       select 'Informática', from: 'Category'
       click_on 'Salvar'
 
-      expect(current_path).to eq root_path
+      expect(current_path).to eq products_path
       expect(page).to have_content 'Produto cadastrado com sucesso.'
       expect(page).to have_link 'Monitor AOC 21 polegadas'
     end
@@ -79,6 +81,7 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
+      click_on 'Produtos Cadastrados'
       click_on 'Cadastrar Produto'
       fill_in 'Name', with: ''
       fill_in 'Description', with: ''

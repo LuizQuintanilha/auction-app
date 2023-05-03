@@ -1,6 +1,9 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :show, :edit, :update]
-
+  before_action :authenticate_admin!, only: [:index, :new, :create, :show, :edit, :update]
+  def index
+    @products = Product.all
+  end
+  
   def new
     @product = Product.new
     @categories = Category.all
@@ -10,7 +13,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     if @product.save
       flash[:notice] = 'Produto cadastrado com sucesso.'
-      redirect_to root_path
+      redirect_to products_path
     else
       @categories = Category.all
       flash.now[:notice] = 'Não foi possível cadastrar produto.'
@@ -33,6 +36,7 @@ class ProductsController < ApplicationController
       flash[:notice] = 'Produto atualizado com sucesso.'
       redirect_to @product
     else
+      @categories = Category.all
       flash.now[:notice] = 'Não foi possível atualizar dados do produto.'
       render 'edit'
     end
