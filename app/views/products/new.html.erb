@@ -1,5 +1,13 @@
 <h1>Cadastrar Produto</h1>
 
+<% if @product.errors.any? %>
+  <% @product.errors.full_messages.each.each do |msg| %>
+    <div>
+      <%= msg %>
+    <div>
+  <% end %>
+<% end %>
+
 <%= form_with(model: @product) do |f| %>
   <div>
     <%= f.label :name %>

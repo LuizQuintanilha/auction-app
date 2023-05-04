@@ -1,1 +1,39 @@
 <h1>Cadastrar Lote</h1>
+
+<% if @product_batch.errors.any? %>
+  <% @product_batch.errors.full_messages.each.each do |msg| %>
+    <div>
+      <%= msg %>
+    <div>
+  <% end %>
+<% end %>
+
+<%= form_with(model: @product_batch) do |f| %>
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+  <div>
+    <%= f.label :start_date %>
+    <%= f.date_field :start_date %>
+  </div>
+    <div>
+    <%= f.label :deadline %>
+    <%= f.date_field :deadline %>
+  </div>
+  <div>
+    <%= f.label :minimum_value %>
+    <%= f.number_field :minimum_value, step: '0.01' %>
+  </div>
+   <div>
+    <%= f.label :minimal_difference %>
+    <%= f.number_field :minimal_difference, step: '0.01' %>
+  </div>
+  <div>
+    <%= f.label :Status %>
+  </div>
+  <div>
+    <%= f.submit 'Salvar' %>
+  </div>
+
+<% end %>
