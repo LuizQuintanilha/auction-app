@@ -1,0 +1,13 @@
+<h2>Iten(s) para Leilão</h2>
+
+<h3><%= link_to 'Cadastrar Item', new_product_path %></h3>
+
+<% @products.each do |product| %>
+<div> 
+  <div>
+    <strong>Produto: </strong><%= link_to product.name, product_path(@product.id) %> /
+    <strong>Lance inicial: R$ </strong><%= @product_batch.minimum_value %> -
+    <strong>Último Lance: R$ </strong><%= @product_batch.minimal_difference %>
+  </div>
+<% end %>
+  

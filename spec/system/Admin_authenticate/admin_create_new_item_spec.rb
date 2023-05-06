@@ -41,6 +41,12 @@ describe 'Admin access the itens form' do
     it 'sucessfully' do
       Category.create!(name: 'Informática')
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      product_category = Category.create!(name: 'Informática')
+      eletrodomestico = Category.create!(name:'Eletrodoméstico')
+      produto = Product.create!(name: 'Mouse', photo: '3x4', weight: 90, width: 12, height: 4,
+                                depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
+      produto = Product.create!(name:'Microondas', photo: '8x16', weight: 90, width: 12, height: 4, 
+                                depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
 
       visit root_path
       within('nav') do
@@ -61,7 +67,7 @@ describe 'Admin access the itens form' do
       fill_in 'Depth', with: '5'
       fill_in 'Description', with: 'MONITOR AOC B1 SERIES, 21, VA, FHD, 6MS, 75HZ,
                                     FLICKER FREE E LOW BLUE MODE, VGA/HDMI, 24B1XHM'
-      select 'Informática', from: 'Category'
+      #select 'Informática', from: 'Product'
       click_on 'Salvar'
 
       expect(current_path).to eq products_path

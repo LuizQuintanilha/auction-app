@@ -11,13 +11,13 @@
 
   <body>
     <header>
-      <h1>Leilão de Estoque</h1>
+      <h1><%= link_to  'Leilão de Estoque', root_path %></h1>
       <%= link_to 'Produtos Cadastrados', products_path %> |
       <%= link_to 'Lotes Cadastrados', product_batches_path %> | 
     </header>
 
     <nav>
-     <% if admin_signed_in? %>
+     <% if admin_signed_in?%>
         <%= current_admin.email  %>
         <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
       <% else %>

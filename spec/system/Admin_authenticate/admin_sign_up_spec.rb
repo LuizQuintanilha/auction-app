@@ -7,7 +7,7 @@ describe 'Admin sign up' do
     within('nav') do
       click_on 'Entrar'
     end
-    click_on 'Criar conta'
+    click_on 'Criar Conta'
     within('form') do
       fill_in 'Cpf', with: '12662381744'
       fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
@@ -28,7 +28,7 @@ describe 'Admin sign up' do
     within('nav') do
       click_on 'Entrar'
     end
-    click_on 'Criar conta'
+    click_on 'Criar Conta'
     within('form') do
       fill_in 'Cpf', with: '12662381700'
       fill_in 'Email', with: 'luana@leilaodogalpao.com.br'

@@ -10,6 +10,10 @@
 
 <%= form_with(model: @product_batch) do |f| %>
   <div>
+      <%= f.label :product_id %>
+      <%= f.collection_select(:product_id, @products , :id, :name)%>
+    </div>
+  <div>
     <%= f.label :code %>
     <%= f.text_field :code %>
   </div>
