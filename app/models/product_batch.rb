@@ -5,12 +5,19 @@ class ProductBatch < ApplicationRecord
   validates :start_date, :deadline, :minimum_value, presence: true
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true
+  before_save :remove_unchecked_products
 
   
   def date_validator
     if self.start_date.present? && self.start_date >= Date.today
       self.errors.add(:start_date,  "A data não pode ser inferior a data atual")
     end
+  end
+
+  private
+
+  def remove_unchecked_products
+    self.product_ids.reject!(&:blank?)
   end
 
   def difference_validator(minimal_difference)

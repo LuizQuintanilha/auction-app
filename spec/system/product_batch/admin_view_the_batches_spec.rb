@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Admin view all product batch registered' do
   context 'with status' do
+    
     it 'approved' do
       # Arrange
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
@@ -23,6 +24,7 @@ describe 'Admin view all product batch registered' do
       expect(page).to have_content 'Lotes Cadastrados'
       expect(page).to have_content 'ACB112233'
     end
+
     it 'wait_approve' do
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
@@ -44,6 +46,7 @@ describe 'Admin view all product batch registered' do
       expect(page).to have_button 'Aprovar'
     end
   end
+
   it "don't have batch's register" do
     # Arrange
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')

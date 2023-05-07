@@ -23,7 +23,7 @@ https://github.com/LuizQuintanilha/auction-app/issues/3
 | sqlite | 1.4 |
 | capybara ||
 | pry-byebug ||
-| 
+| activestorage | 5.2' |
 
 ## Instalando projeto: 
 ### Instalando gems:

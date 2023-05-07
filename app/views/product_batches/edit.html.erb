@@ -11,8 +11,10 @@
 <%= form_with(model: @product_batch) do |f| %>
   <div>
     <%= f.label :product_ids %>
-    <%= f.collection_check_boxes(:product_ids, Product.where(status: 2) , :id, :name)%>
-  </div>
+    <%= f.collection_check_boxes(:product_ids, Product.all, :id, :name) do |products| %>
+      <%= products.check_box(checked: @product_batch.product_ids.include?(products.value.to_i)) %>
+      <%= products.label %>
+    <% end %>
   <div>
     <%= f.label :code %>
     <%= f.text_field :code %>

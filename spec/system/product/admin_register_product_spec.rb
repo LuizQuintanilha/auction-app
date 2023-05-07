@@ -33,13 +33,16 @@ describe 'Admin access the itens form' do
     it 'sucessfully' do
       Category.create!(name: 'Informática')
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      product_category = Category.create!(name: 'Informática')
       eletrodomestico = Category.create!(name:'Eletrodoméstico')
-      produto = Product.create!(name: 'Mouse', photo: '3x4', weight: 90, width: 12, height: 4,
-                                depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
-      produto = Product.create!(name:'Microondas', photo: '8x16', weight: 90, width: 12, height: 4, 
+      informatica = Category.create!(name: 'Informática')
+      mouse_produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
+                                depth: 6, description: 'MOUSE OFFICE TGT P90', category: informatica)
+      produto = Product.new(name:'Microondas', weight: 90, width: 12, height: 4, 
                                 depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
-
+      mouse_produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+      mouse_produto.save
+      produto.save
+      
       visit root_path
       within('nav') do
         click_on 'Entrar'
@@ -52,20 +55,19 @@ describe 'Admin access the itens form' do
       within('nav') do
         click_on 'Cadastrar Produto'
       end
-      fill_in 'Name', with: 'Monitor AOC 21 polegadas'
-      fill_in 'Photo', with: '3x4'
-      fill_in 'Weight', with: '3000'
-      fill_in 'Width', with: '50'
-      fill_in 'Height', with: '35'
-      fill_in 'Depth', with: '5'
-      fill_in 'Description', with: 'MONITOR AOC B1 SERIES, 21, VA, FHD, 6MS, 75HZ,
-                                    FLICKER FREE E LOW BLUE MODE, VGA/HDMI, 24B1XHM'
-      #select 'Informática', from: 'Product'
+      fill_in 'Name', with: 'Mouse Red LG'
+      attach_file 'Photo', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+      fill_in 'Weight', with: '300'
+      fill_in 'Width', with: '4'
+      fill_in 'Height', with: '8'
+      fill_in 'Depth', with: '3'
+      fill_in 'Description', with: 'MOUSE RED LG ULTIMA GERAÇÃO'
+      select 'Eletrodoméstico', from: 'Category'
       click_on 'Salvar'
 
       expect(current_path).to eq products_path
       expect(page).to have_content 'Produto cadastrado com sucesso.'
-      expect(page).to have_link 'Monitor AOC 21 polegadas'
+      expect(page).to have_link 'Mouse Red LG'
     end
     it 'unsucessfully' do
       Category.create!(name: 'Informática')

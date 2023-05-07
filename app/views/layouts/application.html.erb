@@ -15,7 +15,6 @@
       <%= link_to 'Produtos Cadastrados', products_path %> |
       <%= link_to 'Lotes Cadastrados', product_batches_path %> | 
     </header>
-
     <nav>
      <% if admin_signed_in?%>
         <%= current_admin.email  %>
@@ -29,7 +28,6 @@
         <%= link_to 'Entrar', new_admin_session_path  %>
       <% end %>
     </nav>
-
     <main>
       <div>
         <%= notice %>

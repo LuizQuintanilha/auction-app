@@ -1,5 +1,5 @@
 class ProductBatchesController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :admin_aprove_batch, :edit, :update ]
+  before_action :authenticate_admin!, only: %i[new, create, admin_aprove_batch, edit, update]
  
   def index
     @product_batches = ProductBatch.where(status: 2)
@@ -49,9 +49,15 @@ class ProductBatchesController < ApplicationController
 
   def update
     @product_batch = ProductBatch.find(params[:id])
+    current_products = @product_batch.product_ids
     if @product_batch.update(product_batch_params)
       @product_batch.product_ids.each do |product_id|
         Product.where(id: product_id).update(status: 0)
+      end
+      current_products.each do |prod|
+        unless @product_batch.product_ids.include?(prod)
+          Product.where(id: prod).update(status: 2)
+        end
       end
       flash[:notice] = 'Lote editado com sucesso.'
       redirect_to aprove_path

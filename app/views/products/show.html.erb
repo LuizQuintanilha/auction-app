@@ -1,6 +1,9 @@
 <h1><%= @product.name %></h1>
 
 <div>
+  <%= image_tag url_for(@product.photo) %>
+<div>
+<div>
   <strong>Código:</strong> <%= @product.code %>
 </div>
 <div>
@@ -15,9 +18,6 @@
 <div>
   <strong>Peso:</strong> <%= @product.weight %>g
 </div>
-<div>
-  <strong>Imagem ilustrativa:</strong> <%= @product.photo %>
-  <div>
   <strong>Status:</strong> <%= @product.status %>
 </div>
 </div>

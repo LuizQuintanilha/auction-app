@@ -14,6 +14,7 @@ describe 'User from the homepage' do
         expect(page).to have_link 'Lotes Cadastrados'
       end
     end
+
     it 'to all products registered' do
       visit root_path
       click_on 'Produtos Cadastrados'
@@ -21,6 +22,7 @@ describe 'User from the homepage' do
       expect(current_path).to eq products_path
       expect(page).to have_content 'Produtos Cadastrados'
     end
+
     it 'to all batches registered' do
       visit root_path
       click_on 'Lotes Cadastrados'
@@ -28,7 +30,8 @@ describe 'User from the homepage' do
       expect(current_path).to eq product_batches_path
       expect(page).to have_content 'Lotes Cadastrados'
     end
-    it 'fill-in all the fields to login' do 
+    
+    it 'fill-in all the fields to login' do
     end
   end
 end

@@ -5,10 +5,14 @@ describe 'Admin add item for batch' do
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     product_category = Category.create!(name: 'Informática')
     eletrodomestico = Category.create!(name:'Eletrodoméstico')
-    produto = Product.create!(name: 'Mouse', photo: '3x4', weight: 90, width: 12, height: 4,
+    mouse_product = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
                               depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
-    produto = Product.create!(name:'Microondas', photo: '8x16', weight: 90, width: 12, height: 4, 
+    mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+    microondas_product = Product.new(name:'Microondas',  weight: 90, width: 12, height: 4, 
                               depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
+    microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')), filename: 'microondas.png')
+    microondas_product.save
+    mouse_product.save
 
     visit root_path
     within('nav') do
