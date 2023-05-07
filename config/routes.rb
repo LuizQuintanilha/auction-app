@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :new, :create, :show, :edit, :update]
 
 
-  resources :product_batches, only: [:index, :new, :create, :show ] do
+  resources :product_batches, only: [:index, :new, :create, :show, :edit, :update] do
     patch :approve, :wait_approve, on: :member
   end
 

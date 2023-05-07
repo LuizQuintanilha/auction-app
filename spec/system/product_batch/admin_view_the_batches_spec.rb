@@ -1,24 +1,48 @@
 require 'rails_helper'
 
-describe 'Admin view all product batch registred' do
-  it 'from the homepage' do
-    # Arrange
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+describe 'Admin view all product batch registered' do
+  context 'with status' do
+    it 'approved' do
+      # Arrange
+      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
+      lote.approve!
+      # Act
+      visit root_path
+      within('nav') do
+        click_on 'Entrar'
+      end
+      within('form') do
+        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
+        fill_in 'Password', with: '123456'
+        click_on 'Entrar'
+      end
+      click_on 'Lotes Cadastrados'
+      # Assert
+      expect(current_path).to eq product_batches_path
+      expect(page).to have_content 'Lotes Cadastrados'
+      expect(page).to have_content 'ACB112233'
+    end
+    it 'wait_approve' do
+      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
+      visit root_path
+      within('nav') do
+        click_on 'Entrar'
+      end
+      within('form') do
+        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
+        fill_in 'Password', with: '123456'
+        click_on 'Entrar'
+      end
+      click_on 'Aprovar lote'
 
-    # Act
-    visit root_path
-    within('nav') do
-      click_on 'Entrar'
+      expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
+      expect(page).to have_content 'ACB112233'
+      expect(page).to have_content 'Status:'
+      expect(page).to have_content 'wait_approve'
+      expect(page).to have_button 'Aprovar'
     end
-    within('form') do
-      fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      click_on 'Entrar'
-    end
-    click_on 'Lotes Cadastrados'
-    # Assert
-    expect(current_path).to eq product_batches_path
-    expect(page).to have_content 'Lotes Cadastrados'
   end
   it "don't have batch's register" do
     # Arrange

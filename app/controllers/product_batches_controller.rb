@@ -1,5 +1,5 @@
 class ProductBatchesController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :admin_aprove_batch ]
+  before_action :authenticate_admin!, only: [:new, :create, :admin_aprove_batch, :edit, :update ]
  
   def index
     @product_batches = ProductBatch.where(status: 2)
@@ -41,6 +41,24 @@ class ProductBatchesController < ApplicationController
     @product_batch = ProductBatch.find(params[:id])
     @product_batch.approve!
     redirect_to @product_batch, notice: 'Aprovado'
+  end
+
+  def edit
+    @product_batch = ProductBatch.find(params[:id])
+  end
+
+  def update
+    @product_batch = ProductBatch.find(params[:id])
+    if @product_batch.update(product_batch_params)
+      @product_batch.product_ids.each do |product_id|
+        Product.where(id: product_id).update(status: 0)
+      end
+      flash[:notice] = 'Lote editado com sucesso.'
+      redirect_to aprove_path
+    else
+      flash.now[:notice] = 'Nao foi possível editar o lote.'
+      render 'edit'
+    end
   end
 
   private

@@ -14,10 +14,9 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
-      within('header') do
-        click_on 'Produtos Cadastrados'
+      within('nav') do
+        click_on 'Cadastrar Produto'
       end
-      click_on 'Cadastrar Produto'
       # Assert
       expect(current_path).to eq new_product_path
       expect(page).to have_field 'Name'
@@ -50,8 +49,9 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
-      click_on 'Produtos Cadastrados'
-      click_on 'Cadastrar Produto'
+      within('nav') do
+        click_on 'Cadastrar Produto'
+      end
       fill_in 'Name', with: 'Monitor AOC 21 polegadas'
       fill_in 'Photo', with: '3x4'
       fill_in 'Weight', with: '3000'
@@ -80,8 +80,9 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
-      click_on 'Produtos Cadastrados'
-      click_on 'Cadastrar Produto'
+      within('nav') do
+        click_on 'Cadastrar Produto'
+      end
       fill_in 'Name', with: ''
       fill_in 'Description', with: ''
       click_on 'Salvar'

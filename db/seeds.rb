@@ -25,3 +25,4 @@ produto = Product.create!(name:'SMARTV', photo: '8x16', weight: 90, width: 12, h
 produto = Product.create!(name:'Sofa', photo: '8x16', weight: 90, width: 12, height: 4, 
                                   depth: 6, description: sofa, category: moveis)
 
+lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)

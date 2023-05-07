@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Admin add item for batch' do
+describe 'Admin approve a batch' do
   it 'sucessfully' do
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     product_category = Category.create!(name: 'Informática')
@@ -9,6 +9,7 @@ describe 'Admin add item for batch' do
                               depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
     produto = Product.create!(name:'Microondas', photo: '8x16', weight: 90, width: 12, height: 4, 
                               depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
+    lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
 
     visit root_path
     within('nav') do
@@ -19,19 +20,15 @@ describe 'Admin add item for batch' do
       fill_in 'Password', with: '123456'
       click_on 'Entrar'
     end
+    click_on 'Aprovar lote'
+    click_on 'Aprovar'
 
-    click_on 'Cadastrar Lote'
-    check 'Mouse'
-    check 'Microondas'
-    fill_in 'Code', with: 'ABC112233'
-    fill_in 'Start date', with: Date.today
-    fill_in 'Deadline', with: 3.days.from_now
-    fill_in 'Minimum value', with: 1000
-    click_on 'Salvar'
+    expect(page).to have_content 'Iten(s) para Leilão'
+    expect(page).to have_content 'Aprovado'
+    expect(page).to have_content 'Início'
+    expect(page).to have_content 'Término'
+    expect(page).to have_content 'Lance Mínimo:'
+    expect(page).to have_content 'Término'
 
-    expect(current_path).to eq aprove_path
-    expect(page).to have_content 'Código do lote: ABC112233'
-    expect(page).to have_content 'Status: wait_approve'
-    expect(page).to have_button 'Aprovar'
   end
 end

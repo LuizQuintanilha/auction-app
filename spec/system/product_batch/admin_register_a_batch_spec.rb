@@ -45,7 +45,6 @@ describe 'From the homepage' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
-
       click_on 'Aprovar lote'
       click_on 'Cadastrar Lote'
       check 'Microondas'
@@ -56,9 +55,11 @@ describe 'From the homepage' do
       click_on 'Salvar'
       # Assert
       expect(page).to have_link('ABC123456')
-
+      expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
+      expect(page).to have_content 'Status:'
+      expect(page).to have_content 'wait_approve'
+      expect(page).to have_button 'Aprovar'
     end
-
     it 'unsucessfully' do
       # Arrange
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
