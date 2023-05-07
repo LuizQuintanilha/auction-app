@@ -1,15 +1,9 @@
 <h2>Lotes Cadastrados</h2>
-<div>
-  <%= link_to 'Cadastrar Lote', new_product_batch_path %>
-</div>
-
 <% if @product_batches.any? %>
 
   <% @product_batches.each do |batch| %>
     <div>
-      <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %> |
-      <strong>Início:</strong> <%= batch.start_date %> |
-      <strong>Término:</strong> <%= batch.deadline %>
+      <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %>
     </div>
   <% end %>
 <% else %>

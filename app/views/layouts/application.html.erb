@@ -19,7 +19,12 @@
     <nav>
      <% if admin_signed_in?%>
         <%= current_admin.email  %>
-        <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
+        <div>
+          <%= link_to 'Cadastrar Produto', new_product_path  %> |
+          <%= link_to 'Cadastrar Lote', new_product_batch_path %> |
+          <%= link_to 'Aprovar lote', aprove_path  %> |
+          <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
+        <div>
       <% else %>
         <%= link_to 'Entrar', new_admin_session_path  %>
       <% end %>

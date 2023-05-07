@@ -1,6 +1,8 @@
 class ProductBatch < ApplicationRecord
-  has_many :product
-  validates :start_date, :deadline, :minimum_value, :product_id, presence: true
+  enum status: { wait_approve: 0, approve: 2}
+  has_many :product_batch_items
+  has_many :products, through: :product_batch_items
+  validates :start_date, :deadline, :minimum_value, presence: true
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true
 

@@ -19,7 +19,6 @@ describe 'Admin view all product batch registred' do
     # Assert
     expect(current_path).to eq product_batches_path
     expect(page).to have_content 'Lotes Cadastrados'
-    expect(page).to have_link 'Cadastrar Lote'
   end
   it "don't have batch's register" do
     # Arrange

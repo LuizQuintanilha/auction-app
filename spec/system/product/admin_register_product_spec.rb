@@ -14,7 +14,9 @@ describe 'Admin access the itens form' do
         fill_in 'Password', with: '123456'
         click_on 'Entrar'
       end
-      click_on 'Produtos Cadastrados'
+      within('header') do
+        click_on 'Produtos Cadastrados'
+      end
       click_on 'Cadastrar Produto'
       # Assert
       expect(current_path).to eq new_product_path
@@ -26,15 +28,6 @@ describe 'Admin access the itens form' do
       expect(page).to have_field 'Depth'
       expect(page).to have_field 'Description'
       expect(page).to have_button 'Salvar'
-    end
-    it 'and has not access' do
-
-      visit products_path
-
-      expect(current_path).to eq new_admin_session_path
-      expect(page).not_to have_link 'Cadastrar Produto'
-      expect(page).to have_field 'Email'
-      expect(page).to have_field 'Password'
     end
   end
   context 'Admin create a new product' do

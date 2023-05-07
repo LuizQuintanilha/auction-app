@@ -21,7 +21,6 @@ describe 'Admin authenticate itself' do
     expect(page).to have_content 'luiz@leilaodogalpao.com.br'
     expect(page).to have_content 'Signed in successfully.'
   end
-
   it 'and logout' do
     Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 

@@ -10,9 +10,9 @@
 
 <%= form_with(model: @product_batch) do |f| %>
   <div>
-      <%= f.label :product_id %>
-      <%= f.collection_select(:product_id, @products , :id, :name)%>
-    </div>
+    <%= f.label :product_ids %>
+    <%= f.collection_check_boxes(:product_ids, Product.where(status: 2) , :id, :name)%>
+  </div>
   <div>
     <%= f.label :code %>
     <%= f.text_field :code %>

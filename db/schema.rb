@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_05_201827) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_06_234647) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -30,17 +30,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_201827) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "product_batch_items", force: :cascade do |t|
+    t.integer "product_batch_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_batch_id"], name: "index_product_batch_items_on_product_batch_id"
+    t.index ["product_id"], name: "index_product_batch_items_on_product_id"
+  end
+
   create_table "product_batches", force: :cascade do |t|
     t.string "code"
     t.datetime "start_date"
     t.datetime "deadline"
     t.decimal "minimum_value"
     t.decimal "minimal_difference"
-    t.string "status"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "product_id", null: false
-    t.index ["product_id"], name: "index_product_batches_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -55,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_201827) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id", default: 0, null: false
+    t.integer "status", default: 2
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
@@ -71,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_05_201827) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "product_batches", "products"
+  add_foreign_key "product_batch_items", "product_batches"
+  add_foreign_key "product_batch_items", "products"
   add_foreign_key "products", "categories"
 end

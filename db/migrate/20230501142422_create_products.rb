@@ -9,7 +9,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.integer :depth
       t.string :description
       t.string :code
-
+      
       t.timestamps
     end
   end

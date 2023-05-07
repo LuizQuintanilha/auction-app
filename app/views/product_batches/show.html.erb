@@ -1,13 +1,19 @@
 <h2>Iten(s) para Leilão</h2>
+<strong>Início:</strong> <%= @product_batch.start_date %> |
+<strong>Término:</strong> <%= @product_batch.deadline %>
+<div>
+  <strong>Lance Mínimo: </strong>R$<%= @product_batch.minimum_value %> 
+</div>
 
-<h3><%= link_to 'Cadastrar Item', new_product_path %></h3>
-
-<% @products.each do |product| %>
-<div> 
+<% @product_batch.products.each do |product| %>
   <div>
-    <strong>Produto: </strong><%= link_to product.name, product_path(@product.id) %> /
-    <strong>Lance inicial: R$ </strong><%= @product_batch.minimum_value %> -
-    <strong>Último Lance: R$ </strong><%= @product_batch.minimal_difference %>
+    <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
+  </div>
+   <div>
+    <strong>Descrição: </strong><%= product.description %> 
   </div>
 <% end %>
+<%= link_to 'Voltar', product_batches_path %>
   
+
+

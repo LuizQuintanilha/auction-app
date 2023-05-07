@@ -6,7 +6,7 @@ class CreateProductBatches < ActiveRecord::Migration[7.0]
       t.datetime :deadline
       t.decimal :inimum_value
       t.decimal :minimal_difference
-      t.string :status
+      t.integer :status, default: 0
 
       t.timestamps
     end

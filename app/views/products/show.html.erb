@@ -17,11 +17,14 @@
 </div>
 <div>
   <strong>Imagem ilustrativa:</strong> <%= @product.photo %>
+  <div>
+  <strong>Status:</strong> <%= @product.status %>
+</div>
 </div>
 <div>
   <%= link_to 'Editar', edit_product_path%>
 </div>
 
 <div>
-  <%= link_to 'Voltar', root_path %>
+  <%= link_to 'Voltar', products_path %>
 </div>
