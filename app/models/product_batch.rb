@@ -8,12 +8,17 @@ class ProductBatch < ApplicationRecord
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true
   before_save :remove_unchecked_products
-  validate :created_by_different_from_approved_by
+  validate :date_validator
+  #validate :created_by_different_from_approved_by
+  # validate :starting_bid_must_be_greater_than_minimum_value
 
 
   def date_validator
-    if self.start_date.present? && self.start_date >= Date.today
+    if self.start_date.present? && self.start_date < Date.today
       self.errors.add(:start_date,  "A data não pode ser inferior a data atual")
+    end
+    if self.deadline.present? && self.deadline < start_date
+      self.errors.add(:deadline, 'A data inválida')
     end
   end
 
@@ -29,10 +34,18 @@ class ProductBatch < ApplicationRecord
     end
   end
 
-  def difference_validator(minimal_difference)
-    minimal_difference = initial_batch - ultimate_batch
-    if ultimate_batch < minimum_value
-      product_batch.errors.add(:minimal_difference, "Valor de lance não pode ser inferior ao Lance Inicial do item.")
+=begin
+  def starting_bid_must_be_greater_than_minimum_value
+    if starting_bid.present? && starting_bid < minimum_value
+      errors.add(:starting_bid, "O lance inicial deve ser maior que o valor mínimo.")
     end
   end
+
+  def last_bid_must_be_greater_than_starting_bid
+    if last_bid.present? && last_bid < minimum_value + minimal_difference
+      errors.add(:last_bid, "O lance deve ser maior que o valor atual.")
+    end
+  end
+=end
+
 end
