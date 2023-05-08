@@ -45,13 +45,14 @@ class ProductBatchesController < ApplicationController
   end
   
   def approve
+    @product_batches = ProductBatch.all
     @product_batch = ProductBatch.find(params[:id])
     @product_batch.approved_by = current_admin
     if @product_batch.save
       @product_batch.approve!
       redirect_to @product_batch, notice: 'Aprovado'
     else
-      redirect_to @product_batch, notice:  'Não pode ser o mesmo admininistrador para aprovar o lote'
+      redirect_to @product_batch, notice:  'Não pode ser o mesmo administrador para aprovar o lote'
     end
   end
 
@@ -62,6 +63,7 @@ class ProductBatchesController < ApplicationController
   def update
     @product_batch = ProductBatch.find(params[:id])
     current_products = @product_batch.product_ids
+    @product_batch.created_by = current_admin
     if @product_batch.update(product_batch_params)
       @product_batch.product_ids.each do |product_id|
         Product.where(id: product_id).update(status: 0)
@@ -71,6 +73,7 @@ class ProductBatchesController < ApplicationController
           Product.where(id: prod).update(status: 2)
         end
       end
+
       flash[:notice] = 'Lote editado com sucesso.'
       redirect_to aprove_path
     else

@@ -4,13 +4,13 @@ class ProductBatch < ApplicationRecord
   enum status: { wait_approve: 0, approve: 2}
   has_many :product_batch_items
   has_many :products, through: :product_batch_items
-  validates :start_date, :deadline, :minimum_value, presence: true
+  validates :start_date, :deadline, :minimum_value, :minimal_difference, presence: true
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true
   before_save :remove_unchecked_products
   validate :date_validator
-  #validate :created_by_different_from_approved_by
-  # validate :starting_bid_must_be_greater_than_minimum_value
+  validate :created_by_different_from_approved_by
+ 
 
 
   def date_validator
@@ -24,7 +24,7 @@ class ProductBatch < ApplicationRecord
 
   private
 
-  def remove_unchecked_products
+  def remove_unchecked_products  
     self.product_ids.reject!(&:blank?)
   end
 
@@ -34,18 +34,15 @@ class ProductBatch < ApplicationRecord
     end
   end
 
-=begin
+=begin ##colocar esta regra no model de user
   def starting_bid_must_be_greater_than_minimum_value
     if starting_bid.present? && starting_bid < minimum_value
       errors.add(:starting_bid, "O lance inicial deve ser maior que o valor mínimo.")
     end
   end
 
-  def last_bid_must_be_greater_than_starting_bid
-    if last_bid.present? && last_bid < minimum_value + minimal_difference
-      errors.add(:last_bid, "O lance deve ser maior que o valor atual.")
-    end
+  def minimum_bid_difference
+    last_bid >= self.minimum_value + self.starting_bid + self.minimal_difference
   end
 =end
-
 end

@@ -1,6 +1,7 @@
 # Admin seed
 
-Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
+luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
+luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
 informatica = Category.create!(name:'Informática')
 eletronico = Category.create!(name:'Eletrônico')

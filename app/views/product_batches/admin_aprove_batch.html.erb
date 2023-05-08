@@ -4,13 +4,21 @@
     <div>
       <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %> |
       <strong>Status:</strong> <%= batch.status %>
-      <%= batch.created_by.email if batch.created_by %>
-      <% if batch.approved_by.present? %>
-        <p><strong>Aprovado por:</strong> <%= batch.approved_by.email %></p>
+
+      <% if batch.wait_approve? %>
+        <%= link_to 'Editar', edit_product_batch_path(batch.id) %>
       <% end %>
+
+      <p><strong>Criado por:</strong> <%= batch.created_by.email if batch.created_by %>
+
+      <% if batch.approved_by.present? %>
+        <strong>Aprovado por:</strong> <%= batch.approved_by.email if batch.approved_by%>
+      <% end %>
+
       <%if batch.wait_approve? %>
         <%= button_to "Aprovar", approve_product_batch_path(batch.id), {method: 'patch'}%>
       <%end%>
+      
     </div>
   <% end %>
 <% else %>

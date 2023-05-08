@@ -6,21 +6,22 @@ describe 'Admin view all product batch registered' do
     it 'approved' do
       # Arrange
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
-      lote.approve!
+      lote = ProductBatch.create!(ccode: 'ACB112233', start_date: Date.today, 
+                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
+      
       # Act
       login_as(admin, :scope => :admin)
       visit root_path
-      click_on 'Lotes Cadastrados'
+      click_on 'Aprovar lote'
       # Assert
-      expect(current_path).to eq product_batches_path
-      expect(page).to have_content 'Lotes Cadastrados'
+      expect(current_path).to eq aprove_path
+      expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
       expect(page).to have_content 'ACB112233'
     end
 
     it 'wait_approve' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600)
+      lote = ProductBatch.create!(created_by: admin, code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
       visit root_path
       within('nav') do
         click_on 'Entrar'
