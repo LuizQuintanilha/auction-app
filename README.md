@@ -24,7 +24,7 @@ https://github.com/LuizQuintanilha/auction-app/issues/3
 | capybara ||
 | pry-byebug ||
 | activestorage | 5.2' |
-
+| simplecov |
 ## Instalando projeto: 
 ### Instalando gems:
 
