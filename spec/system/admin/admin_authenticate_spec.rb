@@ -8,7 +8,7 @@ describe 'Admin authenticate itself' do
     login_as(admin, :scope => :admin)
     visit root_path
     # assert
-    expect(page).not_to have_link 'Entrar'
+    expect(page).not_to have_link 'Admin'
     expect(page).to have_button 'Sair'
     expect(page).to have_content 'luiz@leilaodogalpao.com.br'
   end
@@ -20,7 +20,7 @@ describe 'Admin authenticate itself' do
     click_on 'Sair'
 
     #expect(page).to have_content 'Signed out successfully.'
-    expect(page).to have_link 'Entrar'
+    expect(page).to have_link 'Admin'
     expect(page).not_to have_button 'Sair'
     expect(page).not_to have_content 'luiz@leilaodogalpao.com.br'
   end

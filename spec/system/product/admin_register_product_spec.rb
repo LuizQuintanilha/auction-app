@@ -7,7 +7,7 @@ describe 'Admin access the itens form' do
 
       login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
+      within('nav.admin') do
         click_on 'Cadastrar Produto'
       end
       # Assert
@@ -38,7 +38,7 @@ describe 'Admin access the itens form' do
       
       login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
+      within('nav.admin') do
         click_on 'Cadastrar Produto'
       end
       fill_in 'Name', with: 'Mouse Red LG'
@@ -61,7 +61,7 @@ describe 'Admin access the itens form' do
 
       login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
+      within('nav.admin') do
         click_on 'Cadastrar Produto'
       end
       fill_in 'Name', with: ''

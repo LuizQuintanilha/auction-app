@@ -1,6 +1,6 @@
 def login(admin)
-  within('nav') do
-    click_on 'Entrar'
+  within('nav.admin') do
+    click_on 'Admin'
   end
   within('form') do
     fill_in 'Email', with: admin.email

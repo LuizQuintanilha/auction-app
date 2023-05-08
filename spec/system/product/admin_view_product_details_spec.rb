@@ -12,8 +12,8 @@ describe 'Admin view products details' do
     produto.save
 
     visit root_path
-    within('nav') do
-      click_on 'Entrar'
+    within('nav.admin') do
+      click_on 'Admin'
     end
     within('form') do
       fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'

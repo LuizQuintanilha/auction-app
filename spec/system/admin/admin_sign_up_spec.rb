@@ -4,8 +4,8 @@ describe 'Admin sign up' do
   it 'successfully' do
 
     visit root_path
-    within('nav') do
-      click_on 'Entrar'
+    within('nav.admin') do
+      click_on 'Admin'
     end
     click_on 'Criar Conta'
     within('form') do
@@ -26,8 +26,8 @@ describe 'Admin sign up' do
     it 'when cpf is invalid' do
 
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
+      within('nav.admin') do
+        click_on 'Admin'
       end
       click_on 'Criar Conta'
       within('form') do
@@ -44,8 +44,8 @@ describe 'Admin sign up' do
     it 'when cpf is already in used' do
       Admin.create!(cpf: 12662381744, email: 'luiz@leilaodogalpao.com.br', password: '123456', password_confirmation: '123456')
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
+      within('nav.admin') do
+        click_on 'Admin'
       end
       click_on 'Criar Conta'
       within('form') do
@@ -62,8 +62,8 @@ describe 'Admin sign up' do
     it 'when email is invalid' do
 
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
+      within('nav.admin') do
+        click_on 'Admin'
       end
       click_on 'Criar Conta'
       within('form') do
@@ -80,8 +80,8 @@ describe 'Admin sign up' do
     it 'when password is too short' do
 
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
+      within('nav.admin') do
+        click_on 'Admin'
       end
       click_on 'Criar Conta'
       within('form') do

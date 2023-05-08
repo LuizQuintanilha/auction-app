@@ -15,7 +15,17 @@
       <%= link_to 'Produtos Cadastrados', products_path %> |
       <%= link_to 'Lotes Cadastrados', product_batches_path %> | 
     </header>
-    <nav>
+
+    <nav class="user">
+        <% if user_signed_in?%>
+          <%= current_user.email  %>
+          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to 'Usuário', new_user_session_path  %>
+        <% end %>
+    </nav>
+
+    <nav class="admin">
      <% if admin_signed_in?%>
         <%= current_admin.email  %>
         <div>
@@ -25,9 +35,10 @@
           <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
         <div>
       <% else %>
-        <%= link_to 'Entrar', new_admin_session_path  %>
+        <%= link_to 'Admin', new_admin_session_path  %>
       <% end %>
     </nav>
+    
     <main>
       <div>
         <%= notice %>

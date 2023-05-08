@@ -14,13 +14,12 @@ describe 'Admin edit batch' do
       microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')), filename: 'microondas.png')
       microondas_product.save
       mouse_product.save
-      lote = ProductBatch.create!(code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, 
-                                  minimum_value: 600, product_ids: [mouse_product.id])
+      lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, 
+                                  minimum_value: 600, minimal_difference: 80)
 
       login_as(admin, :scope => :admin)
       visit root_path   
       click_on 'Aprovar lote'
-      click_on 'ACB112233'
       click_on 'Editar'
       uncheck 'Mouse'
       check 'Microondas'
@@ -32,7 +31,7 @@ describe 'Admin edit batch' do
 
       lote
       expect(page).to have_content 'Lote editado com sucesso.'
-      #expect(mouse_product.status).to eq 'available'
-      #expect(microondas_product.status).not_to eq 'available'
+      expect(mouse_product.status).to eq 'available'
+      expect(microondas_product.reload.status).not_to eq 'available'
     end
 end

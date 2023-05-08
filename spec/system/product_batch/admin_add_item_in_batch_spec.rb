@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Admin add item for batch' do
   it 'sucessfully' do
+    luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     product_category = Category.create!(name: 'Informática')
     eletrodomestico = Category.create!(name:'Eletrodoméstico')
@@ -24,6 +25,7 @@ describe 'Admin add item for batch' do
     fill_in 'Start date', with: Date.today
     fill_in 'Deadline', with: 3.days.from_now
     fill_in 'Minimum value', with: 1000
+    fill_in 'Minimal difference', with: 100
     click_on 'Salvar'
 
     expect(current_path).to eq aprove_path

@@ -35,17 +35,17 @@ describe 'From the homepage' do
       # Act
       login_as(admin, :scope => :admin)
       visit root_path
-      click_on 'Aprovar lote'
       click_on 'Cadastrar Lote'
       check 'Microondas'
       fill_in 'Code', with: 'ABC123456'
       fill_in 'Start date', with: Date.today
       fill_in 'Deadline', with: 3.days.from_now
-      fill_in 'Minimum value', with: 1.99
+      fill_in 'Minimum value', with: 500
+      fill_in 'Minimal difference', with: 80
       click_on 'Salvar'
       # Assert
-      expect(page).to have_link('ABC123456')
       expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
+      expect(page).to have_link('ABC123456')
       expect(page).to have_content 'Status:'
       expect(page).to have_content 'wait_approve'
       expect(page).to have_button 'Aprovar'
@@ -55,8 +55,8 @@ describe 'From the homepage' do
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       # Act
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
+      within('nav.admin') do
+        click_on 'Admin'
       end
       within('form') do
         fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
@@ -71,7 +71,7 @@ describe 'From the homepage' do
       fill_in 'Minimum value', with: 1.99
       click_on 'Salvar'
       # Assert
-      expect(page).to have_content('Nao foi possível cadastrar o lote.')
+      expect(page).to have_content('Deve ser selecionado pelo menos um produto.')
     end
   end
 end
