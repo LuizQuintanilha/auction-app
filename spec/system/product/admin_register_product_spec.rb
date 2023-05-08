@@ -3,17 +3,10 @@ require 'rails_helper'
 describe 'Admin access the itens form' do
   context 'and view the form' do
     it 'from the homepage' do
-      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
+      login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
-      end
-      within('form') do
-        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        click_on 'Entrar'
-      end
       within('nav') do
         click_on 'Cadastrar Produto'
       end
@@ -32,7 +25,7 @@ describe 'Admin access the itens form' do
   context 'Admin create a new product' do
     it 'sucessfully' do
       Category.create!(name: 'Informática')
-      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       eletrodomestico = Category.create!(name:'Eletrodoméstico')
       informatica = Category.create!(name: 'Informática')
       mouse_produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
@@ -43,15 +36,8 @@ describe 'Admin access the itens form' do
       mouse_produto.save
       produto.save
       
+      login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
-      end
-      within('form') do
-        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        click_on 'Entrar'
-      end
       within('nav') do
         click_on 'Cadastrar Produto'
       end
@@ -71,17 +57,10 @@ describe 'Admin access the itens form' do
     end
     it 'unsucessfully' do
       Category.create!(name: 'Informática')
-      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
+      login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
-      end
-      within('form') do
-        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        click_on 'Entrar'
-      end
       within('nav') do
         click_on 'Cadastrar Produto'
       end

@@ -5,8 +5,8 @@ describe 'From the homepage' do
     # Arrange
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     # Act
+    login_as(admin, :scope => :admin)
     visit root_path
-    login_as(admin)
     click_on 'Aprovar lote'
     click_on 'Cadastrar Lote'
     # Assert
@@ -20,7 +20,7 @@ describe 'From the homepage' do
   context 'admin register a new batch' do
     it 'sucessfully' do
       # Arrange
-      Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+      admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       product_category = Category.create!(name: 'Informática')
       eletrodomestico = Category.create!(name:'Eletrodoméstico')
       mouse_product = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
@@ -33,15 +33,8 @@ describe 'From the homepage' do
       mouse_product.save
 
       # Act
+      login_as(admin, :scope => :admin)
       visit root_path
-      within('nav') do
-        click_on 'Entrar'
-      end
-      within('form') do
-        fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        click_on 'Entrar'
-      end
       click_on 'Aprovar lote'
       click_on 'Cadastrar Lote'
       check 'Microondas'

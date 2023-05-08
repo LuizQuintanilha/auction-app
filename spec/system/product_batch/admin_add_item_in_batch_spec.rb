@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin add item for batch' do
   it 'sucessfully' do
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+    admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     product_category = Category.create!(name: 'Informática')
     eletrodomestico = Category.create!(name:'Eletrodoméstico')
     mouse_product = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
@@ -14,15 +14,8 @@ describe 'Admin add item for batch' do
     microondas_product.save
     mouse_product.save
 
+    login_as(admin, :scope => :admin)
     visit root_path
-    within('nav') do
-      click_on 'Entrar'
-    end
-    within('form') do
-      fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      click_on 'Entrar'
-    end
 
     click_on 'Cadastrar Lote'
     check 'Mouse'

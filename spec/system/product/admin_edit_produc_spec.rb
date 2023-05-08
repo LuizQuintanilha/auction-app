@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin edit a product' do
   it 'sucessfully' do
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+    admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     mouse = 'MOUSE OFFICE TGT P90'
     second_product_category = Category.create!(name: 'Eletrônico')
     product_category = Category.create!(name: 'Informática')
@@ -11,15 +11,8 @@ describe 'Admin edit a product' do
     produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
     produto.save
 
+    login_as(admin, :scope => :admin)
     visit root_path
-    within('nav') do
-      click_on 'Entrar'
-    end
-    within('form') do
-      fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      click_on 'Entrar'
-    end
     click_on 'Produtos Cadastrados'
     click_on 'Mouse'
     click_on 'Editar'
@@ -32,7 +25,7 @@ describe 'Admin edit a product' do
     expect(page).to have_content 'Produto atualizado com sucesso.'
   end
   it 'unsucessfully' do
-    Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+    admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     mouse = 'MOUSE OFFICE TGT P90'
     product_category = Category.create!(name: 'Informática')
     second_product_category = Category.create!(name: 'Eletrônico')
@@ -41,16 +34,8 @@ describe 'Admin edit a product' do
     produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
     produto.save
 
+    login_as(admin, :scope => :admin)
     visit root_path
-
-    within('nav') do
-      click_on 'Entrar'
-    end
-    within('form') do
-      fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      click_on 'Entrar'
-    end
     click_on 'Produtos Cadastrados'
     click_on 'Mouse'
     click_on 'Editar'

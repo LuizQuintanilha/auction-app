@@ -3,6 +3,7 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :product_batches
   validates :cpf, presence: true
   validates :cpf, uniqueness: true
   validates :email, format: { with: /[\w+.]+@leilaodogalpao.com.br\z/, message: 'Precisa pertencer ao domínio @leilaodogalpao.com.br' }

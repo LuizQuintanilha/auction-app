@@ -10,8 +10,12 @@ class ProductBatchesController < ApplicationController
   end
   
   def create
-    @product_batch = ProductBatch.new(product_batch_params)
-    if @product_batch.save
+    @product_batch = current_admin.product_batches.build(product_batch_params)
+    @product_batch.created_by = current_admin
+    if @product_batch.product_ids.empty?
+      @product_batch.errors.add(:product_ids, "Deve ser selecionado pelo menos um produto.")
+      render 'new'
+    elsif @product_batch.save
       @product_batch.product_ids.each do |product_id|
         Product.where(id: product_id).update(status: 0)
       end
@@ -28,19 +32,27 @@ class ProductBatchesController < ApplicationController
   end
 
   def admin_aprove_batch
-    @product_batches = ProductBatch.where(status: 0)
+    @product_batches = ProductBatch.where(status: 0).order(created_at: :asc)
+    @admin = Admin.find_by(email: params[:email])
+    @product_batch.approved_by = current_admin if @product_batch.present?
   end
 
   def wait_approve
     @product_batch = ProductBatch.find(params[:id])
+    @product_batch.created_by = current_admin
     @product_batch.wait_approve!
     redirect_to @product_batch, notice: 'Aprovado'
   end
   
   def approve
     @product_batch = ProductBatch.find(params[:id])
-    @product_batch.approve!
-    redirect_to @product_batch, notice: 'Aprovado'
+    @product_batch.approved_by = current_admin
+    if @product_batch.save
+      @product_batch.approve!
+      redirect_to @product_batch, notice: 'Aprovado'
+    else
+      redirect_to @product_batch, notice:  'Não pode ser o mesmo admininistrador para aprovar o lote'
+    end
   end
 
   def edit
