@@ -1,8 +1,9 @@
 class ProductBatchesController < ApplicationController
   before_action :authenticate_admin!, only: %i[new, create, admin_aprove_batch, edit, update]
+  before_action :ser_product_batch, only: %i[ show wait_approve edit update approve present_or_future?]
  
   def index
-    @product_batches = ProductBatch.where(status: 2)
+    @product_batch = ProductBatch.where(status: 2)
   end
   
   def new
@@ -28,11 +29,10 @@ class ProductBatchesController < ApplicationController
   end
 
   def show
-    @product_batch = ProductBatch.find(params[:id])
   end
 
   def admin_aprove_batch
-    @product_batches = ProductBatch.where(status: 0).order(created_at: :asc)
+    @product_batches = ProductBatch.all
     @admin = Admin.find_by(email: params[:email])
     @product_batch.approved_by = current_admin if @product_batch.present?
   end
@@ -46,7 +46,6 @@ class ProductBatchesController < ApplicationController
   
   def approve
     @product_batches = ProductBatch.all
-    @product_batch = ProductBatch.find(params[:id])
     @product_batch.approved_by = current_admin
     if @product_batch.save
       @product_batch.approve!
@@ -57,11 +56,9 @@ class ProductBatchesController < ApplicationController
   end
 
   def edit
-    @product_batch = ProductBatch.find(params[:id])
   end
 
   def update
-    @product_batch = ProductBatch.find(params[:id])
     current_products = @product_batch.product_ids
     @product_batch.created_by = current_admin
     if @product_batch.update(product_batch_params)
@@ -83,9 +80,15 @@ class ProductBatchesController < ApplicationController
   end
 
   private
+
+  def ser_product_batch
+    @product_batch = ProductBatch.find(params[:id])
+  end
   
   def product_batch_params
-    prod = params.require(:product_batch).permit(:code, :start_date, :deadline, :minimum_value, 
+    prod = params.require(:product_batch).permit(:start_time, :end_time, :code, :start_date, 
+                                                :deadline, :minimum_value, 
                                          :minimal_difference, :status, product_ids: [])
+                                        
   end
 end

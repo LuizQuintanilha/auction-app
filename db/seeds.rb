@@ -33,6 +33,17 @@ sofa_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'fil
 tv_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'tv.webp')), filename: 'tv.webp')
 mouse_product.save
 microondas_product.save
-geladeira_product.save
+geladeira_produ
+ct.save
 tv_product.save
 sofa_product.save
+
+current_batch = ProductBatch.new(admin_id: 1, code: 'ABD334455', start_date: 2.days.from_now, 
+                                start_time: 1.hour.from_now, deadline: 5.days.from_now, 
+                                end_time: 1.hour.from_now, minimum_value: 800, 
+                                minimal_difference: 100, created_by: luana)
+
+future_batch = ProductBatch.new(admin_id: 2, code: 'ABD332211', start_date: 2.days.from_now, 
+                                start_time: 1.hour.from_now, deadline: 5.days.from_now, 
+                                end_time: 1.hour.from_now, minimum_value: 800, 
+                                minimal_difference: 100, created_by: luiz)

@@ -15,7 +15,7 @@ describe 'Admin approve a batch' do
     microondas_product.save
     mouse_product.save
     lote = ProductBatch.create!(admin_id: 1, created_by: luana, code: 'ACB112233', start_date: Date.today, 
-                                deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
+                                deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50, start_time: Time.current, end_time: 1.hour.from_now)
 
     login_as(admin, :scope => :admin)
     visit root_path

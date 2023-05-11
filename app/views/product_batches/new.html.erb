@@ -20,10 +20,14 @@
   <div>
     <%= f.label :start_date %>
     <%= f.date_field :start_date %>
+    <%= f.label :start_time %>
+    <%= f.time_select :start_time, { minute_step: 5, use_short_time: true }%>
   </div>
-    <div>
+  <div>
     <%= f.label :deadline %>
     <%= f.date_field :deadline %>
+    <%= f.label :end_time %>
+    <%= f.time_select :end_time, { minute_step: 5, use_short_time: true } %>
   </div>
   <div>
     <%= f.label :minimum_value %>

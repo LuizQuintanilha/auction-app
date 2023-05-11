@@ -1,14 +1,16 @@
 <h2>Lotes Cadastrados</h2>
 
-<% if @product_batches.any? %>
-  <% @product_batches.each do |batch| %>
-    <div>
-      <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %>
-    </div>
-      <% if batch.approved_by.present? %>
-        <p><strong>Aprovado por:</strong> <%= batch.approved_by.email if batch.approved_by%></p>
-      <% end %>
+<% if @product_batch.any? %>
+  <% @product_batch.each do |batch| %>
+  <div>
+    <strong>Código do lote:</strong> <%= link_to batch.code, product_batch_path(batch.id) %>
+    <strong>Início:</strong><%= batch.start_date.strftime('%d- %m-%Y') %> Hora: <%= batch.start_time.strftime('%H:%M:%S') %>
+    <strong>Término:</strong><%= batch.deadline.strftime('%d-%m-%Y') %> Hora: <%= batch.end_time.strftime('%H:%M:%S') %>
+    <%= batch.present_or_future? %>
+  </div>
   <% end %>
 <% else %>
-  <p>Não existem lotes cadastrados</p>
+  <p>Não existem lotes em andamento</p>
 <% end %>
+
+

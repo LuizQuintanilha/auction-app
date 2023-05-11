@@ -10,9 +10,9 @@ class ProductBatch < ApplicationRecord
   before_save :remove_unchecked_products
   validate :date_validator
   validate :created_by_different_from_approved_by
- 
-
-
+  validate :present_or_future?
+  
+    
   def date_validator
     if self.start_date.present? && self.start_date < Date.today
       self.errors.add(:start_date,  "A data não pode ser inferior a data atual")
@@ -22,6 +22,16 @@ class ProductBatch < ApplicationRecord
     end
   end
 
+  def present_or_future?
+    if self.start_date.present? &&  self.start_time <= Time.current && self.deadline.present? && self.end_time > Time.current
+      'Lote em Andamento'
+    elsif self.start_date.present? && self.start_date >= Time.current &&  self.start_time > Time.current
+      'Lote Futuro'
+    else self.deadline.present? && self.deadline < Time.current && self.end_time < Time.current
+      'Lote Expirado'
+    end
+  end
+      
   private
 
   def remove_unchecked_products  
@@ -43,6 +53,7 @@ class ProductBatch < ApplicationRecord
 
   def minimum_bid_difference
     last_bid >= self.minimum_value + self.starting_bid + self.minimal_difference
+    
   end
 =end
 end

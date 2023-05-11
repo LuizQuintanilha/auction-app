@@ -1,6 +1,6 @@
 <h2>Iten(s) para Leilão</h2>
-<strong>Início:</strong> <%= @product_batch.start_date %> |
-<strong>Término:</strong> <%= @product_batch.deadline %>
+<strong>Início:</strong><%= @product_batch.start_date.strftime('%Y-%m-%d') %> Hora: <%= @product_batch.start_time.strftime('%H:%M:%S') %>
+<strong>Término:</strong><%= @product_batch.deadline.strftime('%Y-%m-%d') %> Hora: <%= @product_batch.end_time.strftime('%H:%M:%S') %>
 <div>
   <strong>Lance Mínimo: </strong>R$<%= @product_batch.minimum_value %> 
 </div>

@@ -8,4 +8,6 @@ class User < ApplicationRecord
   validates :cpf, uniqueness: true
   validates :cpf, cpf: { message: 'CPF inválido' }
   validates :cpf, format: { with: /[0-9]{11}/, message: 'Precisa ter 11 dígitos' }
+
+  
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_07_223451) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_10_131830) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_07_223451) do
     t.integer "admin_id", default: 0, null: false
     t.integer "created_by_id"
     t.integer "approved_by_id"
+    t.datetime "start_time", precision: nil
+    t.datetime "end_time", precision: nil
     t.index ["admin_id"], name: "index_product_batches_on_admin_id"
     t.index ["approved_by_id"], name: "index_product_batches_on_approved_by_id"
     t.index ["created_by_id"], name: "index_product_batches_on_created_by_id"

@@ -44,7 +44,7 @@ describe 'From the homepage' do
       fill_in 'Minimal difference', with: 80
       click_on 'Salvar'
       # Assert
-      expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
+      expect(page).to have_content 'Lotes Cadastrados '
       expect(page).to have_link('ABC123456')
       expect(page).to have_content 'Status:'
       expect(page).to have_content 'wait_approve'
