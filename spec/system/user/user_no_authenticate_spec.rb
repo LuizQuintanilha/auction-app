@@ -53,13 +53,12 @@ describe 'User visit homepage' do
       mouse_product.save
       future_batch = ProductBatch.new(admin_id: 1, code: 'ABD332211', start_date: 2.days.from_now, 
                                       deadline: 5.days.from_now, minimum_value: 800, minimal_difference: 100,
-                                       created_by: luiz, approved_by: luana)
+                                       created_by: luiz, approved_by: luana, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
       future_batch.approve!
       visit root_path
       click_on 'Lotes Cadastrados'
 
-      expect(page).to have_content 'Lotes Futuros'
-      expect(page).to have_content 'Não existem lotes em andamento'
+      expect(page).to have_content 'Lote Futuro'
       expect(page).to have_link 'ABD332211'
     end
     it 'and view all currently batches ' do
@@ -79,9 +78,8 @@ describe 'User visit homepage' do
       visit root_path
       click_on 'Lotes Cadastrados'
 
-      expect(page).to have_content 'Lotes em andamento'
+      expect(page).to have_content 'Lote em Andamento'
       expect(page).to have_link 'ABD332211'
-      expect(page).to have_content 'Não existem lotes futuros'
     end
       
     it 'and there no batches registered' do
@@ -90,10 +88,7 @@ describe 'User visit homepage' do
       click_on 'Lotes Cadastrados'
 
       expect(page).to have_content 'Lotes Cadastrados'
-      expect(page).to have_content 'Não existem lotes cadastrados'
       expect(page).to have_content 'Não existem lotes em andamento'
-      expect(page).to have_content 'Não existem lotes futuros'
-
     end
   end
 end

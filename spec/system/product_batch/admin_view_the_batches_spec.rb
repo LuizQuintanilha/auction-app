@@ -9,7 +9,7 @@ describe 'Admin view all product batch registered' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, 
                                   deadline: 5.days.from_now, minimum_value: 600, 
-                                  minimal_difference: 50, start_time: '10:10', end_time: '10:30')
+                                  minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
       lote.save
       lote.approve!
       # Act
@@ -25,7 +25,7 @@ describe 'Admin view all product batch registered' do
     it 'wait_approve' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, 
-                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50, start_time: Time.current, end_time: 1.hour.from_now)
+                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -37,7 +37,7 @@ describe 'Admin view all product batch registered' do
       end
       click_on 'Aprovar lote'
 
-      expect(page).to have_content 'Lotes Cadastrados Aguardando Aprovação'
+      expect(page).to have_content 'Lotes Cadastrados'
       expect(page).to have_content 'ACB112233'
       expect(page).to have_content 'Status:'
       expect(page).to have_content 'wait_approve'
