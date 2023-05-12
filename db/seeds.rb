@@ -1,7 +1,8 @@
 # Admin seed
 
-luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
-luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
+luana = Admin.create!(email: 'julia@leilaodogalpao.com.br', password: '123456', cpf: '53366189347')
+luiz = Admin.create!(email: 'edna@leilaodogalpao.com.br', password: '123456', cpf: '38125120505')
+user = User.create!(email: 'vando@email.com', password: '123456', cpf: '25706733406')
 
 informatica = Category.create!(name:'Informática')
 eletronico = Category.create!(name:'Eletrônico')
@@ -33,15 +34,14 @@ sofa_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'fil
 tv_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'tv.webp')), filename: 'tv.webp')
 mouse_product.save
 microondas_product.save
-geladeira_produ
-ct.save
+geladeira_product.save
 tv_product.save
 sofa_product.save
 
 current_batch = ProductBatch.new(admin_id: 1, code: 'ABD334455', start_date: 2.days.from_now, 
                                 start_time: 1.hour.from_now, deadline: 5.days.from_now, 
                                 end_time: 1.hour.from_now, minimum_value: 800, 
-                                minimal_difference: 100, created_by: luana)
+                                minimal_difference: 100, created_by: luana, approved_by: luiz)
 
 future_batch = ProductBatch.new(admin_id: 2, code: 'ABD332211', start_date: 2.days.from_now, 
                                 start_time: 1.hour.from_now, deadline: 5.days.from_now, 

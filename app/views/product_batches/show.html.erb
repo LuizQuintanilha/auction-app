@@ -1,16 +1,37 @@
 <h2>Iten(s) para Leilão</h2>
-<strong>Início:</strong><%= @product_batch.start_date.strftime('%Y-%m-%d') %> Hora: <%= @product_batch.start_time.strftime('%H:%M:%S') %>
-<strong>Término:</strong><%= @product_batch.deadline.strftime('%Y-%m-%d') %> Hora: <%= @product_batch.end_time.strftime('%H:%M:%S') %>
-<div>
-  <strong>Lance Mínimo: </strong>R$<%= @product_batch.minimum_value %> 
-</div>
 
+<div>
+<strong>Início:</strong><%= @product_batch.start_date.strftime('%d-%m-%Y') %> 
+       <strong> Hora: </strong> <%= @product_batch.start_time.strftime('%H:%M:%S') %>
+<strong>Término:</strong><%= @product_batch.deadline.strftime('%d-%m-%Y') %> 
+        <strong>Hora:</strong> <%= @product_batch.end_time.strftime('%H:%M:%S') %>
+</div>
+<div>
+  <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
+  <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %>
+</div>
 <% @product_batch.products.each do |product| %>
+<div>
+  <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
+</div>
+<div>
+  <strong>Descrição: </strong><%= product.description %> 
+</div>
+<% end %>
+<div>
+<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch)) do |f| %>
+<div>
+<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch)) do |f| %>
   <div>
-    <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
-  </div>
-   <div>
-    <strong>Descrição: </strong><%= product.description %> 
+    <%= f.label :value %>
+    <%= f.number_field :value %>
+    <%= f.submit 'Dar Lance' %>
   </div>
 <% end %>
+
+<p>Valor atual do lance: <%= number_to_currency(@current_value) %></p>
+<div>
+<% end %>
+
+
 <%= link_to 'Voltar', product_batches_path %>

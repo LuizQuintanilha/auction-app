@@ -29,6 +29,7 @@ class ProductBatchesController < ApplicationController
   end
 
   def show
+    @bids = @product_batch.bids.order(value: :desc)
   end
 
   def admin_aprove_batch
