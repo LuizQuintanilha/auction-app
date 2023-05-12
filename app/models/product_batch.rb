@@ -25,11 +25,11 @@ class ProductBatch < ApplicationRecord
 
   def present_or_future?
     if self.start_date.present? &&  self.start_time <= Time.current && self.deadline.present? && self.end_time > Time.current
-      'Lote em Andamento'
-    elsif self.start_date.present? && self.start_date >= Time.current &&  self.start_time > Time.current
-      'Lote Futuro'
+      status = 'Lote em Andamento'
+    elsif self.start_date.present? && self.start_date >= Date.current &&  self.start_time > Time.current
+      status = 'Lote Futuro'
     else self.deadline.present? && self.deadline < Time.current && self.end_time < Time.current
-      'Lote Expirado'
+      status ='Lote Expirado'
     end
   end
       
@@ -45,16 +45,4 @@ class ProductBatch < ApplicationRecord
     end
   end
 
-=begin ##colocar esta regra no model de user
-  def starting_bid_must_be_greater_than_minimum_value
-    if starting_bid.present? && starting_bid < minimum_value
-      errors.add(:starting_bid, "O lance inicial deve ser maior que o valor mínimo.")
-    end
-  end
-
-  def minimum_bid_difference
-    last_bid >= self.minimum_value + self.starting_bid + self.minimal_difference
-    
-  end
-=end
 end

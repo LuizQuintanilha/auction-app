@@ -1,32 +1,30 @@
 class BidsController < ApplicationController
+  def new
+    @product_batch = ProductBatch.find(params[:product_batch_id])
+    @bid = @product_batch.bids.new
+  end
 
-
-  
   def create
     @product_batch = ProductBatch.find(params[:product_batch_id])
-    @current_value = @product_batch.minimum_value + @product_batch.bids.maximum(:value).to_f
-
-    if @product_batch.start_date && @product_batch.start_time <= Time.current && 
-                @product_batch.deadline && @product_batch.end_time > Time.current
-      @bid = @product_batch.bids.new(bid_params)
+    @bid = @product_batch.bids.new(bid_params)
+    @last_bid = @product_batch.bids.last&.value || @product_batch.minimum_value
+  
+    if @product_batch.present_or_future? == 'Lote em Andamento'
       @bid.user = current_user
-
-      if @bid.save
-        @current_value = @product_batch.minimum_value + @product_batch.bids.maximum(:value).to_f
-
-        flash[:notice] = "Bid created successfully."
+  
+      if @bid.validate_value?(@last_bid)
+        @bid.save
+        flash[:notice] = "Lance realizado com sucesso"
         redirect_to product_batch_path(@product_batch.id)
       else
-        flash[:notice] = @bid.errors.full_messages.join(", ")
-        render :new
+        flash[:notice] = ''
+        render 'new'
       end
-    else
-      flash[:notice] = "This batch is no longer open for bids."
+    else @product_batch.present_or_future? == 'Lote Futuro'
+      flash[:notice] = "Lote ainda não iniciou."
       redirect_to product_batch_path(@product_batch.id)
     end
   end
-
-  private
 
   def bid_params
     params.require(:bid).permit(:value)

@@ -1,0 +1,7 @@
+<h2>Fazer Lance</h2>
+
+<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch.id)) do |f| %>
+  <%= f.label :value %>
+  <%= f.number_field :value %>
+  <%= f.submit 'Dar Lance' %>
+<% end %>

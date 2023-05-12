@@ -17,21 +17,18 @@
 <div>
   <strong>Descrição: </strong><%= product.description %> 
 </div>
-<% end %>
-<div>
-<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch)) do |f| %>
-<div>
-<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch)) do |f| %>
-  <div>
-    <%= f.label :value %>
-    <%= f.number_field :value %>
-    <%= f.submit 'Dar Lance' %>
-  </div>
+
+  
+
 <% end %>
 
-<p>Valor atual do lance: <%= number_to_currency(@current_value) %></p>
-<div>
+<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch.id)) do |f| %>
+  <%= f.label :value %>
+  <%= f.number_field :value %>
+  <%= f.submit 'Dar Lance' %>
 <% end %>
+
+<p>Valor atual do lance: <%= @current_value %></p>
 
 
 <%= link_to 'Voltar', product_batches_path %>

@@ -16,11 +16,11 @@ describe 'From the homepage' do
 
       click_on 'Lotes Cadastrados'
       click_on 'ACB112233'
-      fill_in 'Value', with: '10000'
+      fill_in 'Value', with: '610'
       click_on 'Dar Lance'
       expect(page).to have_field('Value')
       expect(page).to have_button 'Dar Lance'
-      expect(page).to have_contant('10000')
+      expect(page).to have_contant('610')
 
     end
   end
