@@ -25,9 +25,9 @@
 
 <div>
 <% if @product_batch.bids.any? %>
-  <p>Valor atual do lote: <%= @product_batch.bids.last.value %></p>
+  <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
 <% else %>
-  <p>Valor atual do lote: <%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
+  <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
 <% end %>
 
 <%= link_to 'Voltar', product_batches_path %>

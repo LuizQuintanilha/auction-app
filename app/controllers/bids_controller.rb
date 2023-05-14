@@ -12,16 +12,16 @@ class BidsController < ApplicationController
     @bid.user = current_user
     if @product_batch.present_or_future? == 'Lote em Andamento'
       if @bid.validate_value?
-        @bid.save
         if @bid.value > @product_batch.minimum_value && @bid.value > @product_batch.bids.last&.value
           @product_batch.update(minimum_value: @bid.value)
         end
+        @bid.save
         #binding.pry
         flash[:notice] = "Lance criado com sucesso"
         redirect_to product_batch_path(@product_batch)
       else 
         flash[:notice] = " Novo lance deve ser maior que o valor atual somado com o  valor de diferença."
-        render 'new'
+        redirect_to new_product_batch_bid_path(@product_batch)
       end
     else
       redirect_to product_batches_path, notice: "Lote ainda não iniciou."

@@ -8,11 +8,11 @@
   <%= f.submit "Dar Lance" %>
 
 <% end %>
-  <p>Valor inicial do lote: R$<%= (@product_batch.minimum_value) %></p>
+  <p>Diferença mínima entre lances: R$<%= @product_batch.minimal_difference %></p>
   <% if @product_batch.bids.any? %>
-    <p>Valor atual do lote: <%= @product_batch.bids.last.value %></p>
+    <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
   <% else %>
-    <p>Valor atual do lote: <%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
+    <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
   <% end %>
 
 <% @product_batch.products.each do |product| %>
