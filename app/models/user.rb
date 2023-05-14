@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :bids  
+  has_many :bids
+  has_many :product_batches, through: :bid
+  
   validates :cpf, presence: true
   validates :cpf, uniqueness: true
   validates :cpf, cpf: { message: 'CPF inválido' }

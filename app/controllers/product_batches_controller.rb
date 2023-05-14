@@ -29,7 +29,8 @@ class ProductBatchesController < ApplicationController
   end
 
   def show
-    @bids = @product_batch.bids.order(value: :desc)
+    @bids = Bid.all
+    @bid = Bid.new(product_batch: @product_batch)
   end
 
   def admin_aprove_batch
@@ -71,7 +72,6 @@ class ProductBatchesController < ApplicationController
           Product.where(id: prod).update(status: 2)
         end
       end
-
       flash[:notice] = 'Lote editado com sucesso.'
       redirect_to aprove_path
     else
@@ -89,7 +89,6 @@ class ProductBatchesController < ApplicationController
   def product_batch_params
     prod = params.require(:product_batch).permit(:start_time, :end_time, :code, :start_date, 
                                                 :deadline, :minimum_value, 
-                                         :minimal_difference, :status, product_ids: [])
-                                        
+                                         :minimal_difference, :status, product_ids: [])                               
   end
 end

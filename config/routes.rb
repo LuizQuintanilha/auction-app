@@ -7,9 +7,7 @@ Rails.application.routes.draw do
 
   resources :product_batches, only: [:index, :new, :create, :show, :edit, :update] do
     patch :approve, :wait_approve, on: :member
-    resources :bids do
-      post :create, on: :member
-    end
+    resources :bids, only: [:new, :create ] 
   end
 
   get 'aprove', to: 'product_batches#admin_aprove_batch'

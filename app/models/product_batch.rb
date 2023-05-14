@@ -1,10 +1,12 @@
 class ProductBatch < ApplicationRecord
   belongs_to :created_by, class_name: 'Admin', foreign_key: 'created_by_id'
   belongs_to :approved_by, class_name: 'Admin', foreign_key: 'approved_by_id', optional: true
-  has_many :bids
-  enum status: { wait_approve: 0, approve: 2}
   has_many :product_batch_items
   has_many :products, through: :product_batch_items
+  has_many :bids
+  has_many :user, through: :bids
+  
+  enum status: { wait_approve: 0, approve: 2}
   validates :start_date, :deadline, :minimum_value, :minimal_difference, presence: true
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true

@@ -1,7 +1,23 @@
-<h2>Fazer Lance</h2>
 
-<%= form_with(model: @bid, url: product_batch_bids_path(@product_batch.id)) do |f| %>
+<h2>Fazer Lances</h2>
+
+<%= form_with model: @bid, url: product_batch_bids_path(@product_batch) do |f| %>
+
   <%= f.label :value %>
-  <%= f.number_field :value %>
-  <%= f.submit 'Dar Lance' %>
+  <%= f.number_field :value, step: 'any' %>
+  <%= f.submit "Dar Lance" %>
+
 <% end %>
+  <p>Valor inicial do lote: R$<%= (@product_batch.minimum_value) %></p>
+  <% if @product_batch.bids.any? %>
+    <p>Valor atual do lote: <%= @product_batch.bids.last.value %></p>
+  <% else %>
+    <p>Valor atual do lote: <%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
+  <% end %>
+
+<% @product_batch.products.each do |product| %>
+<div>
+  <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
+</div>
+<% end %>
+<%= link_to 'Voltar', product_batches_path %>
