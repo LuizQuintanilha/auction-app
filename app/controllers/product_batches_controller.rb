@@ -1,5 +1,5 @@
 class ProductBatchesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[new, create, admin_aprove_batch, edit, update]
+  before_action :authenticate_admin!, only: %i[ new create admin_aprove_batch edit update expired_batches ]
   before_action :ser_product_batch, only: %i[ show wait_approve edit update approve present_or_future?]
  
   def index
@@ -79,6 +79,14 @@ class ProductBatchesController < ApplicationController
       render 'edit'
     end
   end
+  
+  def expired_batches
+    #@product_batches = ProductBatch.all
+    @product_batches = ProductBatch.where("deadline < ? AND end_time < ?", Time.current, Time.current)
+
+
+  end
+
 
   private
 

@@ -32,6 +32,7 @@
           <%= link_to 'Cadastrar Produto', new_product_path  %> |
           <%= link_to 'Cadastrar Lote', new_product_batch_path %> |
           <%= link_to 'Aprovar lote', aprove_path  %> |
+          <%= link_to 'Lotes Expirados', expired_batches_path  %> 
           <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
         <div>
       <% else %>

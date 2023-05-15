@@ -1,0 +1,22 @@
+<h2>Lotes Expirados</h2>
+
+<% if @product_batches.any? %>
+  <% @product_batches.each do |batch| %>
+    <div class="batch-info">
+      <div>
+      <strong>Código:</strong> <%= batch.code %> |
+      <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
+      <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
+      <strong>Status:</strong> <%= batch.present_or_future? %>
+      </div>
+      <%# if batch.bids.any? %>
+        <%#= link_to "Encerrar Lote", close_batch_path(batch), method: :put %>
+      <%# else %>
+        <%#= link_to "Cancelar Lote", cancel_batch_path(batch), method: :delete %>
+      <%# end %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Não existem lotes vencidos</p>
+<% end %>
+</div>

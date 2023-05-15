@@ -5,10 +5,12 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :new, :create, :show, :edit, :update]
 
 
-  resources :product_batches, only: [:index, :new, :create, :show, :edit, :update] do
+  resources :product_batches, only: [ :index, :new, :create, :show, :edit, :update] do
     patch :approve, :wait_approve, on: :member
+    
+
     resources :bids, only: [:new, :create ] 
   end
-
+  get 'expired_batches', to: 'product_batches#expired_batches'
   get 'aprove', to: 'product_batches#admin_aprove_batch'
 end

@@ -7,6 +7,8 @@ class ProductBatch < ApplicationRecord
   has_many :user, through: :bids
   
   enum status: { wait_approve: 0, approve: 2}
+
+  
   validates :start_date, :deadline, :minimum_value, :minimal_difference, presence: true
   validates_format_of :code, with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/
   validates :code, uniqueness: true
@@ -14,7 +16,7 @@ class ProductBatch < ApplicationRecord
   validate :date_validator
   validate :created_by_different_from_approved_by
   validate :present_or_future?
-  
+
     
   def date_validator
     if self.start_date.present? && self.start_date < Date.today
@@ -31,7 +33,7 @@ class ProductBatch < ApplicationRecord
     elsif self.start_date.present? && self.start_date >= Date.current &&  self.start_time > Time.current
       status = 'Lote Futuro'
     else self.deadline.present? && self.deadline < Time.current && self.end_time < Time.current
-      status ='Lote Expirado'
+      status = 'Lote Expirado'
     end
   end
       
