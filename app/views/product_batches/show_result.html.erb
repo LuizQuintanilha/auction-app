@@ -1,0 +1,12 @@
+<h2>Resultado dos Vencedores</h2>
+<% if @winners_info.present? && @winners_info.any? %>
+  <% @winners_info.each do |winner_info| %>
+    <p>
+      Código do Lote: <%= winner_info[:code] %>
+      <br>
+      Email do Vencedor: <%= winner_info[:email] %>
+    </p>
+  <% end %>
+<% else %>
+  <p>Sem lotes vencedores</p>
+<% end %>

@@ -6,7 +6,6 @@ class Bid < ApplicationRecord
 
   def validate_value?
     return false unless product_batch && value.present?
-  
     max_bid = product_batch.bids.maximum(:value)
     if max_bid.nil?
       if value > product_batch.minimum_value
@@ -36,5 +35,4 @@ class Bid < ApplicationRecord
   def last_bid_value
     bids.maximum(:value) || minimum_value
   end
-  
 end
