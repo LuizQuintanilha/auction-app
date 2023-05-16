@@ -69,7 +69,7 @@ describe 'User create a count' do
       fill_in 'Password', with: '123456'
       fill_in 'Password confirmation', with: '123456'
       click_on 'Sign up'
-      expect(page).to have_content "Can't be the exclusive domain 'leilaodogalpão.com'"
+      expect(page).to have_content "Email Domínio exclusivo"
     end
     it 'when email has not domain' do
       visit root_path

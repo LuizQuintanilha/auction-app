@@ -54,5 +54,4 @@ class ProductBatch < ApplicationRecord
     end
   end
 
-
 end
