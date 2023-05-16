@@ -17,7 +17,7 @@ describe 'From the homepage' do
     expect(page).to have_content 'Lotes Expirado'
     expect(page).to have_content "Código: ACB112233"
   end 
-  it 'admin view the expreds batches' do
+  it "and there'n no batches" do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')    
    
     login_as(admin, :scope => :admin)                   
