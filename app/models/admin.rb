@@ -13,7 +13,7 @@ class Admin < ApplicationRecord
 
   def cpf_different_from_user
     if User.exists?(cpf: cpf)
-      errors.add(:cpf, 'has already been taken')
+      errors.add(:cpf, 'CPF já cadastrado')
     end
   end
 end

@@ -1,12 +1,16 @@
 <h2>Resultado dos Vencedores</h2>
-<% if @winners_info.present? && @winners_info.any? %>
-  <% @winners_info.each do |winner_info| %>
+
+<% @product_batches.each do |batch| %>
+  <% if batch.bids.any? %>
+    <% winning_bid = batch.bids.last %>
     <p>
-      Código do Lote: <%= winner_info[:code] %>
+      Código do Lote: <%= batch.code %>
       <br>
-      Email do Vencedor: <%= winner_info[:email] %>
+      Email do Vencedor: <%= winning_bid.user.email %>
     </p>
   <% end %>
-<% else %>
+<% end %>
+
+<% if @product_batches.none? { |batch| batch.bids.any? } %>
   <p>Sem lotes vencedores</p>
 <% end %>

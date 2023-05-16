@@ -4,22 +4,18 @@
   
     <div>
       <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %> |
-      <strong>Status:</strong> <%= batch.status %>
       <strong>Início:</strong><%= batch.start_date.strftime('%d-%m-%Y') %> Hora: <%= batch.start_time.strftime('%H:%M:%S') %>
       <strong>Término:</strong><%= batch.deadline.strftime('%d-%m-%Y') %> Hora: <%= batch.end_time.strftime('%H:%M:%S') %>
-
-      <% if batch.wait_approve? %>
-        <%= link_to 'Editar', edit_product_batch_path(batch.id) %>
-      <% end %>
+      <strong>Status: </strong><%= batch.status %>
 
       <p><strong>Criado por:</strong> <%= batch.created_by.email if batch.created_by %>
-
       <% if batch.approved_by.present? %>
         <strong>Aprovado por:</strong> <%= batch.approved_by.email if batch.approved_by%>
       <% end %>
 
       <%if batch.wait_approve? %>
         <%= button_to "Aprovar", approve_product_batch_path(batch.id), {method: 'patch'}%>
+        <%= link_to 'Editar', edit_product_batch_path(batch.id) %>
       <%end%>
       
     </div>

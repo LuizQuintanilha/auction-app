@@ -16,13 +16,13 @@ class User < ApplicationRecord
 
   def email_format
     if self.email.present? && self.email.match(/@leilaodogalpao.com.br\z/)
-      errors.add(:email, "Can't be the exclusive domain 'leilaodogalpão.com'")
+      errors.add(:email, "Domínio exclusivo")
     end
   end
 
   def cpf_different_from_admin
     if Admin.exists?(cpf: cpf)
-      errors.add(:cpf, 'has already been taken')
+      errors.add(:cpf, 'CPF já cadastrado')
     end
   end
 end

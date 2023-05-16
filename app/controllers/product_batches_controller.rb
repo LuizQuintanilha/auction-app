@@ -1,6 +1,6 @@
 class ProductBatchesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[ new create admin_aprove_batch edit update expired_batches show_result destroy ]
-  before_action :set_product_batch, only: %i[ show_result show wait_approve edit update approve present_or_future? destroy ]
+  before_action :authenticate_admin!, only: %i[ new create admin_aprove_batch edit update expired_batches destroy  ]
+  before_action :set_product_batch, only: %i[ show wait_approve edit update approve present_or_future? destroy waiting_close close_batch ]
  
   def index
     @product_batches = ProductBatch.where("start_date > ? AND start_time > ?", Time.current, Time.current) && 
@@ -53,33 +53,47 @@ class ProductBatchesController < ApplicationController
       @product_batch.approve!
       redirect_to @product_batch, notice: 'Aprovado'
     else
-      redirect_to @product_batch, notice: 'O lote foi encerrado com sucesso.'
+      redirect_to aprove_path, notice: 'Admin não pode ser o mesmo'
     end
   end
 
   def expired_batches
-    @product_batches = ProductBatch.where("deadline < ? AND end_time < ?", Time.current, Time.current)
-  end
-
-  def close_batch
-    @product_batch = ProductBatch.find(params[:id])
-    if @product_batch.bids.any?
-      @product_batch.close_batch!
-      @winning_bid = @product_batch.bids.last
-      if @winning_bid
-        @winner_info = { code: @product_batch.code, email: @winning_bid.user.email }
-        flash[:notice] = 'Lote encerrado com sucesso.'
-      else
-        flash[:notice] = 'O lote não recebeu nenhum lance.'
-      end
+    @product_batches = ProductBatch.where("deadline <= ? AND end_time < ?", Date.current, Time.current)
+    @product_batches = ProductBatch.all
+    @admin = Admin.find_by(email: params[:email])
+    @product_batches.each do |batch|
+      batch_fishined = current_admin if batch.present?
+      batches = ProductBatch.where(expired: 2)
+      #binding.pry
     end
-    redirect_to expired_batches_path
   end
 
+  def waiting_close
+    @product_batches = ProductBatch.where(expired: 0)
+    @product_batch.wait_finish!
+    redirect_to @product_batch, notice: 'Encerrrado'
+  end
+  
+  def close_batch
+    @winning_bid = @product_batch.bids.last
+    @product_batch.approved_by = current_admin
+    @product_batch.close_batch!
+    if @winning_bid
+      @winner_info = { code: @product_batch.code, email: @winning_bid.user.email }
+    end
+    #binding.pry
+    if @product_batch.update_columns(expired: 2)
+      redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
+    else
+      redirect_to expired_batches_path, notice: 'Não foi possível encerrar o lote'
+    end
+  end
+  
   def show_result
-    @closed_product_batches = ProductBatch.where(status: 'encerrado')
+    @product_batches = ProductBatch.all
+    @product_batches = ProductBatch.where(expired: 2)
     @winners_info = []
-    @closed_product_batches.each do |product_batch|
+    @product_batches.each do |product_batch|
       if product_batch.bids.any?
         winning_bid = product_batch.bids.last&.value
         @winners_info << { code: product_batch.code, email: winning_bid.user.email }
@@ -120,6 +134,6 @@ class ProductBatchesController < ApplicationController
   def product_batch_params
     params.require(:product_batch).permit(:start_time, :end_time, :code, :start_date, 
                                                 :deadline, :minimum_value, 
-                                         :minimal_difference, :status, product_ids: [])                               
+                                         :minimal_difference, :status, :expired, product_ids: [])                               
   end
 end
