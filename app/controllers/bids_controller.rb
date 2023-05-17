@@ -23,8 +23,8 @@ class BidsController < ApplicationController
         flash[:notice] = " Novo lance deve ser maior que o valor atual somado com o  valor de diferença."
         redirect_to new_product_batch_bid_path(@product_batch)
       end
-    else
-      redirect_to product_batches_path, notice: "Lote ainda não iniciou."
+    else @product_batch.present_or_future? == 'Lote Futuro'
+      redirect_to product_batches_path, notice: "Lote ainda não iniciou"
     end    
   end
 

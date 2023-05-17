@@ -4,36 +4,25 @@
   <% @product_batches.each do |batch| %>
     <% if batch.bids.any? %>
       <div>
-        <div>
         <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
         <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
-        <strong>Encerrado</strong>
-        </div>
-
-        <div>
-        <% if batch.approved_by.present? %>
-          <strong>Encerrado por:</strong> <%= batch.approved_by.email if batch.approved_by%>
+   
+        <% if batch.wait_finish! %>
+        <% #binding.pry %>
+          <%= button_to 'Encerrar', close_batch_product_batch_path(batch.id), { method: 'patch'} %>
         <% end %>
-        </div>
-
-        <div>
-        <% if batch.wait_finish? %>
-          <%= button_to 'Encerrar Lote', close_batch_product_batch_path(batch.id), {method: 'patch'} %>
-        <% end %>
-        </div>
-        
       </div>
-    <% else %>
+    <% else #batch.present_or_future? != 'Lote Futuro' %>
       <div>
         <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
         <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
         <strong>Lote sem Lance</strong>
-        <%= button_to 'Excluir Lote', product_batch_path(batch), method: :delete %>
+        <%= button_to 'Excluir Lote', product_batch_path(batch.id), { method: 'delete' } %>
       </div>
     <% end %>
   <% end %>
 <% else %>
-  <p>Não existem lotes vencidos</p>
+  <p>Não existem lotes expirados</p>
 <% end %>
