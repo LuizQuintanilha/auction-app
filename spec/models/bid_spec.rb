@@ -37,9 +37,10 @@ RSpec.describe Bid, type: :model do
         lote = ProductBatch.create!(admin_id: 1, created_by_id: 1, approved_by_id: 2, code: 'ACB112233', start_date: Date.today, deadline: 5.days.from_now, 
                                     minimum_value: 600, minimal_difference: 80, start_time: Time.current, end_time: 1.hour.from_now)
         lote.approve!
-        luana_bid = Bid.create!(value: 610, user_id: 1, product_batch_id: 1)
-        lance = Bid.new(value: '650', user_id: 2, product_batch_id: 1)
-
+       
+        l = Bid.new(value: 610, user_id: 1, product_batch_id: 1)
+        l.save
+        lance = Bid.new(value: 650, user_id: 2, product_batch_id: 1)
         result = lance.valid?
 
         expect(result).to eq false

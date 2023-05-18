@@ -7,19 +7,19 @@
         <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
         <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
-   
-        <% if batch.wait_finish! %>
-        <% #binding.pry %>
-          <%= button_to 'Encerrar', close_batch_product_batch_path(batch.id), { method: 'patch'} %>
+  
+        <% if batch.wait_finish? %>
+          <%= button_to 'Encerrar', close_batch_product_batch_path(batch.id), { method: :patch} %>
         <% end %>
+      
       </div>
-    <% else #batch.present_or_future? != 'Lote Futuro' %>
+    <% else %>
       <div>
         <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
         <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
         <strong>Lote sem Lance</strong>
-        <%= button_to 'Excluir Lote', product_batch_path(batch.id), { method: 'delete' } %>
+        <%= button_to 'Excluir Lote', product_batch_path(batch.id), { method: :delete } %>
       </div>
     <% end %>
   <% end %>

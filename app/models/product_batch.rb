@@ -41,7 +41,11 @@ class ProductBatch < ApplicationRecord
   def close_batch!
     self.expired = 2
   end
-      
+  
+  def bids
+    Bid.where(product_batch_id: id)
+  end    
+  
   private
 
   def remove_unchecked_products  

@@ -6,7 +6,7 @@ class Bid < ApplicationRecord
 
   def validate_value?
     return false unless product_batch && value.present?
-    max_bid = product_batch.bids.maximum(:value)
+    max_bid = product_batch.bids.last&.value || product_batch.minimum_value
     if max_bid.nil?
       if value > product_batch.minimum_value
         if persisted?
@@ -19,7 +19,7 @@ class Bid < ApplicationRecord
         errors.add(:value, 'Valor do lance deve ser maior que valor inicial.')
         false
       end
-    elsif value >= max_bid + product_batch.minimal_difference
+    elsif max_bid.nil? || value >= max_bid + product_batch.minimal_difference
       if persisted?
         Bid.create(value: value, product_batch: product_batch, user: user)
       else
@@ -31,8 +31,5 @@ class Bid < ApplicationRecord
       false
     end
   end
-  
-  def last_bid_value
-    bids.maximum(:value) || minimum_value
-  end
+
 end

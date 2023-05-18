@@ -64,22 +64,26 @@ class ProductBatchesController < ApplicationController
   end
 
   def waiting_close
-    #@product_batches = ProductBatch.where(expired: 0)
-    @product_batch.wait_finish!
+    @product_batches = ProductBatch.all
+    @product_batches.each do |product_batch|
+      product_batch.wait_finish?
+      product_batch.update_column(expired: 0)
+      product_batch.save(validate: false)
+    end
     redirect_to @product_batch, notice: 'Encerrrado'
   end
   
   def close_batch
-    #@product_batches = ProductBatch.where("deadline <= ? AND end_time < ?", Time.current, Time.current)
     @product_batches = ProductBatch.where(expired: 0)
-    @winning_bid = @product_batch.bids.last
-    @product_batch.close_batch!
+    winning_bid = @product_batch.bids.maximum(:value)
+    @product_batch.wait_finish?
     if @winning_bid
-      @winner_info = { code: @product_batch.code, email: @winning_bid.user.email }
-    end  
+      @winner_info = { code: product_batch.code, email: winning_bid.user&.email }
+    end
+    @product_batch.update_column(:start_date, Date.today) if @product_batch.start_date < Date.today
     if @product_batch.update_columns(expired: 2)
+      @product_batch.close_batch!
       @product_batch.save(validate: false)
-      #binding.pry
       redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
     end
   end
