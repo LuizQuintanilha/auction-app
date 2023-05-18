@@ -10,7 +10,6 @@ class BidsController < ApplicationController
   def create
     @bid = @product_batch.bids.build(bid_params)
     @bid.user = current_user
-
     if @product_batch.present_or_future? == 'Lote em Andamento'
       if @bid.validate_value?
         @bid.save

@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_132908) do
     t.integer "approved_by_id"
     t.datetime "start_time", precision: nil
     t.datetime "end_time", precision: nil
-    t.boolean "expired", default: false
+    t.integer "expired", default: 0
     t.index ["admin_id"], name: "index_product_batches_on_admin_id"
     t.index ["approved_by_id"], name: "index_product_batches_on_approved_by_id"
     t.index ["created_by_id"], name: "index_product_batches_on_created_by_id"

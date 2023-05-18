@@ -71,22 +71,21 @@ class ProductBatchesController < ApplicationController
   end
 
   def waiting_close
-    @product_batch.waiting_finish!
+    @product_batch.wait_finish!
   end
   
   def close_batch
+    @product_batch.close_batch!
     winning_bid = @product_batch.bids.maximum(:value)
-    if  @product_batch.save(validate: false)
-      @product_batch.close_batch!
-      redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
-    end
     if @winning_bid
       @winner_info = { code: product_batch.code, email: winning_bid.user&.email }
     end
+    redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
   end
   
   def show_result
-    @product_batches = ProductBatch.where(expired: 2)
+    @product_batches = ProductBatch.where(expired: 2) && 
+                        ProductBatch.where("deadline <= ? AND end_time < ?", Time.current, Time.current)
   end
 
   def edit

@@ -9,22 +9,14 @@ class Bid < ApplicationRecord
     max_bid = product_batch.bids.last&.value || product_batch.minimum_value
     if max_bid.nil?
       if value > product_batch.minimum_value
-        if persisted?
-          Bid.create(value: value, product_batch: product_batch, user: user)
-        else
-          self.product_batch.bids.build(value: value, user: user)
-        end
+        create_bid
         true
       else
         errors.add(:value, 'Valor do lance deve ser maior que valor inicial.')
         false
       end
     elsif max_bid.nil? || value >= max_bid + product_batch.minimal_difference
-      if persisted?
-        Bid.create(value: value, product_batch: product_batch, user: user)
-      else
-        self.product_batch.bids.build(value: value, user: user)
-      end
+      create_bid
       true
     else
       errors.add(:value, 'Valor do lance deve ser maior que o último lance.')
@@ -32,4 +24,11 @@ class Bid < ApplicationRecord
     end
   end
 
+  def create_bid
+    if persisted?
+      Bid.create(value: value, product_batch: product_batch, user: user)
+    else
+      self.product_batch.bids.build(value: value, user: user)
+    end
+  end
 end

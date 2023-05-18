@@ -32,6 +32,7 @@ class ProductBatch < ApplicationRecord
 
   def close_batch!
     self.expired = 2
+    save(validate: false)
   end
 
   def present_or_future?
