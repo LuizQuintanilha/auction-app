@@ -13,7 +13,6 @@ class BidsController < ApplicationController
 
     if @product_batch.present_or_future? == 'Lote em Andamento'
       if @bid.validate_value?
-        @product_batch.update(minimum_value: @bid.value) 
         @bid.save
         flash[:notice] = 'Lance criado com sucesso'
         redirect_to product_batch_path(@product_batch)

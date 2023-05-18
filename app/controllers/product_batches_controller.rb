@@ -1,7 +1,14 @@
 class ProductBatchesController < ApplicationController
-  before_action :authenticate_admin!, only: %i[ new create admin_aprove_batch edit update expired_batches destroy ]
+  before_action :authenticate_admin!, only: %i[ new create admin_aprove_batch edit update expired_batches destroy  ]
+  before_action :authenticate_user!, only: %i[ show_result ]
   before_action :set_product_batch, only: %i[ destroy show wait_approve edit update approve present_or_future? destroy waiting_close close_batch ]
- 
+
+  def authenticate_user!
+    unless admin_signed_in? || user_signed_in?
+      authenticate_user!
+    end
+  end
+  
   def index
     @product_batches = ProductBatch.where("start_date > ? AND start_time > ?", Time.current, Time.current) && 
                         ProductBatch.where(status: 2)
@@ -64,27 +71,17 @@ class ProductBatchesController < ApplicationController
   end
 
   def waiting_close
-    @product_batches = ProductBatch.all
-    @product_batches.each do |product_batch|
-      product_batch.wait_finish?
-      product_batch.update_column(expired: 0)
-      product_batch.save(validate: false)
-    end
-    redirect_to @product_batch, notice: 'Encerrrado'
+    @product_batch.waiting_finish!
   end
   
   def close_batch
-    @product_batches = ProductBatch.where(expired: 0)
     winning_bid = @product_batch.bids.maximum(:value)
-    @product_batch.wait_finish?
+    if  @product_batch.save(validate: false)
+      @product_batch.close_batch!
+      redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
+    end
     if @winning_bid
       @winner_info = { code: product_batch.code, email: winning_bid.user&.email }
-    end
-    @product_batch.update_column(:start_date, Date.today) if @product_batch.start_date < Date.today
-    if @product_batch.update_columns(expired: 2)
-      @product_batch.close_batch!
-      @product_batch.save(validate: false)
-      redirect_to expired_batches_path, notice: 'Lote encerrado com sucesso'
     end
   end
   

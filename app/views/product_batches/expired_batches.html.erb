@@ -8,8 +8,8 @@
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | 
         <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
   
-        <% if batch.wait_finish? %>
-          <%= button_to 'Encerrar', close_batch_product_batch_path(batch.id), { method: :patch} %>
+        <% if batch.waiting_finish? %>
+          <%= button_to 'Encerrar', close_batch_product_batch_path(batch ), { method: :patch} %>
         <% end %>
       
       </div>

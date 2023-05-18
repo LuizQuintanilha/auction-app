@@ -17,15 +17,21 @@ class ProductBatch < ApplicationRecord
   validate :present_or_future?
   validate :date_validator
   
-
-
   def date_validator
-    if self.start_date.present? && self.start_date < Date.today
+    if self.start_date.present? && self.start_date < Date.current
       self.errors.add(:start_date,  "A data não pode ser inferior a data atual")
     end
     if self.deadline.present? && self.deadline < self.start_date
       self.errors.add(:deadline, 'A data inválida')
     end
+  end
+
+  def waiting_finish?
+    self.expired = 0 
+  end
+
+  def close_batch!
+    self.expired = 2
   end
 
   def present_or_future?
@@ -37,14 +43,14 @@ class ProductBatch < ApplicationRecord
       'Lote Expirado'
     end
   end
-
-  def close_batch!
-    self.expired = 2
-  end
   
   def bids
     Bid.where(product_batch_id: id)
-  end    
+  end  
+
+  def skip_date_validation?
+    skip_date_validation || false
+  end 
   
   private
 
@@ -57,5 +63,4 @@ class ProductBatch < ApplicationRecord
       errors.add(:approved_by_id, "Não poder ser o mesmo admin.")
     end
   end
-
 end
