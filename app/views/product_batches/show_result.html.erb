@@ -5,10 +5,6 @@
   <div>
     <% winning_bid = batch.bids.last %>
     <strong>Código do Lote: </strong> <%= link_to batch.code, product_batch_path(batch.id) %> | 
-    <strong>  Valor: </strong>R$<%= winning_bid.value %>
-  <div>
-    <strong>  Email do Vencedor: </strong> <%= winning_bid.user.email %>
-  <div>
   <% end %>
 <% end %>
 

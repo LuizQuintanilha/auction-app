@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   resources :product_batches, only: [ :index, :new, :create, :show, :edit, :update, :destroy ] do
     patch :approve, :wait_approve, on: :member
     patch :close_batch, :waiting_close, on: :member
-    resources :bids, only: [ :new, :create ] 
+    resources :bids, only: [ :new, :create ]
+    get 'search', on: :collection
   end
+  
+  get 'user_space', to: 'product_batches#user_space'
   get 'show_result', to: 'product_batches#show_result'
   get 'expired_batches', to: 'product_batches#expired_batches'
   get 'aprove', to: 'product_batches#admin_aprove_batch'

@@ -66,7 +66,7 @@ describe 'From the homepage' do
                                   start_time: 1.hour.ago, end_time: 1.minutes.ago, approved_by: luiz)
     lote.approve!     
     bid = Bid.create!(user_id: 1, value: '1000', product_batch_id: 1)
-    #binding.pry
+    
     login_as(admin, :scope => :admin)                   
     visit expired_batches_path
     click_on 'Encerrar'
@@ -99,8 +99,6 @@ describe 'From the homepage' do
 
     expect(page).to have_content "Resultado dos Vencedores"
     expect(page).to have_content 'Código do Lote: ACB112233' 
-    expect(page).to have_content "Valor: R$#{bid.value}"
-    expect(page).to have_content "Email do Vencedor: #{bid.user.email}"
   end
 
 end

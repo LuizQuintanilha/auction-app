@@ -1,0 +1,18 @@
+<h2>Meus Lotes:</h2>
+<div>
+<% if @product_batches.any?  %>
+  <% @product_batches.each do |batch| %>
+    <div>
+      <strong>Código do lote: </strong>
+      <%= link_to batch.code, product_batch_path(batch.id) %>
+    </div> 
+      <div>
+        <strong>Produtos:</strong>
+          <% batch.products.each do |product| %>
+            <%= link_to product.name, product_path(product.id) %> |
+          <% end %>
+      </div>
+  <% end %>
+<% else %>
+  <p>Nenhum lote adquirido</p>
+<% end %>

@@ -84,8 +84,7 @@ class ProductBatchesController < ApplicationController
   end
   
   def show_result
-    @product_batches = ProductBatch.where(expired: 2) && 
-                        ProductBatch.where("deadline <= ? AND end_time < ?", Time.current, Time.current)
+    @product_batches = ProductBatch.where(expired: 2) 
   end
 
   def edit
@@ -123,6 +122,17 @@ class ProductBatchesController < ApplicationController
     redirect_to expired_batches_path, notice: 'Lote excluído com sucesso.'
   end
 
+  def search
+    @query = params[:query]
+    @product_batches = ProductBatch.joins(:products).where("product_batches.code LIKE :query OR products.name LIKE :query", query: "%#{@query}%")
+  end
+  
+
+  def user_space
+    @user = current_user
+    @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
+  end
+  
   private
 
   def set_product_batch

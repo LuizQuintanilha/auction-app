@@ -19,7 +19,13 @@
 
     <nav class="user">
         <% if user_signed_in?%>
+          <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
+              <%= f.label :query, 'Buscar Pedido' %>
+              <%= f.text_field :query %>
+              <%= f.submit 'Buscar' %>
+          <% end %>  
           <%= current_user.email  %>
+          <%= link_to 'Meus Lotes',  user_space_path %>
           <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to 'Usuário', new_user_session_path  %>
@@ -29,6 +35,11 @@
 
     <nav class="admin">
      <% if admin_signed_in?%>
+         <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
+            <%= f.label :query, 'Buscar Pedido' %>
+            <%= f.text_field :query %>
+            <%= f.submit 'Buscar' %>
+          <% end %>  
         <%= current_admin.email  %>
         <div>
           <%= link_to 'Cadastrar Produto', new_product_path  %> |
