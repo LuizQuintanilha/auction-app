@@ -1,7 +1,7 @@
 <h1>Resultado da busca por: <%= @query %></h1>
 
 <% if @product_batches.present? %>
-  <p><%= pluralize(@product_batches.count, ProductBatch.model_name.human(count: @product_batches.count)) %></p>
+  <p><%= @product_batches.count %> Lote(s) Encontrado(s)</p>
 
   <% @product_batches.each do |batch| %>
     <div>
@@ -9,12 +9,11 @@
     </div>
     <div>
       <strong>Produtos:</strong>
-      <ul>
         <% batch.products.each do |product| %>
-          <li><%= link_to product.name, product_path(product.id) %></li>
+      <%= link_to product.name, product_path(product.id) %> |
         <% end %>
-      </ul>
     </div>
+    <p>
   <% end %>
 <% else %>
   <p>Nenhum lote encontrado para a busca realizada.</p>

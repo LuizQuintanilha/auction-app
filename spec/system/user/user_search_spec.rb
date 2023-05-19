@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-describe 'Authenticaed user ' do
-  it 'view the winners batches' do
+describe 'From the homepage' do
+  context 'user do a search' do
+  it 'sucessfully ' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     luiz = Admin.create!(email: 'l@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
     luna = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
@@ -13,19 +14,30 @@ describe 'Authenticaed user ' do
     mouse_product.save
     lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today,  
                                   deadline: Date.today, minimum_value: 600, minimal_difference: 50, 
-                                  start_time: 1.hour.ago, end_time: 1.minutes.ago, approved_by: luiz)
+                                  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: luiz)
                                   
-    lote.approve!
-    lote.close_batch!     
-    bid = Bid.create!(user_id: 1, value: '1000', product_batch_id: 1)
-    #binding.pry
+    lote.approve!    
+    
+
     login_as(luna, :scope => :user)                   
     visit root_path
-    click_on 'Lotes Vencedores'
-    
-    
-    expect(page).to have_content "Resultado dos Vencedores"
-    expect(page).to have_content 'Código do Lote: ACB112233' 
-  
+    fill_in 'Buscar Pedido', with: 'Mouse'
+    click_on 'Buscar'
+      expect(page).to have_content '1 Lote(s) Encontrado(s)'
+      expect(page).to have_content 'Código do lote: ACB112233'
+      expect(page).to have_content 'Produtos: Mouse'
+    end
+  end
+  it "unsucessfully" do
+    luna = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
+
+    login_as(luna, :scope => :user)                   
+    visit root_path
+    fill_in 'Buscar Pedido', with: 'Mouse'
+    click_on 'Buscar'
+
+    expect(page).to have_content 'Resultado da busca por: Mouse'
+    expect(page).to have_content 'Nenhum lote encontrado para a busca realizada.'
+
   end
 end
