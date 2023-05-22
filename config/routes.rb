@@ -7,8 +7,14 @@ Rails.application.routes.draw do
     patch :approve, :wait_approve, on: :member
     patch :close_batch, :waiting_close, on: :member
     resources :bids, only: [ :new, :create ]
+    resources :questions
     get 'search', on: :collection
   end
+  
+  resources :answers, only: [:index, :create, :new ], param: :product_batch_id
+
+
+  #resources :answers
   
   get 'user_space', to: 'product_batches#user_space'
   get 'show_result', to: 'product_batches#show_result'

@@ -10,9 +10,9 @@
 <div>
   <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
   <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %> | 
+
   <%= link_to "Fazer Lance", new_product_batch_bid_path(@product_batch) %>
 
-  
 </div>
 
 <div>
@@ -34,4 +34,4 @@
   <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
 <% end %>
 
-<%= link_to 'Voltar', product_batches_path %>
+<%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>

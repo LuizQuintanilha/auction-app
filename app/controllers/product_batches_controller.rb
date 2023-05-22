@@ -3,12 +3,13 @@ class ProductBatchesController < ApplicationController
   before_action :authenticate_user!, only: %i[ show_result ]
   before_action :set_product_batch, only: %i[ destroy show wait_approve edit update approve present_or_future? destroy waiting_close close_batch ]
 
+  
   def authenticate_user!
     unless admin_signed_in? || user_signed_in?
       authenticate_user!
     end
   end
-  
+
   def index
     @product_batches = ProductBatch.where("start_date > ? AND start_time > ?", Time.current, Time.current) && 
                         ProductBatch.where(status: 2)
@@ -65,6 +66,7 @@ class ProductBatchesController < ApplicationController
   end
 
   def expired_batches
+    @product_batch = ProductBatch.find_by(params[:product_batch_id])
     @product_batches = ProductBatch.where("deadline <= ? AND end_time < ?", Time.current, Time.current)
     @admin = Admin.find_by(email: params[:email])
     @batch_fishined = current_admin if @product_batches.present?
@@ -144,4 +146,5 @@ class ProductBatchesController < ApplicationController
                                                 :deadline, :minimum_value, 
                                          :minimal_difference, :status, :expired, product_ids: [])                               
   end
+  
 end

@@ -1,0 +1,7 @@
+<h2>Responder pergunta do usuário: <%= @question.user_id.email  %></h2>
+
+ <%= form_with(model: [question, Answer.new], url: question_answers_path(question), method: :post) do |form| %>
+      <%= form.text_area :content, placeholder: 'Digite sua resposta' %>
+      <%= form.submit 'Enviar resposta' %>
+    <% end %>
+  </div>
