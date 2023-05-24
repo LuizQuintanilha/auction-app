@@ -8,10 +8,11 @@ Rails.application.routes.draw do
     patch :close_batch, :waiting_close, on: :member
     resources :bids, only: [ :new, :create ]
     resources :questions
+    resources :answers, only: [:index, :create, :new ]
     get 'search', on: :collection
   end
   
-  resources :answers, only: [:index, :create, :new ], param: :product_batch_id
+  
 
 
   #resources :answers

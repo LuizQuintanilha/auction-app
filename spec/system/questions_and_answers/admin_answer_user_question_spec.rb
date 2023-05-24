@@ -13,7 +13,7 @@ describe 'From the homepage' do
     visit root_path
     click_on 'Caixa de Perguntas'
 
-    expect(current_path).to eq answers_path
+    expect(current_path).to eq product_batch_answers_path(:product_batch_id)
     expect(page).to have_content 'Perguntas em Aberto'
     expect(page).to have_content "Usuário: #{question.user.email}"
     expect(page).to have_content "#{question.content}"

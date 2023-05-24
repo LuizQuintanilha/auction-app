@@ -1,7 +1,24 @@
-<h2>Responder pergunta do usuário: <%= @question.user_id.email  %></h2>
+<h1>Nova Resposta</h1>
 
- <%= form_with(model: [question, Answer.new], url: question_answers_path(question), method: :post) do |form| %>
-      <%= form.text_area :content, placeholder: 'Digite sua resposta' %>
-      <%= form.submit 'Enviar resposta' %>
-    <% end %>
+<div>
+  <strong>Usuário:</strong> <%= @question.user.email %>
+</div>
+
+<div>
+  <strong>Produto:</strong> <%= @question.product_batch.product.name %>
+</div>
+
+<div>
+  <strong>Dúvida:</strong>
+  <p><%= @question.content %></p>
+</div>
+
+<%= form_with model: @answer, url: question_answers_path(@question) do |form| %>
+  <div>
+    <%= form.label :content, "Resposta" %>
+    <%= form.text_area :content %>
   </div>
+
+  <%= form.submit "Enviar Resposta" %>
+<% end %>
+

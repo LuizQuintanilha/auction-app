@@ -1,54 +1,25 @@
 <h1>Perguntas em Aberto</h1>
-<% if Question.any? %>
-  <% @questions.each do |question| %>
+
+<% if @questions.any? %>
+  <% #binding.pry %>
+  <div>  
+    <% @questions.each do |q| %>
     <div>
-    <% #binding.pry %>
-      <strong>Usuário:</strong> <%= question.user.email %>
+      <strong>Usuário:</strong> <%= q.user.email %>
     </div>
     <div>
-      <strong>Produto:</strong> <%= @question.product_batch.product.name %>
+      <strong>Lote:</strong> <%= q.product_batch.code %>
     </div>
     <div>
       <strong>Dúvida:</strong>
-      <p><%= question.content %></p>
+      <%= q.content %>
+      <p> 
     </div>
-    <%= form_with model: @answer, url: question_answers_path(@question) do |form| %>
-  <div>
-    <%= form.label :content, "Resposta" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <%= form.submit "Enviar Resposta" %>
   <% end %>
-
-  <% end %>
+</div>
 <% else %>
-<% #binding.pry %>
-  <p>Sem perguntas a serem respondidas</p>
+<p>Sem perguntas a serem respondidas</p>
+  <% #binding.pry %>
 <% end %>
 
 
-
-<h1>Nova Resposta</h1>
-
-<div>
-  <strong>Usuário:</strong> <%= @question.user.email %>
-</div>
-
-<div>
-  <strong>Produto:</strong> <%= @question.product_batch.product.name %>
-</div>
-
-<div>
-  <strong>Dúvida:</strong>
-  <p><%= @question.content %></p>
-</div>
-
-<%= form_with model: @answer, url: question_answers_path(@question) do |form| %>
-  <div>
-    <%= form.label :content, "Resposta" %>
-    <%= form.text_area :content %>
-  </div>
-
-  <%= form.submit "Enviar Resposta" %>
-<% end %>

@@ -2,22 +2,28 @@ class AnswersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    #@product_batch = ProductBatch.find(params[:product_batch_id])
-  
-    @questions = Question.includes(:product_batch, :user).where(hidden: false)
+    @questions = Question.all
+    #@questions = Question.includes(:product_batch, :user).where(hidden: false)
+    
+
+    @product_batches = ProductBatch.where(questions: { product_batch_id: params[:product_batch_id] })
+    #@answers = Answer.includes(:question).where(questions: { product_batch_id: params[:product_batch_id] })
+   
   end
   
 
   def new
     @question = Question.includes(:product_batch, :user).find(params[:question_id])
-    @answer = Answer.new
+    @answer = @question.answers.build
   end
+
   
 
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
     @answer.user = current_admin
+    @answer.product_batch = @question.product_batch
 
     if @answer.content.blank?
       redirect_to questions_path, alert: 'A resposta não pode estar vazia.'
