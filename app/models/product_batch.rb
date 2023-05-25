@@ -6,6 +6,8 @@ class ProductBatch < ApplicationRecord
   has_many :bids, dependent: :destroy
   has_many :users, through: :bids
   has_many :questions
+  has_many :answers, class_name: 'Answer'
+
   enum status: { wait_approve: 0, approve: 2}
   enum expired: { wait_finish: 0, finished: 2 }
 

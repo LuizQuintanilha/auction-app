@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     patch :close_batch, :waiting_close, on: :member
     resources :bids, only: [ :new, :create ]
     resources :questions
-    resources :answers, only: [:index, :create, :new ]
+    resources :answers, only: [:index, :new, :create  ]
     get 'search', on: :collection
   end
   

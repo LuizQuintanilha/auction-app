@@ -6,6 +6,7 @@
     <% @questions.each do |q| %>
     <div>
       <strong>Usuário:</strong> <%= q.user.email %>
+      
     </div>
     <div>
       <strong>Lote:</strong> <%= q.product_batch.code %>
@@ -13,7 +14,9 @@
     <div>
       <strong>Dúvida:</strong>
       <%= q.content %>
-      <p> 
+      <p>
+     
+      <%= link_to 'Responder', new_product_batch_answer_path(product_batch_id: q.product_batch_id, question_id: q.id, user_id: q.user_id) %>
     </div>
   <% end %>
 </div>

@@ -1,24 +1,24 @@
-<h1>Nova Resposta</h1>
+<h1>Responder Usuário: </h1>
 
-<div>
-  <strong>Usuário:</strong> <%= @question.user.email %>
-</div>
 
-<div>
-  <strong>Produto:</strong> <%= @question.product_batch.product.name %>
-</div>
-
-<div>
-  <strong>Dúvida:</strong>
-  <p><%= @question.content %></p>
-</div>
-
-<%= form_with model: @answer, url: question_answers_path(@question) do |form| %>
   <div>
-    <%= form.label :content, "Resposta" %>
-    <%= form.text_area :content %>
+    <strong>Usuário:</strong> <%= @question.user.email  %>
+    <% #binding.pry %>
   </div>
 
-  <%= form.submit "Enviar Resposta" %>
-<% end %>
+  <div>
+    <strong>Lote:</strong> <%= @question.product_batch.code %>
+  </div>
 
+  <div>
+    <strong>Dúvida:</strong><%= @question.content %>
+  </div>
+
+<%= form_with model: @answer, url: product_batch_answers_path(product_batch_id: @product_batch.id, question_id: @question.id) do |f| %>
+  <div>
+    <%= f.text_area :content, placeholder: 'Digite sua resposta' %>
+  </div>
+
+  <%= f.submit "Enviar Resposta" %>
+  
+<% end %>

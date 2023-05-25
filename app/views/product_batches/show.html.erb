@@ -35,3 +35,20 @@
 <% end %>
 
 <%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>
+<div>
+<div>
+<div>
+
+
+<div>
+  <strong>Perguntas dos usuários:</strong>
+  <% @questions.each do |question| %>
+    <div>
+      <p><strong>Pergunta:</strong> <%= question.content %></p>
+      <% question.answers.each do |answer| %>
+        <p><strong>Resposta:</strong> <%= answer.content %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

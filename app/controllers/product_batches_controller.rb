@@ -40,6 +40,9 @@ class ProductBatchesController < ApplicationController
   def show
     @bids = Bid.all
     @bid = Bid.new(product_batch: @product_batch)
+    #@questions = Question.where('product_batch_id = ?', @product_batch)
+    #@answers = Answer.where('product_batch_id = ?', @product_batch)
+    @questions = Question.includes(:answers).where(product_batch_id: @product_batch.id)
   end
 
   def admin_aprove_batch

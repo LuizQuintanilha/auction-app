@@ -3,39 +3,38 @@ class AnswersController < ApplicationController
 
   def index
     @questions = Question.all
-    #@questions = Question.includes(:product_batch, :user).where(hidden: false)
-    
-
     @product_batches = ProductBatch.where(questions: { product_batch_id: params[:product_batch_id] })
-    #@answers = Answer.includes(:question).where(questions: { product_batch_id: params[:product_batch_id] })
-   
+    
   end
   
-
   def new
-    @question = Question.includes(:product_batch, :user).find(params[:question_id])
-    @answer = @question.answers.build
+    @user = User.find_by(id: params[:user_id])
+    @question = Question.includes(:user, :product_batch).find_by(id: params[:question_id])
+    @product_batch = ProductBatch.find_by(id: params[:product_batch_id])
+    @answer = Answer.new()
   end
-
-  
-
+      
   def create
-    @question = Question.find(params[:question_id])
+    @user = User.find_by(id: params[:user_id])
+    @question = Question.includes(:user, :product_batch).find_by(id: params[:question_id])
+    @product_batch = ProductBatch.find_by(id: params[:product_batch_id])
     @answer = @question.answers.build(answer_params)
-    @answer.user = current_admin
-    @answer.product_batch = @question.product_batch
+    @answer.user_id = current_admin.id 
+    @answer.question_id = @question.id
 
-    if @answer.content.blank?
-      redirect_to questions_path, alert: 'A resposta não pode estar vazia.'
-    else
-      @answer.save
+    if @answer.save  
+      
       redirect_to product_batch_answers_path(product_batch_id: @question.product_batch_id), notice: 'Resposta enviada com sucesso.'
+    else
+      flash[:alert] = 'Não foi possível enviar a resposta.'
+      render :new
     end
+
   end
 
   private
 
   def answer_params
-    params.require(:answer).permit(:content)
+    params.require(:answer).permit(:content, :user_id, :question_id)
   end
 end

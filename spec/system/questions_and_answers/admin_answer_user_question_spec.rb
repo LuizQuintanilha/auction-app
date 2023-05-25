@@ -12,11 +12,15 @@ describe 'From the homepage' do
     login_as(admin, :scope => :admin)
     visit root_path
     click_on 'Caixa de Perguntas'
+    click_on 'Responder'
 
-    expect(current_path).to eq product_batch_answers_path(:product_batch_id)
-    expect(page).to have_content 'Perguntas em Aberto'
+    expect(page).to have_content 'Responder Usuário:'
     expect(page).to have_content "Usuário: #{question.user.email}"
     expect(page).to have_content "#{question.content}"
+    expect(page).to have_content 'Formas de envio do produto!'
+    expect(page).to have_field 'Digite sua resposta'
+    expect(page).to have_button 'Enviar Resposta'
+
   end
   it 'admin answer a question' do
     luiz = User.create!(email: 'luiz@email.com', password: '123456', cpf:'12662381744')
@@ -30,10 +34,9 @@ describe 'From the homepage' do
     visit root_path
     click_on 'Caixa de Perguntas'
     click_on 'Responder'
+    fill_in 'Digite sua resposta', with: 'Envio será realizado pela Transportadora JSTransportes no prazo de até 10 dias úteis'
+    click_on 'Enviar Resposta'
     
-    expect(current_path).to eq new_answer_path
-    expect(page).to have_content "Responder pergunta do usuário: #{question.user}"
-
-
+    expect(page).to have_content 'Resposta enviada com sucesso.'
   end
 end
