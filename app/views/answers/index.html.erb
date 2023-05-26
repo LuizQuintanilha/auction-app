@@ -1,7 +1,6 @@
 <h1>Perguntas em Aberto</h1>
 
 <% if @questions.any? %>
-  <% #binding.pry %>
   <div>  
     <% @questions.each do |q| %>
     <div>
@@ -15,14 +14,15 @@
       <strong>Dúvida:</strong>
       <%= q.content %>
       <p>
-     
       <%= link_to 'Responder', new_product_batch_answer_path(product_batch_id: q.product_batch_id, question_id: q.id, user_id: q.user_id) %>
+    <% if admin_signed_in? %>
+      <%= button_to 'Excluir Pergunta', product_batch_question_path( q.product_batch_id, q.id), method: :delete %>
+    <% end %>
     </div>
   <% end %>
 </div>
 <% else %>
 <p>Sem perguntas a serem respondidas</p>
-  <% #binding.pry %>
 <% end %>
 
 

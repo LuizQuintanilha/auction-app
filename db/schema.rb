@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_22_195918) do
     t.text "content"
     t.integer "user_id", null: false
     t.integer "product_batch_id", null: false
-    t.boolean "hidden"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_batch_id"], name: "index_questions_on_product_batch_id"

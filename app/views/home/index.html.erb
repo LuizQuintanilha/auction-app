@@ -1,0 +1,5 @@
+<h1>Todos os Lotes</h1>
+
+<% @product_batches.each do |batch|  %>
+  <strong>Código do lote:</strong> <%= link_to batch.code, product_batch_path(batch.id) %>
+<% end %>

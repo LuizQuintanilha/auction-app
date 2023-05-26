@@ -44,11 +44,10 @@
   <strong>Perguntas dos usuários:</strong>
   <% @questions.each do |question| %>
     <div>
-      <p><strong>Pergunta:</strong> <%= question.content %></p>
-      <% question.answers.each do |answer| %>
-        <p><strong>Resposta:</strong> <%= answer.content %></p>
+      <strong>Pergunta:</strong> <%= question.content %> |
+      <% if question.answer.present? %>
+        <strong>Resposta:</strong> <%= question.answer.content %>
       <% end %>
     </div>
   <% end %>
 </div>
-
