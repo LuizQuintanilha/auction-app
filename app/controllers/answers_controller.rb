@@ -3,9 +3,7 @@ class AnswersController < ApplicationController
 
   def index
     @questions = Question.where(hidden: :false)
-    #@product_batches = ProductBatch.where(questions: { product_batch_id: params[:product_batch_id] })
     @product_batch = ProductBatch.find_by(id: params[:product_batch_id])
-
   end
   
   def new
@@ -24,7 +22,6 @@ class AnswersController < ApplicationController
     @answer.user_id = current_admin.id 
     @answer.question_id = @question.id
     @admin = current_admin
-    
     if @answer.save
       @question.hidden
       redirect_to product_batch_answers_path(product_batch_id: @question.product_batch_id), notice: 'Resposta enviada com sucesso.'
