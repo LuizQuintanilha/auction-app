@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   has_many :bids
   has_many :product_batches, through: :bid
   
@@ -13,7 +13,9 @@ class User < ApplicationRecord
   validates :cpf, format: { with: /[0-9]{11}/, message: 'Precisa ter 11 dígitos' }
   validate :email_format
   validate :cpf_different_from_admin
-
+ 
+  #validate :check_blocked_cpf, on: :create
+  
   def email_format
     if self.email.present? && self.email.match(/@leilaodogalpao.com.br\z/)
       errors.add(:email, "Domínio exclusivo")
@@ -25,4 +27,13 @@ class User < ApplicationRecord
       errors.add(:cpf, 'CPF já cadastrado')
     end
   end
+
+  def active_for_authentication?
+    super && !blocked?
+  end
+
+  def inactive_message
+    blocked? ? "Sua conta está suspensa." : super
+  end
+
 end

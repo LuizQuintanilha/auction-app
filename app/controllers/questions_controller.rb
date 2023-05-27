@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :check_admin, only: [ :destroy ]
+  before_action :check_blocked_user, only: [:new, :create]
 
   def new
     @product_batch = ProductBatch.find_by(id: params[:product_batch_id])
@@ -8,15 +9,19 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @product_batch = ProductBatch.find(params[:product_batch_id])
-    @question = @product_batch.questions.build(question_params)
-    @question.user = current_user
+    if current_user&.blocked?
+      redirect_to root_path
+    else
+      @product_batch = ProductBatch.find(params[:product_batch_id])
+      @question = @product_batch.questions.build(question_params)
+      @question.user = current_user
 
-    if @question.content.blank?
-      redirect_to product_batch_path(@product_batch), notice: 'Erro ao enviar a pergunta.'
-    else 
-      @question.save
-      redirect_to product_batch_path(@product_batch), notice: 'Pergunta enviada com sucesso.'
+      if @question.content.blank?
+        redirect_to product_batch_path(@product_batch), notice: 'Erro ao enviar a pergunta.'
+      else 
+        @question.save
+        redirect_to product_batch_path(@product_batch), notice: 'Pergunta enviada com sucesso.'
+      end
     end
   end
 
@@ -28,6 +33,11 @@ class QuestionsController < ApplicationController
   end
   
   private
+
+  def check_blocked_user
+    if current_user&.blocked?
+    end
+  end
 
   def question_params
     params.require(:question).permit(:content)

@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
   
-  
+  resources :blocked_users, only: [:update, :index]
+
 
 
   #resources :answers
