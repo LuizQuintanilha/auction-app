@@ -17,41 +17,38 @@
       <%= link_to 'Lotes Vencedores', show_result_path %>
     </header>
 
-    <nav class="user">
-        <% if user_signed_in?%>
-          <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
-              <%= f.label :query, 'Buscar Pedido' %>
-              <%= f.text_field :query %>
-              <%= f.submit 'Buscar' %>
-          <% end %>  
-          <%= current_user.email  %>
-          <%= link_to 'Meus Lotes',  user_space_path %>
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Usuário', new_user_session_path  %>
-       
-        <% end %>
-    </nav>
-
-    <nav class="admin">
-     <% if admin_signed_in?%>
-        <%= current_admin.email  %>
-        <div>
-          <%= link_to 'Cadastrar Produto', new_product_path  %> |
-          <%= link_to 'Cadastrar Lote', new_product_batch_path %> |
-          <%= link_to 'Aprovar lote', aprove_path  %> |
-          <%= link_to 'Lotes Expirados', expired_batches_path  %> |
-          <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id) %>
-          <%= link_to 'Bloqueio de Usuário', blocked_users_path %>
-
-
- 
-          <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
-        <div>
-      <% else %>
-        <%= link_to 'Admin', new_admin_session_path  %>   
+  <nav class="user">
+    <% if !user_signed_in? && !admin_signed_in? %>
+      <%= link_to 'Usuário', new_user_session_path %>
+    <% elsif user_signed_in? %>
+      <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
+        <%= f.label :query, 'Buscar Pedido' %>
+        <%= f.text_field :query %>
+        <%= f.submit 'Buscar' %>
       <% end %>
-    </nav>
+      <%= current_user.email %>
+      <%= link_to 'Meus Lotes', user_space_path %>
+      <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+    <% end %>
+  </nav>
+
+  <nav class="admin">
+    <% if !user_signed_in? && !admin_signed_in? %>
+      <%= link_to 'Admin', new_admin_session_path %>
+    <% elsif admin_signed_in? %>
+      <%= current_admin.email %>
+      <div>
+        <%= link_to 'Cadastrar Produto', new_product_path %> |
+        <%= link_to 'Cadastrar Lote', new_product_batch_path %> |
+        <%= link_to 'Aprovar lote', aprove_path %> |
+        <%= link_to 'Lotes Expirados', expired_batches_path %> |
+        <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id) %>
+        <%= link_to 'Bloqueio de Usuário', blocked_users_path %>
+        <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
+      </div>
+    <% end %>
+  </nav>
+
     
     <main>
       <div>
