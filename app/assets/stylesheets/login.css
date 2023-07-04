@@ -1,0 +1,22 @@
+.login {
+  border: 1px solid #080707;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px;
+  padding: 10px;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  margin-bottom: 3px;
+}
+
+.input {
+  margin-top: 3px;
+  border-radius: 4px;
+}
