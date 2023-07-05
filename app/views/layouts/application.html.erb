@@ -10,46 +10,61 @@
   </head>
 
   <body>
-    <header>
-      <h1><%= link_to  'Leilão de Estoque', root_path %></h1>
-      <%= link_to 'Produtos Cadastrados', products_path %> |
-      <%= link_to 'Lotes Cadastrados', product_batches_path %> | 
-      <%= link_to 'Lotes Vencedores', show_result_path %>
-    </header>
+    <div class='homepage'>
+      <header>
+        <h1><%= link_to  'Leilão de Estoque', root_path, class: 'title' %></h1>
+          <div class='menu'>
+            <%= link_to 'Produtos Cadastrados', products_path, class: 'subtitle' %>
+            <%= link_to 'Lotes Cadastrados', product_batches_path, class: 'subtitle' %>
+            <%= link_to 'Lotes Vencedores', show_result_path, class: 'subtitle' %>
+          </div>
+      </header>
+    </div>  
 
-  <nav class="user">
-    <% if !user_signed_in? && !admin_signed_in? %>
-      <%= link_to 'Usuário', new_user_session_path %>
-    <% elsif user_signed_in? %>
-      <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
-        <%= f.label :query, 'Buscar Pedido' %>
-        <%= f.text_field :query %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
-      <%= current_user.email %>
-      <%= link_to 'Meus Lotes', user_space_path %>
-      <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-    <% end %>
-  </nav>
+      <nav class="user">
+        <% if !user_signed_in? && !admin_signed_in? %>
+          <div class='user-position'>
+            <%= link_to 'Usuário', new_user_session_path, class: 'color-position' %>
+          </div>
+    <div class='menu-login'>
+        <% elsif user_signed_in? %>
+          <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
+            <%= f.label :query, 'Buscar Pedido' %>
+            <%= f.text_field :query %>
+            <%= f.submit 'Buscar' %>
+          <% end %>
+          <div class='email'>
+            <%= current_user.email %>
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'subtitle' %>
+          </div>
+          <%= link_to 'Meus Lotes', user_space_path %>
+        <% end %>
+      </nav>
+    </div>
+      <nav class="admin">
+        <% if !user_signed_in? && !admin_signed_in? %>
+          <div class='admin-position'>
+            <%= link_to 'Admin', new_admin_session_path, class: 'color-position' %>
+          </div>
+        <div class='menu-login'>
+        <% elsif admin_signed_in? %>
+          <div class='email'>
+            <%= current_admin.email %><br>
+            <%= button_to 'Sair', destroy_admin_session_path, method: :delete, class: 'subtitle' %>
+          </div>
+            <div class='submenu'>
+              <%= link_to 'Cadastrar Produto', new_product_path, class: 'subtitle' %>
+              <%= link_to 'Cadastrar Lote', new_product_batch_path, class: 'subtitle' %>
+              <%= link_to 'Aprovar lote', aprove_path, class: 'subtitle' %>
+              <%= link_to 'Lotes Expirados', expired_batches_path, class: 'subtitle' %>
+              <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id), class: 'subtitle' %>
+              <%= link_to 'Bloqueio de Usuário', blocked_users_path, class: 'subtitle' %>
+            </div>
+        </div>
+        <% end %>
+        </div>
+      </nav>
 
-  <nav class="admin">
-    <% if !user_signed_in? && !admin_signed_in? %>
-      <%= link_to 'Admin', new_admin_session_path %>
-    <% elsif admin_signed_in? %>
-      <%= current_admin.email %>
-      <div>
-        <%= link_to 'Cadastrar Produto', new_product_path %> |
-        <%= link_to 'Cadastrar Lote', new_product_batch_path %> |
-        <%= link_to 'Aprovar lote', aprove_path %> |
-        <%= link_to 'Lotes Expirados', expired_batches_path %> |
-        <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id) %>
-        <%= link_to 'Bloqueio de Usuário', blocked_users_path %>
-        <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
-      </div>
-    <% end %>
-  </nav>
-
-    
     <main>
       <div>
         <%= notice %>

@@ -1,0 +1,160 @@
+body {
+  background-image: url(https://www.vilarica.mt.gov.br/fotos_bancoimagens/3265.png);
+  background-size: cover;
+}
+
+.login {
+  border: 1px solid #080707;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px;
+  padding: 10px;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  margin-bottom: 3px;
+  font-weight: bolder;
+}
+
+.input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  height: 20px;
+  width: 220px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.title {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+  margin-bottom: 0;
+  font-size: 75px;
+  font-family: 'Avantgarde';
+  color: rgb(146, 107, 9);
+  border: 1px groove white;
+  border-radius: 20px;
+  padding: 38px;
+  background-color:black;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+}
+
+.subtitle {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: #080707;
+  margin-left: 10px;
+}
+
+.menu-login {
+  display: flex;
+  justify-content: right;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 25px;
+  margin-top: 15px;
+}
+
+.admin {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.user {
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.user-position {
+  display: flex;
+  justify-content: right;
+  position: fixed;
+  top: 95px;
+  left: 1110px;
+  margin-left: 30px;
+  margin-top: 20px;
+  border: 1px groove white;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: black;
+  font-weight: bolder;
+}
+
+.admin-position {
+  display: flex;
+  justify-content: right;
+  position: fixed;
+  top: 95px;
+  left: 1200px;
+  margin-left: 30px;
+  margin-top: 20px;
+  border: 1px groove white;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: black;
+  font-weight: bolder;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-decoration: none;
+}
+
+.submenu a {
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.email {
+  position: fixed;
+  top: 95px;
+  right: 0;
+  margin-top: 30px;
+  margin-right: 60px;
+}
+
+.button {
+  align-items: center;
+  background-color: rgb(18, 121, 74);
+  border: rgb(189, 18, 18);
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.button a {
+  margin-left: 7px;
+  margin-right: 10px;
+}
+
+.color-position {
+  color: rgb(146, 107, 9);
+  text-decoration: none;
+}
+
+
+
+
