@@ -18,14 +18,12 @@ describe 'Authenticaed user ' do
     lote.approve!
     lote.close_batch!     
     bid = Bid.create!(user_id: 1, value: '1000', product_batch_id: 1)
-    #binding.pry
+
     login_as(luna, :scope => :user)                   
     visit root_path
     click_on 'Lotes Vencedores'
-    
-    
-    expect(page).to have_content "Resultado dos Vencedores"
-    expect(page).to have_content 'Código do Lote: ACB112233' 
   
+    expect(page).to have_content 'Resultado dos Vencedores'
+    expect(page).to have_content 'Código do Lote: ACB112233' 
   end
 end

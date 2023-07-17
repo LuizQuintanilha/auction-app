@@ -3,7 +3,6 @@ class ProductBatchesController < ApplicationController
   before_action :authenticate_user!, only: %i[ show_result ]
   before_action :set_product_batch, only: %i[ destroy show wait_approve edit update approve present_or_future? destroy waiting_close close_batch ]
 
-  
   def authenticate_user!
     unless admin_signed_in? || user_signed_in?
       authenticate_user!
@@ -130,22 +129,28 @@ class ProductBatchesController < ApplicationController
     @product_batches = ProductBatch.joins(:products).where("product_batches.code LIKE :query OR products.name LIKE :query", query: "%#{@query}%")
   end
   
-
   def user_space
     @user = current_user
     @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
   end
-  
+
   private
+
+  def favorite_option(product_batch)
+    @favorite = Favorite.new
+    return unless user_signed_in? && current_user.favorite_products.include?(product_batch)
+
+    @favorite = current_user.favorites.find { |fav| fav.product_batch_id == product_batch.id }
+  end
 
   def set_product_batch
     @product_batch = ProductBatch.find(params[:id])
   end
   
   def product_batch_params
-    params.require(:product_batch).permit(:start_time, :end_time, :code, :start_date, 
-                                                :deadline, :minimum_value, 
-                                         :minimal_difference, :status, :expired, product_ids: [])                               
+    params.require(:product_batch) .permit(:start_time, :end_time, 
+            :code, :start_date, 
+            :deadline, :minimum_value, 
+            :minimal_difference, :status, :expired, product_ids: [])                               
   end
-  
 end

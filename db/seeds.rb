@@ -1,8 +1,8 @@
 # Admin seed
 
-Admin.create!(email: 'vando@leilaodogalpao.com.br', password: '123456', cpf: '53366189347')
-Admin.create!(email: 'edna@leilaodogalpao.com.br', password: '123456', cpf: '38125120505')
-User.create!(email: 'deise@email.com', password: '123456', cpf: '25706733406')
+admin = Admin.create!(email: 'vando@leilaodogalpao.com.br', password: '123456', cpf: '53366189347')
+admin_dois = Admin.create!(email: 'edna@leilaodogalpao.com.br', password: '123456', cpf: '38125120505')
+user = User.create!(email: 'deise@email.com', password: '123456', cpf: '25706733406')
 User.create!(email: 'luna@email.com', password: '123456', cpf: '12662381744')
 
 informatica = Category.create!(name:'Informática')
@@ -38,3 +38,14 @@ microondas_product.save
 geladeira_product.save
 tv_product.save
 sofa_product.save
+
+
+lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin,
+  code: 'ACB112233', start_date: Date.today,  
+  deadline: Date.today, minimum_value: 600, minimal_difference: 50, 
+  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+
+ProductBatch.create!(product_ids: 2, admin_id: 1, created_by: admin,
+    code: 'ACB321654', start_date: Date.today,  
+    deadline: Date.today, minimum_value: 800, minimal_difference: 80, 
+    start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)

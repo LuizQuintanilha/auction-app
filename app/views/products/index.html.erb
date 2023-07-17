@@ -1,10 +1,14 @@
-<h2>Produtos Cadastrados</h2>
-<% if @products.any? %>
-  <% @products.each do |product| %>
-    <div>
-      <strong>Produto:</strong> <%= link_to product.name, product_path(product.id) %>
-    </div>
-  <% end %>
-<% else %>
-  <p>Sem produtos cadastrados.</p>
-<% end %>
+<div class="container-parent">
+  <div class="container">
+    <h2>Produtos Cadastrados</h2>
+    <% if @products.any? %>
+      <% @products.each do |product| %>
+        <div>
+          <strong>Produto:</strong> <%= link_to product.name, product_path(product.id) %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Sem produtos cadastrados.</p>
+    <% end %>
+  </div>
+</div>

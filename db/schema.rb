@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_26_221422) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_125521) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,6 +78,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_221422) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "product_batch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_batch_id"], name: "index_favorites_on_product_batch_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "product_batch_items", force: :cascade do |t|
@@ -157,6 +166,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_26_221422) do
   add_foreign_key "answers", "users"
   add_foreign_key "bids", "product_batches"
   add_foreign_key "bids", "users"
+  add_foreign_key "favorites", "product_batches"
+  add_foreign_key "favorites", "users"
   add_foreign_key "product_batch_items", "product_batches"
   add_foreign_key "product_batch_items", "products"
   add_foreign_key "product_batches", "admins"

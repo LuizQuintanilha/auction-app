@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:cpf])
   end
 
-
   def check_blocked_user
     if user_signed_in? && current_user.blocked?
       flash.now[:notice] = "Sua conta está suspensa."

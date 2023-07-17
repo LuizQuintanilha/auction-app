@@ -8,6 +8,19 @@
         <strong>Início:</strong> <%= batch.start_date.strftime('%d- %m-%Y') %> | <strong>Hora:</strong> <%= batch.start_time.strftime('%H:%M:%S') %> |
         <strong>Término:</strong> <%= batch.deadline.strftime('%d-%m-%Y') %> | <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M:%S') %> |
         <strong>Status:</strong> <%= batch.present_or_future? %>
+
+        <% if user_signed_in? %>
+          <%= form_for(Favorite.new) do |f| %>
+            <%= f.hidden_field :product_batch_id, value: batch.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <% if Favorite.exists?(product_batch_id: batch.id, user_id: current_user.id) %>
+              <p>Favoritado</p>
+            <% else %>
+              <%= f.submit 'Favoritar'%>
+            <% end %>
+          <% end %>
+        <% end %>
+        
         </div>
     <% end %>
   <% end %>

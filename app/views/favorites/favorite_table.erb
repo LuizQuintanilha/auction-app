@@ -1,0 +1,8 @@
+<% if @favorites.any? %>
+  <% @favorites.each do |favorite| %>
+    <%= favorite.product_batch.code %>
+    <%= button_to 'Desfavoritar', favorite_path(favorite), method: :delete, id: favorite.id %>
+  <% end %>
+<% else %>
+  <p>Lista de Favoritos está vazia</p>
+<% end %>
