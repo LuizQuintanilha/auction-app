@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe 'Admin view all product batch registered' do
   context 'with status' do
-    
     it 'approved' do
-      # Arrange
       luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, 
@@ -12,11 +10,11 @@ describe 'Admin view all product batch registered' do
                                   minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
       lote.save
       lote.approve!
-      # Act
+
       login_as(admin, :scope => :admin)
       visit root_path
       click_on 'Lotes Cadastrados'
-      # Assert
+
       expect(current_path).to eq product_batches_path
       expect(page).to have_content 'Lotes Cadastrados'
       expect(page).to have_content 'ACB112233'

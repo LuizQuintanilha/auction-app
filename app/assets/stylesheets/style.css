@@ -44,7 +44,7 @@ body {
   color: rgb(146, 107, 9);
   border: 1px groove white;
   border-radius: 20px;
-  padding: 38px;
+  padding: 40px;
   background-color:black;
 }
 
@@ -57,10 +57,15 @@ body {
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  color: #080707;
+  margin-bottom: 7px;
+  margin-top: 8px;
+  color: rgb(146, 107, 9);
   margin-left: 10px;
+  border: 1px groove white;
+  border-radius: 15px;
+  padding: 8px;
+  background-color: black;
+  font-weight: bolder;
 }
 
 .menu-login {
@@ -87,7 +92,7 @@ body {
   display: flex;
   justify-content: right;
   position: fixed;
-  top: 95px;
+  top: 123px;
   left: 1110px;
   margin-left: 30px;
   margin-top: 20px;
@@ -102,7 +107,7 @@ body {
   display: flex;
   justify-content: right;
   position: fixed;
-  top: 95px;
+  top: 123px;
   left: 1200px;
   margin-left: 30px;
   margin-top: 20px;
@@ -154,6 +159,24 @@ body {
   color: rgb(146, 107, 9);
   text-decoration: none;
 }
+
+
+.container-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 800px; 
+  padding: 20px; 
+}
+
+
 
 
 

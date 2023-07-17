@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :bids
   has_many :product_batches, through: :bid
+  has_many :favorites, dependent: :destroy
   
   validates :cpf, presence: true
   validates :cpf, uniqueness: true
@@ -34,6 +35,10 @@ class User < ApplicationRecord
 
   def inactive_message
     blocked? ? "Sua conta está suspensa." : super
+  end
+
+  def favorite_products
+    favorites.map(&:product_batch)
   end
 
 end

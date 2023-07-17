@@ -16,13 +16,10 @@ Rails.application.routes.draw do
   end
   
   resources :blocked_users, only: [:update, :index]
-
-
-
-  #resources :answers
-  
+  resources :favorites, only: [:create, :destroy]
   get 'user_space', to: 'product_batches#user_space'
   get 'show_result', to: 'product_batches#show_result'
   get 'expired_batches', to: 'product_batches#expired_batches'
   get 'aprove', to: 'product_batches#admin_aprove_batch'
+  get "favorite_table", to: "favorites#favorite_table"
 end

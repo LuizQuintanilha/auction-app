@@ -20,7 +20,6 @@
           </div>
       </header>
     </div>  
-
       <nav class="user">
         <% if !user_signed_in? && !admin_signed_in? %>
           <div class='user-position'>
@@ -38,9 +37,11 @@
             <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'subtitle' %>
           </div>
           <%= link_to 'Meus Lotes', user_space_path %>
+          <%= link_to 'Favoritos', favorite_table_path %>
         <% end %>
       </nav>
     </div>
+    
       <nav class="admin">
         <% if !user_signed_in? && !admin_signed_in? %>
           <div class='admin-position'>
