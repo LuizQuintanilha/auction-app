@@ -6,7 +6,7 @@ describe 'From the homepage' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     user = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
     # act
-    login_as(admin, :scope => :admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Bloqueio de Usuário'
     # assert
@@ -21,7 +21,7 @@ describe 'From the homepage' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     user = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
     # act
-    login_as(admin, :scope => :admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Bloqueio de Usuário'
     click_on 'Bloquear'
@@ -38,18 +38,17 @@ describe 'From the homepage' do
     user = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
     user.update(blocked: true)
     user.reload
-  
+
     # act
-    login_as(admin, :scope => :admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Bloqueio de Usuário'
     click_on 'Desbloquear'
-  
+
     expect(page).to have_content "Email: #{user.email}"
     expect(page).to have_content "CPF: #{user.cpf}"
     expect(page).to have_button 'Bloquear'
     expect(page).not_to have_button 'Desbloquear'
     expect(page).to have_content 'Usuário desbloqueado com sucesso.'
   end
-  
 end

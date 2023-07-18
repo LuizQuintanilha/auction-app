@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe 'Admin sign up' do
   it 'successfully' do
-
     visit root_path
     within('nav.admin') do
       click_on 'Admin'
@@ -24,7 +23,6 @@ describe 'Admin sign up' do
   end
   context 'unsuccessfully' do
     it 'when cpf is invalid' do
-
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -42,7 +40,8 @@ describe 'Admin sign up' do
       expect(page).to have_content 'CPF inválido'
     end
     it 'when cpf is already in used' do
-      Admin.create!(cpf: 12662381744, email: 'luiz@leilaodogalpao.com.br', password: '123456', password_confirmation: '123456')
+      Admin.create!(cpf: 12_662_381_744, email: 'luiz@leilaodogalpao.com.br', password: '123456',
+                    password_confirmation: '123456')
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -60,7 +59,6 @@ describe 'Admin sign up' do
       expect(page).to have_content 'Cpf has already been taken'
     end
     it 'when email is invalid' do
-
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -78,7 +76,6 @@ describe 'Admin sign up' do
       expect(page).to have_content 'Email Precisa pertencer ao domínio @leilaodogalpao.com.br'
     end
     it 'when password is too short' do
-
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -95,6 +92,5 @@ describe 'Admin sign up' do
       expect(page).to have_content 'error prohibited this admin from being saved:'
       expect(page).to have_content 'Password is too short (minimum is 6 characters)'
     end
-
   end
 end

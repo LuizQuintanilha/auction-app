@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe 'From the homepage' do 
+describe 'From the homepage' do
   it 'sucessfully' do
     # Arrange
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     # Act
-    login_as(admin, :scope => :admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Aprovar lote'
     click_on 'Cadastrar Lote'
@@ -22,23 +22,25 @@ describe 'From the homepage' do
       # Arrange
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       product_category = Category.create!(name: 'Informática')
-      eletrodomestico = Category.create!(name:'Eletrodoméstico')
+      eletrodomestico = Category.create!(name: 'Eletrodoméstico')
       mouse_product = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
-                                depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
-      mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
-      microondas_product = Product.new(name:'Microondas',  weight: 90, width: 12, height: 4, 
-                                depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
-      microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')), filename: 'microondas.png')
+                                  depth: 6, description: 'MOUSE OFFICE TGT P90', category: product_category)
+      mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                                 filename: 'mouse_red.jpg')
+      microondas_product = Product.new(name: 'Microondas', weight: 90, width: 12, height: 4,
+                                       depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
+      microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')),
+                                      filename: 'microondas.png')
       microondas_product.save
       mouse_product.save
 
       # Act
-      login_as(admin, :scope => :admin)
+      login_as(admin, scope: :admin)
       visit root_path
       click_on 'Cadastrar Lote'
       check 'Microondas'
       fill_in 'Code', with: 'ABC123456'
-      fill_in 'Start date', with: Date.today
+      fill_in 'Start date', with: Time.zone.today
       fill_in 'Deadline', with: 3.days.from_now
       fill_in 'Minimum value', with: 500
       fill_in 'Minimal difference', with: 80

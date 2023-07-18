@@ -10,7 +10,8 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
                               depth: 6, description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
         # act
         result = produto.valid?
         produto.save
@@ -23,7 +24,8 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: '', weight: 90, width: 12, height: 4,
                               depth: 6, description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
 
         result = produto.valid?
 
@@ -36,7 +38,6 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
                               depth: 6, description: mouse, category: product_category)
-        
 
         result = produto.valid?
 
@@ -47,9 +48,10 @@ RSpec.describe Product, type: :model do
       it 'false when weight is empty' do
         product_category = Category.create!(name: 'Informática')
         mouse = 'MOUSE OFFICE TGT P90'
-        produto = Product.new(name: 'Mouse', weight: '' , width: 12, height: 4,
+        produto = Product.new(name: 'Mouse', weight: '', width: 12, height: 4,
                               depth: 6, description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
 
         result = produto.valid?
 
@@ -62,8 +64,9 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: '', height: 4,
                               depth: 6, description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
-                              
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
+
         result = produto.valid?
 
         expect(result).to eq false
@@ -75,7 +78,8 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: '',
                               depth: 6, description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
 
         result = produto.valid?
 
@@ -88,7 +92,8 @@ RSpec.describe Product, type: :model do
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
                               depth: '', description: mouse, category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
 
         result = produto.valid?
 
@@ -100,8 +105,9 @@ RSpec.describe Product, type: :model do
         product_category = Category.create!(name: 'Informática')
         mouse = 'MOUSE OFFICE TGT P90'
         produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
-                              depth: 6 , description: '', category: product_category)
-        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')                     
+                              depth: 6, description: '', category: product_category)
+        produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                             filename: 'mouse_red.jpg')
 
         result = produto.valid?
 

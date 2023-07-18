@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
         user = User.new(email: 'ana_22@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
         # Act
         result = user.valid?
-        
+
         expect(result).to eq false
       end
 
@@ -30,7 +30,8 @@ RSpec.describe User, type: :model do
       end
 
       it 'when password different from password confirmation' do
-        user = User.new(email: 'luana@email.com', password: '123456', password_confirmation: '654321', cpf: '13008409784')
+        user = User.new(email: 'luana@email.com', password: '123456', password_confirmation: '654321',
+                        cpf: '13008409784')
         # Act
         result = user.valid?
 

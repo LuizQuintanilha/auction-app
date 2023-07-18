@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :check_admin, only: [ :destroy ]
-  before_action :check_blocked_user, only: [:new, :create]
+  before_action :authenticate_user!, only: %i[new create]
+  before_action :check_admin, only: [:destroy]
+  before_action :check_blocked_user, only: %i[new create]
 
   def new
     @product_batch = ProductBatch.find_by(id: params[:product_batch_id])
@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
 
       if @question.content.blank?
         redirect_to product_batch_path(@product_batch), notice: 'Erro ao enviar a pergunta.'
-      else 
+      else
         @question.save
         redirect_to product_batch_path(@product_batch), notice: 'Pergunta enviada com sucesso.'
       end
@@ -29,9 +29,10 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @product_batch = @question.product_batch
     @question.destroy
-    redirect_to product_batch_answers_path(product_batch_id: @product_batch.id), notice: 'Pergunta excluída com sucesso.'
+    redirect_to product_batch_answers_path(product_batch_id: @product_batch.id),
+                notice: 'Pergunta excluída com sucesso.'
   end
-  
+
   private
 
   def check_blocked_user
@@ -47,4 +48,3 @@ class QuestionsController < ApplicationController
     redirect_to root_path, alert: 'Apenas usuários não administradores podem enviar perguntas.' unless admin_signed_in?
   end
 end
-
