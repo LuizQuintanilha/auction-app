@@ -17,12 +17,14 @@ class BidsController < ApplicationController
       else
         redirect_to new_product_batch_bid_path(@product_batch), notice: 'Deve ser maior que valor inicial'
       end
-    else @product_batch.present_or_future? == 'Lote em Andamento' && @product_batch.bids.length >= 1
+    else
+      @product_batch.present_or_future? == 'Lote em Andamento' && @product_batch.bids.length >= 1
       if @bid.validate_value?
         @bid.save
         redirect_to product_batch_path(@product_batch), notice: 'Lance criado com sucesso'
       else
-        redirect_to new_product_batch_bid_path(@product_batch), notice: 'Novo lance deve ser maior que o valor atual somado com o valor de diferença.'
+        redirect_to new_product_batch_bid_path(@product_batch),
+                    notice: 'Novo lance deve ser maior que o valor atual somado com o valor de diferença.'
       end
     end
   end

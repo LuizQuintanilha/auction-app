@@ -22,8 +22,10 @@ describe 'User visit homepage' do
                                   depth: 6,
                                   description: mouse,
                                   category: informatica)
-      mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg' )),
-                                filename: 'mouse_red.jpg' )
+      file_path = Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+      file = File.open(file_path)
+      mouse_product.photo.attach(io: file, filename: 'mouse_red.jpg')
+      mouse_product.save
       mouse_product.save
       visit root_path
       click_on 'Produtos Cadastrados'
@@ -41,11 +43,11 @@ describe 'User visit homepage' do
     end
     it 'and view all future batches ' do
       luana = Admin.create!(email: 'luana@leilaodogalpao.com.br',
-                            password: '123456', 
+                            password: '123456',
                             cpf: '13008409784')
       luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br',
-                            password: '123456', 
-                            cpf: '12662381744')
+                           password: '123456',
+                           cpf: '12662381744')
       informatica = Category.create!(name: 'Informática')
       mouse = 'MOUSE OFFICE TGT P90'
       mouse_product = Product.new(name: 'Mouse',
@@ -54,10 +56,10 @@ describe 'User visit homepage' do
                                   height: 4,
                                   depth: 6,
                                   description: mouse,
-                                  category: informatica
-                                )
-      mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), 
-                                 filename: 'mouse_red.jpg')
+                                  category: informatica)
+      file_path = Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+      file = File.open(file_path)
+      mouse_product.photo.attach(io: file, filename: 'mouse_red.jpg')
       mouse_product.save
       future_batch = ProductBatch.new(admin_id: 1,
                                       code: 'ABD332211',
@@ -68,8 +70,7 @@ describe 'User visit homepage' do
                                       created_by: luiz,
                                       approved_by: luana,
                                       start_time: 1.hour.from_now,
-                                      end_time: 2.hour.from_now
-                                    )
+                                      end_time: 2.hours.from_now)
       future_batch.approve!
       visit root_path
       click_on 'Lotes Cadastrados'
@@ -78,38 +79,36 @@ describe 'User visit homepage' do
     end
     it 'and view all currently batches ' do
       luana = Admin.create!(email: 'luana@leilaodogalpao.com.br',
-                              password: '123456',
-                              cpf: '13008409784'
-                            )
-      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br',
                             password: '123456',
-                            cpf: '12662381744'
-                          )
+                            cpf: '13008409784')
+      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br',
+                           password: '123456',
+                           cpf: '12662381744')
       informatica = Category.create!(name: 'Informática')
       mouse = 'MOUSE OFFICE TGT P90'
       mouse_product = Product.new(name: 'Mouse',
-                                    weight: 90,
-                                    width: 12,
-                                    height: 4,
-                                    depth: 6,
-                                    description: mouse,
-                                    category: informatica
-                                  )
-      mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg' )),
-                                filename: 'mouse_red.jpg')
+                                  weight: 90,
+                                  width: 12,
+                                  height: 4,
+                                  depth: 6,
+                                  description: mouse,
+                                  category: informatica)
+      file_path = Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+      file = File.open(file_path)
+      mouse_product.photo.attach(io: file, filename: 'mouse_red.jpg')
       mouse_product.save
-      current_batch = ProductBatch.new( 
-                                        admin_id: 1,
-                                        code: 'ABD332211',
-                                        start_date: Time.current,
-                                        deadline: Time.current,
-                                        minimum_value: 800,
-                                        minimal_difference: 100,
-                                        created_by: luiz,
-                                        approved_by: luana,
-                                        start_time: Time.current,
-                                        end_time: 1.hour.from_now
-                                      )
+      current_batch = ProductBatch.new(
+        admin_id: 1,
+        code: 'ABD332211',
+        start_date: Time.current,
+        deadline: Time.current,
+        minimum_value: 800,
+        minimal_difference: 100,
+        created_by: luiz,
+        approved_by: luana,
+        start_time: Time.current,
+        end_time: 1.hour.from_now
+      )
       current_batch.approve!
       visit root_path
       click_on 'Lotes Cadastrados'

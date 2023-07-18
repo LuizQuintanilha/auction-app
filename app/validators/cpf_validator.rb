@@ -3,6 +3,7 @@ class CpfValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     return if value.blank?
     return if cpf_valid?(value)
+
     record.errors.add(
       attribute,
       :invalid_cpf,
@@ -30,6 +31,7 @@ class CpfValidator < ActiveModel::EachValidator
 
   def cpf_valid?(value)
     return false if DENY_LIST.include?(value)
+
     valid = []
     cpf = value.delete('.-')
     cpf_splitted = value.split('')
@@ -42,7 +44,7 @@ class CpfValidator < ActiveModel::EachValidator
     validation_first_number = 2.upto(10).to_a.reverse
     sum = 0
     i = 0
-    while i <= (cpf_splitted.size - 3) do
+    while i <= (cpf_splitted.size - 3)
       sum += cpf_splitted[i].to_i * validation_first_number[i]
       i += 1
     end
@@ -56,7 +58,7 @@ class CpfValidator < ActiveModel::EachValidator
     validation_second_number = 2.upto(11).to_a.reverse
     sum = 0
     i = 0
-    while i <= validation_second_number.size - 1 do
+    while i <= validation_second_number.size - 1
       sum += cpf_splitted[i].to_i * validation_second_number[i]
       i += 1
     end

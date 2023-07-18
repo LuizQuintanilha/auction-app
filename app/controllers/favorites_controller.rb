@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_favorite, only: %i[ destroy ]
+  before_action :set_favorite, only: %i[destroy]
 
   def create
     @favorite = Favorite.new(favorite_params)
@@ -13,17 +13,18 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    if @favorite.destroy
-      return redirect_to favorite_table_path, notice: "Lote desfavoritado com sucesso"
-    end
+    return unless @favorite.destroy
+
+    redirect_to favorite_table_path, notice: 'Lote desfavoritado com sucesso'
   end
 
   def favorite_table
     return unless user_signed_in?
+
     @product_batch = ProductBatch.where(@product_batch == :product_batch_id)
     @user = current_user
     @favorites = Favorite.where(user_id: @user.id, product_batch_id: @product_batch)
-    #binding.pry
+    # binding.pry
   end
 
   private

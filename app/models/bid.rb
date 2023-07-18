@@ -6,6 +6,7 @@ class Bid < ApplicationRecord
 
   def validate_value?
     return false unless product_batch && value.present?
+
     max_bid = product_batch.bids.last&.value || product_batch.minimum_value
     if product_batch.bids.empty?
       if value >= product_batch.minimum_value
@@ -23,6 +24,6 @@ class Bid < ApplicationRecord
   end
 
   def create_bid
-    self.product_batch.bids.build(value: value, user: user)
+    product_batch.bids.build(value: value, user: user)
   end
 end

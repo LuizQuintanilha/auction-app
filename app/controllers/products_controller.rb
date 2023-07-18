@@ -1,15 +1,24 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_admin!, only: %i[new create edit update]
 
-  def index 
+  def index
     @products = Product.all
   end
-  
+
+  def show
+    @product = Product.find(params[:id])
+  end
+
   def new
     @product = Product.new
     @categories = Category.all
   end
-  
+
+  def edit
+    @product = Product.find(params[:id])
+    @categories = Category.all
+  end
+
   def create
     @product = Product.new(product_params)
     if @product.save
@@ -20,15 +29,6 @@ class ProductsController < ApplicationController
       flash.now[:notice] = 'Não foi possível cadastrar produto.'
       render 'new'
     end
-  end
-
-  def show
-    @product = Product.find(params[:id])
-  end
-
-  def edit
-    @product = Product.find(params[:id])
-    @categories = Category.all
   end
 
   def update

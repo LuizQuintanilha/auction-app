@@ -5,7 +5,7 @@ describe 'Admin access the itens form' do
     it 'from the homepage' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
-      login_as(admin, :scope => :admin)
+      login_as(admin, scope: :admin)
       visit root_path
       within('nav.admin') do
         click_on 'Cadastrar Produto'
@@ -26,17 +26,18 @@ describe 'Admin access the itens form' do
     it 'sucessfully' do
       Category.create!(name: 'Informática')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      eletrodomestico = Category.create!(name:'Eletrodoméstico')
+      eletrodomestico = Category.create!(name: 'Eletrodoméstico')
       informatica = Category.create!(name: 'Informática')
       mouse_produto = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
-                                depth: 6, description: 'MOUSE OFFICE TGT P90', category: informatica)
-      produto = Product.new(name:'Microondas', weight: 90, width: 12, height: 4, 
-                                depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
-      mouse_produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
+                                  depth: 6, description: 'MOUSE OFFICE TGT P90', category: informatica)
+      produto = Product.new(name: 'Microondas', weight: 90, width: 12, height: 4,
+                            depth: 6, description: 'Microondas 20 Litros', category: eletrodomestico)
+      mouse_produto.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
+                                 filename: 'mouse_red.jpg')
       mouse_produto.save
       produto.save
-      
-      login_as(admin, :scope => :admin)
+
+      login_as(admin, scope: :admin)
       visit root_path
       within('nav.admin') do
         click_on 'Cadastrar Produto'
@@ -59,7 +60,7 @@ describe 'Admin access the itens form' do
       Category.create!(name: 'Informática')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
-      login_as(admin, :scope => :admin)
+      login_as(admin, scope: :admin)
       visit root_path
       within('nav.admin') do
         click_on 'Cadastrar Produto'
@@ -67,7 +68,7 @@ describe 'Admin access the itens form' do
       fill_in 'Name', with: ''
       fill_in 'Description', with: ''
       click_on 'Salvar'
-      
+
       expect(page).to have_content 'Não foi possível cadastrar produto.'
     end
   end

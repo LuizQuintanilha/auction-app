@@ -3,15 +3,15 @@ require 'rails_helper'
 describe 'Admin view all product batch registered' do
   context 'with status' do
     it 'approved' do
-      luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
+      Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, 
-                                  deadline: 5.days.from_now, minimum_value: 600, 
-                                  minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
+      lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
+                              deadline: 5.days.from_now, minimum_value: 600,
+                              minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hours.from_now)
       lote.save
       lote.approve!
 
-      login_as(admin, :scope => :admin)
+      login_as(admin, scope: :admin)
       visit root_path
       click_on 'Lotes Cadastrados'
 
@@ -22,8 +22,9 @@ describe 'Admin view all product batch registered' do
 
     it 'wait_approve' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Date.today, 
-                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hour.from_now)
+      ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
+                          deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
+                          start_time: 1.hour.from_now, end_time: 2.hours.from_now)
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -48,7 +49,7 @@ describe 'Admin view all product batch registered' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
     # Act
-    login_as(admin, :scope => :admin)
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Aprovar lote'
     # Assert

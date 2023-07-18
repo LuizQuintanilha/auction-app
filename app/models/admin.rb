@@ -8,13 +8,14 @@ class Admin < ApplicationRecord
   validates :cpf, uniqueness: true
   validates :cpf, cpf: { message: 'CPF inválido' }
   validates :cpf, format: { with: /[0-9]{11}/, message: 'Precisa ter 11 dígitos' }
-  validates :email, format: { with: /[\w+.]+@leilaodogalpao.com.br\z/, message: 'Precisa pertencer ao domínio @leilaodogalpao.com.br' }
+  validates :email,
+            format: { with: /[\w+.]+@leilaodogalpao.com.br\z/,
+                      message: 'Precisa pertencer ao domínio @leilaodogalpao.com.br' }
   validate :cpf_different_from_user
 
   def cpf_different_from_user
-    if User.exists?(cpf: cpf)
-      errors.add(:cpf, 'CPF já cadastrado')
-    end
+    return unless User.exists?(cpf: cpf)
+
+    errors.add(:cpf, 'CPF já cadastrado')
   end
 end
-

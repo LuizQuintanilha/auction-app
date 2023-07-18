@@ -9,7 +9,6 @@ def login(admin)
   end
 end
 
-
 def login(user)
   within('nav.user') do
     click_on 'Usuário'
