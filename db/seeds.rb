@@ -3,7 +3,7 @@
 admin = Admin.create!(email: 'vando@leilaodogalpao.com.br', password: '123456', cpf: '53366189347')
 admin_dois = Admin.create!(email: 'edna@leilaodogalpao.com.br', password: '123456', cpf: '38125120505')
 user = User.create!(email: 'deise@email.com', password: '123456', cpf: '25706733406')
-User.create!(email: 'luna@email.com', password: '123456', cpf: '12662381744')
+User.create!(email: 'luna@email.com', password: '123456', cpf: '12661055142')
 
 informatica = Category.create!(name:'Informática')
 eletronico = Category.create!(name:'Eletrônico')

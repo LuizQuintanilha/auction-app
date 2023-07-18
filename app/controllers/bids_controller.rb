@@ -10,17 +10,20 @@ class BidsController < ApplicationController
   def create
     @bid = @product_batch.bids.build(bid_params)
     @bid.user = current_user
-    if @product_batch.present_or_future? == 'Lote em Andamento'
+    if @product_batch.present_or_future? == 'Lote em Andamento' && @product_batch.bids.length < 1
       if @bid.validate_value?
         @bid.save
-        flash[:notice] = 'Lance criado com sucesso'
-        redirect_to product_batch_path(@product_batch)
+        redirect_to product_batch_path(@product_batch), notice: 'Lance criado com sucesso'
       else
-        flash[:notice] = 'Novo lance deve ser maior que o valor atual somado com o valor de diferença.'
-        redirect_to new_product_batch_bid_path(@product_batch)
+        redirect_to new_product_batch_bid_path(@product_batch), notice: 'Deve ser maior que valor inicial'
       end
-    else
-      redirect_to product_batches_path, notice: 'Lote ainda não iniciou'
+    else @product_batch.present_or_future? == 'Lote em Andamento' && @product_batch.bids.length >= 1
+      if @bid.validate_value?
+        @bid.save
+        redirect_to product_batch_path(@product_batch), notice: 'Lance criado com sucesso'
+      else
+        redirect_to new_product_batch_bid_path(@product_batch), notice: 'Novo lance deve ser maior que o valor atual somado com o valor de diferença.'
+      end
     end
   end
 
