@@ -3,14 +3,20 @@
 <% if @product_batches.any?  %>
   <% @product_batches.each do |batch| %>
     <div>
-      <strong>Código do lote: </strong>
-      <%= link_to batch.code, product_batch_path(batch.id) %>
+      <% if batch.bids.last.id == @user.bids.last.id %>
+      <h4>Seu lance foi o maior. 
+      Você é o vencedor do Lote: <strong><%= link_to batch.code, product_batch_path(batch.id) %></strong></h4>
+      <% else %>
+        <strong>"Valor Final do Lote: R$<strong><%= batch.bids.maximum(:value) %>
+      <% end %>
     </div> 
       <div>
         <strong>Produtos:</strong>
           <% batch.products.each do |product| %>
-            <%= link_to product.name, product_path(product.id) %> |
+            <%= link_to product.name, product_path(product.id) %>
           <% end %>
+          <strong>"Valor Final do Lote: R$<strong><%= batch.bids.maximum(:value) %>
+          
       </div>
   <% end %>
 <% else %>

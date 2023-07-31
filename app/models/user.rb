@@ -41,3 +41,4 @@ class User < ApplicationRecord
     favorites.map(&:product_batch)
   end
 end
+

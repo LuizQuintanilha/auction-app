@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Admin edit batch' do
-  it 'add a new item' do
+  it 'and add a new item' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     product_category = Category.create!(name: 'Informática')
     eletrodomestico = Category.create!(name: 'Eletrodoméstico')

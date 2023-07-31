@@ -28,7 +28,6 @@ describe 'From the homepage' do
                                   deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
                                   start_time: 1.hour.ago, end_time: 2.hours.from_now)
       lote.approve!
-      lote.close_batch!
 
       login_as(luiz, scope: :user)
       visit root_path
@@ -40,7 +39,7 @@ describe 'From the homepage' do
 
       expect(page).to have_content 'Pergunta enviada com sucesso.'
     end
-    it 'and can not do a question' do
+    it 'and let the field empty' do
       luiz = User.create!(email: 'luiz@email.com', password: '123456', cpf: '12662381744')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
@@ -61,7 +60,7 @@ describe 'From the homepage' do
     end
   end
 
-  context 'user with no authenticate' do
+  context 'user not authenticated' do
     it 'do a question' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,

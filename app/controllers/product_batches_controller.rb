@@ -2,7 +2,7 @@ class ProductBatchesController < ApplicationController
   before_action :authenticate_admin!, only: %i[new create admin_aprove_batch edit update expired_batches destroy]
   before_action :authenticate_user!, only: %i[show_result]
   before_action :set_product_batch,
-                only: %i[destroy show wait_approve edit update approve present_or_future? destroy waiting_close
+                only: %i[destroy show wait_approve edit update approve destroy waiting_close
                          close_batch]
 
   def authenticate_user!
@@ -19,7 +19,7 @@ class ProductBatchesController < ApplicationController
   def show
     @bids = Bid.all
     @bid = Bid.new(product_batch: @product_batch)
-    @questions = Question.where(hidden: :true)
+    @questions = Question.where(hidden: true)
   end
 
   def new
@@ -33,17 +33,19 @@ class ProductBatchesController < ApplicationController
     @product_batch.created_by = current_admin
     if @product_batch.product_ids.empty?
       @product_batch.errors.add(:product_ids, 'Deve ser selecionado pelo menos um produto.')
-      render 'new'
-    elsif @product_batch.save
-      @product_batch.product_ids.each do |product_id|
-        Product.where(id: product_id).update(status: 0)
-      end
-      flash[:notice] = 'Lote cadastrado com sucesso.'
-      redirect_to aprove_path
-    else
       flash.now[:notice] = 'Nao foi possível cadastrar o lote.'
       render 'new'
+    elsif @product_batch.save
+      find_product_id
     end
+  end
+
+  def find_product_id
+    @product_batch.product_ids.each do |product_id|
+      Product.where(id: product_id).update(status: 0)
+    end
+    flash[:notice] = 'Lote cadastrado com sucesso.'
+    redirect_to aprove_path
   end
 
   def admin_aprove_batch
@@ -92,20 +94,24 @@ class ProductBatchesController < ApplicationController
   end
 
   def update
-    current_products = @product_batch.product_ids
+    @current_products = @product_batch.product_ids
     @product_batch.created_by = current_admin
     if @product_batch.update(product_batch_params)
-      @product_batch.product_ids.each do |product_id|
-        Product.where(id: product_id).update(status: 0)
-      end
-      current_products.each do |prod|
-        Product.where(id: prod).update(status: 2) unless @product_batch.product_ids.include?(prod)
-      end
+      iterating_update
       flash[:notice] = 'Lote editado com sucesso.'
       redirect_to aprove_path
     else
       flash.now[:notice] = 'Nao foi possível editar o lote.'
       render 'edit'
+    end
+  end
+
+  def iterating_update
+    @product_batch.product_ids.each do |product_id|
+      Product.where(id: product_id).update(status: 0)
+    end
+    @current_products.each do |prod|
+      Product.where(id: prod).update(status: 2) unless @product_batch.product_ids.include?(prod)
     end
   end
 
@@ -118,7 +124,7 @@ class ProductBatchesController < ApplicationController
       @product_batch.product_batch_items.destroy_all
       @product_batch.destroy
     end
-    redirect_to expired_batches_path, notice: 'Lote excluído com sucesso.'
+    redirect_to expired_batches_path, notice: 'Sucessfully'
   end
 
   def search
@@ -129,6 +135,9 @@ class ProductBatchesController < ApplicationController
   end
 
   def user_space
+    return unless user_signed_in?
+
+    @bid = Bid.last&.value
     @user = current_user
     @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
   end
