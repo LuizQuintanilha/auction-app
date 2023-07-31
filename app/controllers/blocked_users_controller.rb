@@ -15,10 +15,4 @@ class BlockedUsersController < ApplicationController
       redirect_to blocked_users_path, notice: 'Usuário bloqueado com sucesso.'
     end
   end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:blocked)
-  end
 end

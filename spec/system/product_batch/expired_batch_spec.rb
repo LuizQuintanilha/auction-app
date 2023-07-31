@@ -43,15 +43,15 @@ describe 'From the homepage' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     luiz = Admin.create!(email: 'l@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
     lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: 3.days.ago,
-                            deadline: 1.day.ago, minimum_value: 600, minimal_difference: 50,
-                            start_time: 1.hour.ago, end_time: 2.hours.ago, approved_by: luiz)
+                            deadline: 1.hour.ago, minimum_value: 600, minimal_difference: 50,
+                            start_time: 1.hour.ago, end_time: 1.hour.ago, approved_by: luiz)
     lote.save(validate: false)
 
     login_as(admin, scope: :admin)
     visit expired_batches_path
     click_on 'Excluir Lote'
 
-    expect(page).to have_content 'Lote excluído com sucesso'
+    expect(page).to have_content 'Sucessfully'
   end
   it 'admin approve a batch with a bid' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')

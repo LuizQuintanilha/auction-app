@@ -1,6 +1,6 @@
 <% if @favorites.any? %>
   <% @favorites.each do |favorite| %>
-    <%= favorite.product_batch.code %>
+    <%= link_to favorite.product_batch.code, product_batch_path(favorite.product_batch.id) %>
     <%= button_to 'Desfavoritar', favorite_path(favorite), method: :delete, id: favorite.id %>
   <% end %>
 <% else %>

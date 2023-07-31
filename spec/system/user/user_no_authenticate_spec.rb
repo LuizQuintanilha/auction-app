@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'User visit homepage' do
-  context 'without authenticate' do
+describe 'User not authenticated' do
+  context 'visit homepage' do
     it 'and see informations' do
       visit root_path
       click_on 'Leilão de Estoque'

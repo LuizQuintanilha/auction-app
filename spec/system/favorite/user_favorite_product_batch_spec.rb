@@ -58,7 +58,7 @@ describe 'From the home page' do
   end
 
   context 'has no acess' do
-    it 'to another user favorite batches' do
+    it 'to favorites batches from another users' do
       user = User.create!(email: 'user@gmail.com', password: '123456', cpf: '25706733406')
       luna = User.create!(email: 'luna@email.com', password: '123456', cpf: '38125120505')
       Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')

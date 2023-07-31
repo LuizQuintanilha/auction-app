@@ -7,8 +7,6 @@ class FavoritesController < ApplicationController
     @product_batch = ProductBatch.find(params[:favorite][:product_batch_id])
     if @favorite.save
       redirect_to product_batches_path, notice: "Lote #{@product_batch.code} favoritado com sucesso"
-    else
-      redirect_to product_batch_path(@product_batch)
     end
   end
 
@@ -24,7 +22,6 @@ class FavoritesController < ApplicationController
     @product_batch = ProductBatch.where(@product_batch == :product_batch_id)
     @user = current_user
     @favorites = Favorite.where(user_id: @user.id, product_batch_id: @product_batch)
-    # binding.pry
   end
 
   private
