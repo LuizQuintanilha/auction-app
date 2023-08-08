@@ -23,8 +23,8 @@ describe 'Admin view all product batch registered' do
     it 'wait_approve' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
-                          deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                          start_time: 1.hour.from_now, end_time: 2.hours.from_now)
+                           deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
+                           start_time: 1.hour.from_now, end_time: 2.hours.from_now)
       visit root_path
       within('nav.admin') do
         click_on 'Admin'

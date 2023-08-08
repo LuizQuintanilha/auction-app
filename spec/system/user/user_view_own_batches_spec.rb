@@ -31,9 +31,10 @@ describe 'From the homepage' do
         click_on 'Meus Lotes'
 
         expect(current_path).to eq user_space_path
-        expect(page).to have_content "Seu lance foi o maior. Você é o vencedor do Lote: #{lote.code}"
-        expect(page).to have_content 'Produtos: Mouse'
-        expect(page).to have_content "Valor Final do Lote: R$#{lote.bids.maximum(:value)}"
+        expect(page).to have_content 'Parabéns!!!'
+        expect(page).to have_content "Você é o vencedor do Lote: #{lote.code}"
+        expect(page).to have_content "Produto(s) Adquirido(s): #{mouse_product.description}"
+        expect(page).to have_content "Valor final do lote: R$#{lote.bids.maximum(:value)}"
       end
     end
     context 'and do a bid but the bid is not the bigger' do
@@ -65,12 +66,10 @@ describe 'From the homepage' do
         click_on 'Meus Lotes'
 
         expect(current_path).to eq user_space_path
-        expect(page).not_to have_content "Seu lance foi o maior. Você é o vencedor do Lote: #{lote.code}"
-        expect(page).to have_content 'Produtos: Mouse'
-        expect(page).to have_content "Valor Final do Lote: R$#{lote.bids.maximum(:value)}"
+        expect(page).not_to have_content  "Você é o vencedor do Lote: #{lote.code}"
       end
     end
-  end
+  end 
   it "and there's no batches" do
     user = User.create!(email: 'luna@email.com', password: '123456', cpf: '15171561737')
 

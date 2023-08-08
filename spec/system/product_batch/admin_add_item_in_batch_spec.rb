@@ -24,7 +24,7 @@ describe 'Admin add item for batch' do
     check 'Mouse'
     check 'Microondas'
     fill_in 'Code', with: 'ABC112233'
-    fill_in 'Start date', with: Date.today
+    fill_in 'Start date', with: Time.zone.today
     fill_in 'Deadline', with: 3.days.from_now
     fill_in 'Minimum value', with: 1000
     fill_in 'Minimal difference', with: 100

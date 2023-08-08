@@ -136,10 +136,12 @@ class ProductBatchesController < ApplicationController
 
   def user_space
     return unless user_signed_in?
-
-    @bid = Bid.last&.value
+    
+    #@bid = Bid.last&.value
     @user = current_user
+
     @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
+
   end
 
   private
