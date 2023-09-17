@@ -12,3 +12,4 @@ pt-BR:
         depth: 'Profundidade'
         description: 'Descrição'
         code: 'Código'
+        category_id: 'Categoria do Produto'

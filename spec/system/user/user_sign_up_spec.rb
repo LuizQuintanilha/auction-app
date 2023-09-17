@@ -14,7 +14,7 @@ describe 'User create a count' do
     click_on 'Criar'
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
   end
 
   context 'unsucessfully' do
@@ -45,7 +45,7 @@ describe 'User create a count' do
       fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
 
-      expect(page).to have_content 'Cpf has already been taken'
+      expect(page).to have_content 'CPF já está em uso'
     end
     it 'when email is already been taken' do
       User.create!(email: 'luana@email.com', password: '123456', cpf: '12662381744')
@@ -59,7 +59,7 @@ describe 'User create a count' do
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
-      expect(page).to have_content 'Email has already been taken'
+      expect(page).to have_content 'Email já está em uso'
     end
     it 'when email is the domain: leilaodogalpão.com.br' do
       visit root_path
@@ -85,7 +85,7 @@ describe 'User create a count' do
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
-      expect(page).to have_content 'Email is invalid'
+      expect(page).to have_content 'Email não é válido'
     end
     it 'when password is less than six' do
       visit root_path
@@ -98,7 +98,7 @@ describe 'User create a count' do
       fill_in 'Senha', with: '12345'
       fill_in 'Confirmação de senha', with: '12345'
       click_on 'Criar'
-      expect(page).to have_content 'Password is too short (minimum is 6 characters)'
+      expect(page).to have_content 'Senha é muito curto (mínimo: 6 caracteres)'
     end
     it 'when password is differente from password confirmation' do
       visit root_path
@@ -111,7 +111,7 @@ describe 'User create a count' do
       fill_in 'Senha', with: '123456'
       fill_in 'Confirmação de senha', with: '654321'
       click_on 'Criar'
-      expect(page).to have_content "Password confirmation doesn't match Password"
+      expect(page).to have_content "Confirmação de senha não é igual a Senha"
     end
   end
 end

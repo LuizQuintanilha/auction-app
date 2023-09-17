@@ -19,7 +19,7 @@ describe 'Admin edit a product' do
     click_on 'Editar'
     fill_in 'Nome', with: 'Mouse LG'
     attach_file 'Foto', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
-    select 'Eletrônico', from: 'Category'
+    select 'Eletrônico', from: 'Categoria do Produto'
     click_on 'Salvar'
 
     expect(page).to have_content 'Mouse LG'
@@ -42,7 +42,7 @@ describe 'Admin edit a product' do
     click_on 'Mouse'
     click_on 'Editar'
     fill_in 'Nome', with: ''
-    select 'Eletrônico', from: 'Category'
+    select 'Eletrônico', from: 'Categoria do Produto'
     click_on 'Salvar'
 
     expect(page).to have_content 'Não foi possível atualizar dados do produto.'
