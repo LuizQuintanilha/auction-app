@@ -14,7 +14,7 @@ RSpec.describe Category, type: :model do
         # Act
         result = product_category.valid?
         expect(result).to eq false
-        expect(product_category.errors.full_messages).to eq ["Name can't be blank"]
+        expect(product_category.errors.full_messages).to eq ["Nome não pode ficar em branco"]
       end
     end
   end

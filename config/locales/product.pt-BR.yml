@@ -4,11 +4,11 @@ pt-BR:
       product: Produto
     attributes:
       product:
-        name: "Nome"
-        photo: "Foto"
-        weight: "Peso"
-        width: "Comprimento"
-        height: "Altura"
-        depth: "Profundiade"
-        description: "Descrição"
-        code: "Código"
+        name: 'Nome'
+        photo: 'Foto'
+        weight: 'Peso'
+        width: 'Comprimento'
+        height: 'Altura'
+        depth: 'Profundidade'
+        description: 'Descrição'
+        code: 'Código'

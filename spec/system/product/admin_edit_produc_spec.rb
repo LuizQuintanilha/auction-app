@@ -17,8 +17,8 @@ describe 'Admin edit a product' do
     click_on 'Produtos Cadastrados'
     click_on 'Mouse'
     click_on 'Editar'
-    fill_in 'Name', with: 'Mouse LG'
-    attach_file 'Photo', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+    fill_in 'Nome', with: 'Mouse LG'
+    attach_file 'Foto', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
     select 'Eletrônico', from: 'Category'
     click_on 'Salvar'
 
@@ -41,7 +41,7 @@ describe 'Admin edit a product' do
     click_on 'Produtos Cadastrados'
     click_on 'Mouse'
     click_on 'Editar'
-    fill_in 'Name', with: ''
+    fill_in 'Nome', with: ''
     select 'Eletrônico', from: 'Category'
     click_on 'Salvar'
 

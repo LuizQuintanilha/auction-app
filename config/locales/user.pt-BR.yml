@@ -1,9 +1,8 @@
 pt-BR:
   activerecord:
     attributes:
-      admin:
+      user:
         cpf: 'CPF'
-        name: 'Nome'
         email: 'Email'
         password: 'Senha'
         password_confirmation: 'Confirmação de senha'

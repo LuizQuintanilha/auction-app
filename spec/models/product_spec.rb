@@ -31,7 +31,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Name can't be blank"]
+        expect(produto.errors.full_messages).to eq ["Nome não pode ficar em branco"]
       end
       it 'false when photo is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -43,7 +43,7 @@ RSpec.describe Product, type: :model do
 
         produto.save
         expect(result).to eq false
-        expect(produto.errors.full_messages).to eq ["Photo can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Foto não pode ficar em branco']
       end
       it 'false when weight is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -57,7 +57,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Weight can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Peso não pode ficar em branco']
       end
       it 'false when width is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -71,7 +71,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Width can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Comprimento não pode ficar em branco']
       end
       it 'false when height is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -85,7 +85,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Height can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Altura não pode ficar em branco']
       end
       it 'false when depth is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -99,7 +99,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Depth can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Profundidade não pode ficar em branco']
       end
       it 'false when description is empty' do
         product_category = Category.create!(name: 'Informática')
@@ -113,7 +113,7 @@ RSpec.describe Product, type: :model do
 
         expect(result).to eq false
         produto.save
-        expect(produto.errors.full_messages).to eq ["Description can't be blank"]
+        expect(produto.errors.full_messages).to eq ['Descrição não pode ficar em branco']
       end
     end
   end

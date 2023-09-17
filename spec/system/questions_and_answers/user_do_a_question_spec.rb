@@ -76,7 +76,7 @@ describe 'From the homepage' do
 
       expect(current_path).to eq new_user_session_path
       expect(page).to have_field 'Email'
-      expect(page).to have_field 'Password'
+      expect(page).to have_field 'Senha'
     end
   end
 end

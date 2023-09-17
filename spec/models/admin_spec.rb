@@ -31,16 +31,16 @@ RSpec.describe Admin, type: :model do
         # Act
         result = admin.valid?
         expect(result).to eq false
-        expect(admin.errors.full_messages).to eq ['Password is too short (minimum is 6 characters)']
+        expect(admin.errors.full_messages).to eq ['Senha muito curta']
       end
     end
 
     context 'cpf is mandatory' do
-      it 'presence' do
+        it 'presence' do
         admin = Admin.new(email: 'ana_22@leilaodogalpao.com.br', password: '123456', cpf: '')
         result = admin.valid?
         expect(result).to eq false
-        expect(admin.errors.full_messages).to eq ["Cpf can't be blank", 'Cpf Precisa ter 11 dígitos']
+        expect(admin.errors.full_messages).to eq ['CPF não pode ficar em branco', 'CPF Precisa ter 11 dígitos']
       end
     end
     context 'cpf is uniq' do
@@ -49,7 +49,7 @@ RSpec.describe Admin, type: :model do
         admin_dois = Admin.new(email: 'maria@leilaodogalpao.com.br', password: '112233', cpf: '12662381744')
         result = admin_dois.valid?
         expect(result).to eq false
-        expect(admin_dois.errors.full_messages).to eq ['Cpf has already been taken']
+        expect(admin_dois.errors.full_messages).to eq ['CPF deve ser único']
       end
     end
   end

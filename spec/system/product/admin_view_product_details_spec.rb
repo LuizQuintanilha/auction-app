@@ -18,7 +18,7 @@ describe 'Admin view products details' do
     end
     within('form') do
       fill_in 'Email', with: 'luiz@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
+      fill_in 'Senha', with: '123456'
       click_on 'Entrar'
     end
     click_on 'Produtos Cadastrados'

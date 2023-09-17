@@ -8,14 +8,14 @@ describe 'Admin sign up' do
     end
     click_on 'Criar Conta'
     within('form') do
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
     end
 
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+    expect(page).to have_content 'Boas vindas! Você realizou seu registro com sucesso.'
     expect(page).to have_content 'luana@leilaodogalpao.com.br'
     expect(page).to have_button 'Sair'
     admin = Admin.last
@@ -29,14 +29,14 @@ describe 'Admin sign up' do
       end
       click_on 'Criar Conta'
       within('form') do
-        fill_in 'Cpf', with: '12662381700'
+        fill_in 'CPF', with: '12662381700'
         fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        fill_in 'Password confirmation', with: '123456'
+        fill_in 'Senha', with: '123456'
+        fill_in 'Confirmação de senha', with: '123456'
         click_on 'Criar'
       end
 
-      expect(page).to have_content 'error prohibited this admin from being saved:'
+      expect(page).to have_content 'Não foi possível salvar admin: 1 erro'
       expect(page).to have_content 'CPF inválido'
     end
     it 'when cpf is already in used' do
@@ -48,15 +48,15 @@ describe 'Admin sign up' do
       end
       click_on 'Criar Conta'
       within('form') do
-        fill_in 'Cpf', with: '12662381744'
+        fill_in 'CPF', with: '12662381744'
         fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
-        fill_in 'Password', with: '123456'
-        fill_in 'Password confirmation', with: '123456'
+        fill_in 'Senha', with: '123456'
+        fill_in 'Confirmação de senha', with: '123456'
         click_on 'Criar'
       end
 
-      expect(page).to have_content 'error prohibited this admin from being saved:'
-      expect(page).to have_content 'Cpf has already been taken'
+      expect(page).to have_content 'Não foi possível salvar admin: 1 erro'
+      expect(page).to have_content 'CPF deve ser único'
     end
     it 'when email is invalid' do
       visit root_path
@@ -65,14 +65,14 @@ describe 'Admin sign up' do
       end
       click_on 'Criar Conta'
       within('form') do
-        fill_in 'Cpf', with: '12662381744'
+        fill_in 'CPF', with: '12662381744'
         fill_in 'Email', with: 'luana@email'
-        fill_in 'Password', with: '123456'
-        fill_in 'Password confirmation', with: '123456'
+        fill_in 'Senha', with: '123456'
+        fill_in 'Confirmação de senha', with: '123456'
         click_on 'Criar'
       end
 
-      expect(page).to have_content 'error prohibited this admin from being saved:'
+      expect(page).to have_content 'Não foi possível salvar admin: 1 erro'
       expect(page).to have_content 'Email Precisa pertencer ao domínio @leilaodogalpao.com.br'
     end
     it 'when password is too short' do
@@ -82,15 +82,15 @@ describe 'Admin sign up' do
       end
       click_on 'Criar Conta'
       within('form') do
-        fill_in 'Cpf', with: '12662381744'
+        fill_in 'CPF', with: '12662381744'
         fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
-        fill_in 'Password', with: '12345'
-        fill_in 'Password confirmation', with: '12345'
+        fill_in 'Senha', with: '12345'
+        fill_in 'Confirmação de senha', with: '12345'
         click_on 'Criar'
       end
 
-      expect(page).to have_content 'error prohibited this admin from being saved:'
-      expect(page).to have_content 'Password is too short (minimum is 6 characters)'
+      expect(page).to have_content 'Não foi possível salvar admin: 1 err'
+      expect(page).to have_content 'Senha muito curta'
     end
   end
 end

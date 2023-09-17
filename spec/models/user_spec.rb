@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
         result = user.valid?
 
         expect(result).to eq false
-        expect(user.errors.full_messages).to eq ["Password confirmation doesn't match Password"]
+        expect(user.errors.full_messages).to eq ['Confirmação de senha não é igual a Senha']
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
         result = user.valid?
 
         expect(result).to eq false
-        expect(user.errors.full_messages).to eq ["Cpf can't be blank", 'Cpf Precisa ter 11 dígitos']
+        expect(user.errors.full_messages).to eq ['CPF não pode ficar em branco', 'CPF Precisa ter 11 dígitos']
       end
 
       it 'uniquiness' do
@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
         result = user.valid?
 
         expect(result).to eq false
-        expect(user.errors.full_messages).to eq ['Cpf has already been taken']
+        expect(user.errors.full_messages).to eq ['CPF já está em uso']
       end
     end
   end

@@ -12,13 +12,13 @@ describe 'Admin access the itens form' do
       end
       # Assert
       expect(current_path).to eq new_product_path
-      expect(page).to have_field 'Name'
-      expect(page).to have_field 'Photo'
-      expect(page).to have_field 'Weight'
-      expect(page).to have_field 'Height'
-      expect(page).to have_field 'Width'
-      expect(page).to have_field 'Depth'
-      expect(page).to have_field 'Description'
+      expect(page).to have_field 'Nome'
+      expect(page).to have_field 'Foto'
+      expect(page).to have_field 'Peso'
+      expect(page).to have_field 'Altura'
+      expect(page).to have_field 'Comprimento'
+      expect(page).to have_field 'Profundidade'
+      expect(page).to have_field 'Descrição'
       expect(page).to have_button 'Salvar'
     end
   end
@@ -42,14 +42,14 @@ describe 'Admin access the itens form' do
       within('nav.admin') do
         click_on 'Cadastrar Produto'
       end
-      fill_in 'Name', with: 'Mouse Red LG'
-      attach_file 'Photo', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
-      fill_in 'Weight', with: '300'
-      fill_in 'Width', with: '4'
-      fill_in 'Height', with: '8'
-      fill_in 'Depth', with: '3'
-      fill_in 'Description', with: 'MOUSE RED LG ULTIMA GERAÇÃO'
-      select 'Eletrodoméstico', from: 'Category'
+      fill_in 'Nome', with: 'Mouse Red LG'
+      attach_file 'Foto', Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')
+      fill_in 'Peso', with: '300'
+      fill_in 'Comprimento', with: '4'
+      fill_in 'Altura', with: '8'
+      fill_in 'Profundidade', with: '3'
+      fill_in 'Descrição', with: 'MOUSE RED LG ULTIMA GERAÇÃO'
+      select 'Eletrodoméstico', from: 'Categoria do Produto'
       click_on 'Salvar'
 
       expect(current_path).to eq products_path
@@ -65,8 +65,8 @@ describe 'Admin access the itens form' do
       within('nav.admin') do
         click_on 'Cadastrar Produto'
       end
-      fill_in 'Name', with: ''
-      fill_in 'Description', with: ''
+      fill_in 'Nome', with: ''
+      fill_in 'Descrição', with: ''
       click_on 'Salvar'
 
       expect(page).to have_content 'Não foi possível cadastrar produto.'

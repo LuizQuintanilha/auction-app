@@ -7,10 +7,10 @@ describe 'User create a count' do
       click_on 'Usuário'
     end
     click_on 'Criar conta'
-    fill_in 'Cpf', with: '12662381744'
+    fill_in 'CPF', with: '12662381744'
     fill_in 'Email', with: 'luiz@email.com'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirmação de senha', with: '123456'
     click_on 'Criar'
 
     expect(current_path).to eq root_path
@@ -24,10 +24,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381700'
+      fill_in 'CPF', with: '12662381700'
       fill_in 'Email', with: 'luiz@email.com'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
 
       expect(page).to have_content 'CPF inválido'
@@ -39,10 +39,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luiz@email.com'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
 
       expect(page).to have_content 'Cpf has already been taken'
@@ -54,10 +54,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '13008408784'
+      fill_in 'CPF', with: '13008408784'
       fill_in 'Email', with: 'luana@email.com'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
       expect(page).to have_content 'Email has already been taken'
     end
@@ -67,10 +67,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luana@leilaodogalpao.com.br'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
       expect(page).to have_content 'Email Domínio exclusivo'
     end
@@ -80,10 +80,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luana'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '123456'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '123456'
       click_on 'Criar'
       expect(page).to have_content 'Email is invalid'
     end
@@ -93,10 +93,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luana@email.com'
-      fill_in 'Password', with: '12345'
-      fill_in 'Password confirmation', with: '12345'
+      fill_in 'Senha', with: '12345'
+      fill_in 'Confirmação de senha', with: '12345'
       click_on 'Criar'
       expect(page).to have_content 'Password is too short (minimum is 6 characters)'
     end
@@ -106,10 +106,10 @@ describe 'User create a count' do
         click_on 'Usuário'
       end
       click_on 'Criar conta'
-      fill_in 'Cpf', with: '12662381744'
+      fill_in 'CPF', with: '12662381744'
       fill_in 'Email', with: 'luana@email.com'
-      fill_in 'Password', with: '123456'
-      fill_in 'Password confirmation', with: '654321'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmação de senha', with: '654321'
       click_on 'Criar'
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
