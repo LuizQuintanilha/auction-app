@@ -38,13 +38,39 @@
   text-align: center;
 }
 
-.header {
+.header-fixed {
+  text-align: center;
+  border-color: black;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%; 
-  background-color: #333;
+  background-color: #d1caca;
   color: #fff;
   padding: 10px;
   z-index: 1000;
+}
+
+.login {
+  margin-top: 100;
+  border-color: black;
+  border-radius: 10px;
+  box-shadow: 7px 7px 13px 0px black;
+  padding: 30px;
+  margin: 20px;
+  width: 160px;
+  transition: all 0.3s ease-out;
+}
+
+.login-fixed {
+  text-align: center;
+  border-color: black;
+  position: fixed;
+  background-color: #d1caca;
+  color: #fff;
+  z-index: 1000;
+}
+
+.links {
+  margin-left: 20px;
 }
