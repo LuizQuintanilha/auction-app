@@ -44,12 +44,15 @@
 
 <div>
   <strong>Perguntas dos usuários:</strong>
-  <% @questions.each do |question| %>
-    <div>
-      <strong>Pergunta:</strong> <%= question.content %> |
-      <% if question.answer.present? %>
-        <strong>Resposta:</strong> <%= question.answer.content %>
+  <div>
+    <% @product_batch.questions.each do |cont| %>
+      <% if cont.answer.present? %>
+        <strong>Usuário:</strong> <%= cont.user.email %><br/>
+        <strong>Pergunta:</strong> <%= cont.content %>
+        <strong>Resposta:</strong> <%= cont.answer.content %>
+        <br/>
       <% end %>
-    </div>
-  <% end %>
+      <br/>
+    <% end %>
+  </div>
 </div>
