@@ -1,7 +1,7 @@
 <h1><%= @product.name %></h1>
 
 <div>
-  <%= image_tag url_for(@product.photo) %>
+  <%= image_tag url_for(@product.photo), class: 'card' %>
 <div>
 <div>
   <strong>Código:</strong> <%= @product.code %>
