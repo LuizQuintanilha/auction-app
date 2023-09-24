@@ -1,3 +1,6 @@
+.body {
+  background-color: gray;
+}
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -56,17 +59,19 @@
   border-radius: 10px;
   box-shadow: 7px 7px 13px 0px black;
   padding: 10px;
-  margin: 10px;
   width: 150px;
+  position: fixed;
+  top: 25px;
+  left: 15px;
 }
 
 .login-fixed {
   text-align: center;
   border-color: black;
-  position: fixed;
+  position: absolute;
   background-color: #d1caca;
   color: #fff;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .links {
@@ -90,4 +95,9 @@
   padding: 10px;
   margin: 10px;
   width: 200px;
+}
+
+.content {
+  margin-top: 90px; 
+  padding: 20px;
 }

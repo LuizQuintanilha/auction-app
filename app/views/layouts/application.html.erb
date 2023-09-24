@@ -57,11 +57,13 @@
     </div>
   
     <main>
-      <div>
-        <%= notice %>
-        <%= alert %>
+      <div class="content">
+        <div class="flash-notice">
+          <%= notice %>
+          <%= alert %>
+        </div>
+        <%= yield %>
       </div>
-      <%= yield %>
     </main>
     
   </body>
