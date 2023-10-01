@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    models:
+      product_batch: Produto do lote
+    attributes:
+      product_batch:
+        start_date: 'Início'
+        deadline: 'Término'
+        minimum_value: 'Valor inicial'
+        minimal_difference: 'Diferença mínima'
+        code: 'Código'
+        product_ids: 'Produtos'
+      product_batch/status:
+          approve: 'Aprovado'
+          wait_approve: 'Aguardando Aprovação'

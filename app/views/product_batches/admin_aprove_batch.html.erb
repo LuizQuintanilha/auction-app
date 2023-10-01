@@ -1,25 +1,29 @@
-<h2>Lotes Cadastrados</h2>
+<div class="h1">
+  <h2>Lotes Cadastrados</h2>
+</div>
 <% if @product_batches.any? %>
-  <% @product_batches.each do |batch| %>
-  
-    <div>
-      <strong>Código do lote:</strong> </dl><%= link_to batch.code, product_batch_path(batch.id) %> |
-      <strong>Início:</strong><%= batch.start_date.strftime('%d-%m-%Y') %> Hora: <%= batch.start_time.strftime('%H:%M:%S') %>
-      <strong>Término:</strong><%= batch.deadline.strftime('%d-%m-%Y') %> Hora: <%= batch.end_time.strftime('%H:%M:%S') %>
-      <strong>Status: </strong><%= batch.status %>
-
-      <p><strong>Criado por:</strong> <%= batch.created_by.email if batch.created_by %>
-      <% if batch.approved_by.present? %>
-        <strong>Aprovado por:</strong> <%= batch.approved_by.email if batch.approved_by%>
-      <% end %>
-
-      <%if batch.wait_approve? %>
-        <%= button_to "Aprovar", approve_product_batch_path(batch.id), {method: 'patch'}%>
-        <%= link_to 'Editar', edit_product_batch_path(batch.id) %>
-      <%end%>
-      
-    </div>
-  <% end %>
+  <div class="card-container">
+    <% @product_batches.each do |batch| %>
+      <div class="row">
+        <div class="card-batch">
+          <h4>Código do lote: <%= link_to batch.code, product_batch_path(batch.id) %></h4>
+          Início:<%= batch.start_date.strftime('%d/%m/%Y') %> - <%= batch.start_time.strftime('%H:%M') %>hr
+          Término:<%= batch.deadline.strftime('%d/%m/%Y') %> - <%= batch.end_time.strftime('%H:%M') %>hr</br>
+          Estatus: <%= batch.status %>
+          Criado por: <%= batch.created_by.email if batch.created_by %>
+          <% if batch.approved_by.present? %>
+            Aprovado por:<%= batch.approved_by.email if batch.approved_by%>
+          <% end %>
+          <%if batch.wait_approve? %>
+            <%= button_to "Aprovar", approve_product_batch_path(batch.id), {method: 'patch'}%>
+            <%= link_to 'Editar', edit_product_batch_path(batch.id) %>
+          <%end%>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
+  <div class="h1">
   <p>Não existem lotes cadastrados</p>
+  </div>
 <% end %>

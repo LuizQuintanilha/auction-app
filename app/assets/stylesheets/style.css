@@ -5,12 +5,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: auto;
 }
 
 .card-row {
   display: flex;
   justify-content: space-between; 
-  width: 48%;
+  width: auto;
   margin-bottom: 20px;
 }
 

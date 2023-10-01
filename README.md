@@ -2,7 +2,9 @@
 ## Sobre:
 Este projeto se trata de uma aplicação  web com Ruby on Rails que servirá para conectar os usuários a produtos cadastrados em lotes, estes lotes poderão ser arrematados através de lances realizados por usuários logados.
 ### O projeto permite três tipos de acessos:
-Administrador: 
+Administrador:
+  - Administradores deverão se registrar com domínio 'leilaodogalpao.com'
+  - Cpf deve ser único e válido
   - Depois de logado usuário  tem permissão de cadastrar produtos e lotes, bem como excluí-los, aprovar e encerrar lotes, bloquear e desbloquear conta de usuários, autorizar e responder perguntas, podendo também excluí-las. Não é capaz de realizar lances e nem de fazer perguntas.
 
 Usuário logado:
@@ -20,7 +22,7 @@ Produtos:
   - Altura
   - Profundidade
   - Descrição
-  - Categoria do Produto (categorias prefiamente cadastradas)
+  - Categoria do Produto (categorias previamente cadastradas)
 
 Lotes:
   - Produto(s)
