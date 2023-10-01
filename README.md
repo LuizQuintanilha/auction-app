@@ -1,7 +1,7 @@
 # README
 ## Sobre:
 Este projeto se trata de uma aplicação  web com Ruby on Rails que servirá para conectar os usuários a produtos cadastrados em lotes, estes lotes poderão ser arrematados através de lances realizados por usuários logados.
-O projeto permite três tipos de acessos:
+### O projeto permite três tipos de acessos:
   ##Administrador: 
     Depois de logado usuário  tem permissão de cadastrar produtos e lotes, bem como excluí-los, aprovar e encerrar lotes, bloquear e desbloquear conta de usuários, autorizar e responder perguntas, podendo também excluí-las. Não é capaz de realizar lances e nem de fazer perguntas.
   ##Usuário logado:
