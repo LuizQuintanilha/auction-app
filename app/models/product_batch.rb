@@ -12,8 +12,8 @@ class ProductBatch < ApplicationRecord
   enum expired: { wait_finish: 0, finished: 2 }
 
   validates :start_date, :deadline, :minimum_value, :minimal_difference, presence: true
-  validates :code, format: { with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/ }
-  validates :code, uniqueness: true
+  validates :code, format: { with: /\A[a-zA-Z]{3}[a-zA-Z0-9]{6}\z/ }, on: :create
+  validates :code, uniqueness: true, if: -> { code.present? }
   before_save :remove_unchecked_products
   validate :created_by_different_from_approved_by
   validate :present_or_future?

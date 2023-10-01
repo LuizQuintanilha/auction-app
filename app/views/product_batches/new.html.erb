@@ -1,44 +1,43 @@
-<h1>Cadastrar Lote</h1>
+<div class="h1">
+  <h2>Cadastrar Lote</h2>
+</div>
 
-<% if @product_batch.errors.any? %>
-  <% @product_batch.errors.full_messages.each.each do |msg| %>
-    <div>
+<div class="error-message">
+  <% if @product_batch.errors.any? %>
+    <% @product_batch.errors.full_messages.each.each do |msg| %>
       <%= msg %>
-    <div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
-<%= form_with(model: @product_batch) do |f| %>
-  <div>
-    <%= f.label :product_ids %>
-    <%= f.collection_check_boxes(:product_ids, Product.where(status: 2) , :id, :name)%>
-  </div>
-  <div>
-    <%= f.label :code %>
-    <%= f.text_field :code %>
-  </div>
-  <div>
-    <%= f.label :start_date %>
-    <%= f.date_field :start_date %>
-    <%= f.label :start_time %>
-    <%= f.time_select :start_time, { minute_step: 5, use_short_time: true }%>
-  </div>
-  <div>
-    <%= f.label :deadline %>
-    <%= f.date_field :deadline %>
-    <%= f.label :end_time %>
-    <%= f.time_select :end_time, { minute_step: 5, use_short_time: true } %>
-  </div>
-  <div>
-    <%= f.label :minimum_value %>
-    <%= f.number_field :minimum_value, step: '0.01' %>
-  </div>
-  <div>
-    <%= f.label :minimal_difference %>
-    <%= f.number_field :minimal_difference, step: '0.01' %>
-  </div>
-  <div>
-    <%= f.submit 'Salvar' %>
-  </div>
-
-<% end %>
+<div class="form">
+  <%= form_with(model: @product_batch) do |f| %>
+    <div>
+      <%= f.label :product_ids %>
+      <%= f.collection_check_boxes(:product_ids, Product.where(status: 2) , :id, :name)%>
+    </div>
+    <div class="input-text">
+      <%= f.label :code %>
+      <%= f.text_field :code %>
+    </div>
+    <div class="date">
+      <%= f.label :start_date %>
+      <%= f.datetime_local_field :start_date %>
+    </div>
+    <div class="date">
+      <%= f.label :deadline %>
+      <%= f.datetime_local_field :deadline %>
+    </div>
+    <div class="valor">
+      <%= f.label :minimum_value %>
+      <%= f.number_field :minimum_value, step: '0.01' %>
+    </div>
+    <div class="valor">
+      <%= f.label :minimal_difference %>
+      <%= f.number_field :minimal_difference, step: '0.01' %>
+    </div>
+    <div class="submit">
+      <%= f.submit 'Salvar' %>
+    </div>
+  <% end %>
+</div>

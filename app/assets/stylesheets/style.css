@@ -87,18 +87,68 @@
   box-shadow: 7px 7px 13px 0px black;
 }
 
-.form {
-  display: inline-block;
-  margin: auto;
-  border-color: black;
-  border-radius: 10px;
-  box-shadow: 7px 7px 13px 0px black;
-  padding: 10px;
-  margin: 10px;
-  width: 200px;
-}
-
 .content {
   margin-top: 90px; 
   padding: 20px;
+}
+
+.form {
+  width: auto;
+  margin: 0 auto;
+  padding: 20px; 
+  background-color: #f0f0f0;
+  border: 2px solid black; 
+  border-radius: 10px;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-top: 3px;
+}
+
+.input-text {
+  width: auto;
+  padding: 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.date {
+  width:auto;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.valor {
+  color: #090909;
+  font-weight: bold;
+  width: auto;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.submit {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.upload-button {
+  font-weight: bold;
+  color: black; 
+  padding: 10px 15px;
+  border: 1px; 
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
 }

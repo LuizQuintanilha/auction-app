@@ -10,6 +10,8 @@ pt-BR:
         minimal_difference: 'Diferença mínima'
         code: 'Código'
         product_ids: 'Produtos'
+        start_time: 'Hora inicial'
+        end_time: 'Hora fical'
       product_batch/status:
           approve: 'Aprovado'
           wait_approve: 'Aguardando Aprovação'
