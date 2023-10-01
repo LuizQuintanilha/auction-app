@@ -2,14 +2,13 @@ require 'rails_helper'
 
 describe 'From the homepage' do
   it 'sucessfully' do
-    # Arrange
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-    # Act
+
     login_as(admin, scope: :admin)
     visit root_path
     click_on 'Aprovar lote'
     click_on 'Cadastrar Lote'
-    # Assert
+
     expect(page).to have_field('Code')
     expect(page).to have_field('Start date')
     expect(page).to have_field('Deadline')
@@ -19,7 +18,6 @@ describe 'From the homepage' do
 
   context 'admin register a new batch' do
     it 'sucessfully' do
-      # Arrange
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       product_category = Category.create!(name: 'Informática')
       eletrodomestico = Category.create!(name: 'Eletrodoméstico')
@@ -34,7 +32,6 @@ describe 'From the homepage' do
       microondas_product.save
       mouse_product.save
 
-      # Act
       login_as(admin, scope: :admin)
       visit root_path
       click_on 'Cadastrar Lote'
@@ -45,7 +42,7 @@ describe 'From the homepage' do
       fill_in 'Minimum value', with: 500
       fill_in 'Minimal difference', with: 80
       click_on 'Salvar'
-      # Assert
+
       expect(page).to have_content 'Lotes Cadastrados '
       expect(page).to have_link('ABC123456')
       expect(page).to have_content 'Status:'
@@ -53,9 +50,8 @@ describe 'From the homepage' do
       expect(page).to have_button 'Aprovar'
     end
     it 'unsucessfully' do
-      # Arrange
       Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
-      # Act
+
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -72,7 +68,7 @@ describe 'From the homepage' do
       fill_in 'Deadline', with: 2.days.from_now
       fill_in 'Minimum value', with: 1.99
       click_on 'Salvar'
-      # Assert
+
       expect(page).to have_content('Deve ser selecionado pelo menos um produto.')
     end
   end

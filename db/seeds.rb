@@ -1,5 +1,3 @@
-# Admin seed
-
 admin = Admin.create!(email: 'vando@leilaodogalpao.com.br', password: '123456', cpf: '53366189347')
 admin_dois = Admin.create!(email: 'edna@leilaodogalpao.com.br', password: '123456', cpf: '38125120505')
 user = User.create!(email: 'deise@email.com', password: '123456', cpf: '25706733406')
@@ -42,10 +40,22 @@ sofa_product.save
 
 lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin,
   code: 'ACB112233', start_date: Date.today,  
-  deadline: Date.today, minimum_value: 600, minimal_difference: 50, 
+  deadline: Date.today, minimum_value: 622, minimal_difference: 17, 
   start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
 
 ProductBatch.create!(product_ids: 2, admin_id: 1, created_by: admin,
-    code: 'ACB321654', start_date: Date.today,  
-    deadline: Date.today, minimum_value: 800, minimal_difference: 80, 
-    start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+  code: 'ACB321654', start_date: Date.today,  
+  deadline: Date.today, minimum_value: 698, minimal_difference: 3, 
+  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+
+lote_dois = ProductBatch.new(product_ids: 3, admin_id: 1, created_by: admin,
+  code: 'ACB112244', start_date: 1.day.ago,  
+  deadline: 1.hour.ago, minimum_value: 600, minimal_difference: 8, 
+  start_time: 1.day.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+lote_dois.save(validates: false)
+
+lote_tres = ProductBatch.new(product_ids: 4, admin_id: 1, created_by: admin,
+  code: 'ACB112255', start_date: 1.hour.from_now,  
+  deadline: 3.hours.from_now, minimum_value: 1200, minimal_difference: 15, 
+  start_time: 1.hour.from_now, end_time: 3.hours.from_now, approved_by: admin_dois)
+lote_tres.save(validates: false)
