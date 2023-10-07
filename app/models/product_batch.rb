@@ -38,7 +38,7 @@ class ProductBatch < ApplicationRecord
   end
 
   def present_or_future?
-    if start_date < Time.now
+    if start_date <= Time.now
       'Lote em Andamento'
     elsif start_date > Time.current && deadline > Time.current
       'Lote Futuro'
