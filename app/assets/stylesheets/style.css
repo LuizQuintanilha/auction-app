@@ -29,8 +29,8 @@
   border-radius: 10px;
   box-shadow: 7px 7px 13px 0px black;
   padding: 30px;
-  margin: 20px;
-  width: 145px;
+  margin: auto;
+  width: auto;
   transition: all 0.3s ease-out;
 }
 
@@ -43,7 +43,6 @@
 }
 
 .header-fixed {
-  text-align: center;
   border-color: black;
   position: fixed;
   top: 0;
@@ -55,18 +54,47 @@
   z-index: 1000;
 }
 
+.header-style {
+  text-align: center;
+}
+
+
+
 .login {
+  text-align: center;
   border-color: black;
-  border-radius: 10px;
-  box-shadow: 7px 7px 13px 0px black;
-  padding: 10px;
-  width: 150px;
+  width: auto;
   position: fixed;
-  top: 25px;
-  left: 15px;
+  top: 35px;
+  margin-left: 15px;
+}
+
+.user-info {
+  text-align: center;
+  color: black;
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  margin-right: 35px ;
+}
+
+.buttom-exit {
+  text-align: center;
+  position: fixed;
+  top: 35px;
+  right: 55px;
+}
+
+.user-space {
+  text-align: center;
+  position: fixed;
+  top: 90px;
+  left: 20px;
+  margin-right: 35px ;
 }
 
 .login-fixed {
+  left: 20px;
   text-align: center;
   border-color: black;
   position: absolute;
@@ -88,6 +116,7 @@
 }
 
 .content {
+  width: auto;
   margin-top: 90px; 
   padding: 20px;
 }
@@ -101,9 +130,21 @@
   border-radius: 10px;
 }
 
-.error-message {
-  color: #ff0000;
-  margin-top: 3px;
+.flash-system {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.notice {
+  color: green;
+}
+
+.alert {
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-text {
@@ -151,4 +192,20 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+
+.search-box {
+  font-weight: bold;
+  font-size: 16px;
+  color: black;
+  position: fixed;
+  top: 10px;
+  left: 20px;
+}
+
+.admin-space {
+  text-align: left;
+  top: 5px;
+  position: fixed;
 }

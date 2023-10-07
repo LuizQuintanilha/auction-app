@@ -11,46 +11,61 @@
   <body>
     <header >
       <div class="header-fixed">
-        <h1><%= link_to  'Leilão de Estoque', root_path %></h1>
+        <div class="header-style">
+          <h1><%= link_to  'Leilão de Estoque', root_path %></h1>
           <div class="links">
             <%= link_to 'Produtos Cadastrados', products_path %>
             <%= link_to 'Lotes Cadastrados', product_batches_path %>
             <%= link_to 'Lotes Vencedores', show_result_path %>
           </div>
+        </div>
       </div>
     </header>
+
     <div class="login-fixed">
       <div class="login">
         <nav class="user">
           <% if !user_signed_in? && !admin_signed_in? %>
-            <div >
-              <%= link_to 'Usuário', new_user_session_path%>
-            </div>
+            <%= link_to 'Usuário', new_user_session_path%>  
           <% elsif user_signed_in? %>
-            <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
-              <%= f.label :query, 'Buscar Pedido' %>
-              <%= f.text_field :query %>
-              <%= f.submit 'Buscar' %>
-            <% end %>
+            <div class="search-box">
+              <%= form_with(url: search_product_batches_path, method: :get) do |f| %>
+                <%= f.label :query, 'Buscar Pedido' %>
+                <%= f.text_field :query %>
+                <%= f.submit 'Buscar' %>
+              <% end %>
+            </div>
+            <div class="user-info">
               <%= current_user.email %>
-              <%= button_to 'Sair', destroy_user_session_path, method: :delete%>
-            <%= link_to 'Meus Lotes', user_space_path %>
-            <%= link_to 'Favoritos', favorite_table_path %>
+            </div>
+            <div class="buttom-exit">
+              <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+            </div>
+            <div class="user-space">
+              <%= link_to 'Meus Lotes', user_space_path %>
+              <%= link_to 'Favoritos', favorite_table_path %>
+            </div>
           <% end %>
         </nav>
-      
+
         <nav class="admin">
           <% if !user_signed_in? && !admin_signed_in? %>
             <%= link_to 'Admin', new_admin_session_path%>
           <% elsif admin_signed_in? %>
+          <div class="user-info">  
             <%= current_admin.email %><br>
+          </div>
+           <div class="buttom-exit">
             <%= button_to 'Sair', destroy_admin_session_path, method: :delete %>
-              <%= link_to 'Cadastrar Produto', new_product_path %>
-              <%= link_to 'Cadastrar Lote', new_product_batch_path %>
-              <%= link_to 'Aprovar lote', aprove_path %>
-              <%= link_to 'Lotes Expirados', expired_batches_path %>
-              <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id)%>
+          </div>
+          <div class="admin-space">
+              <%= link_to 'Cadastrar Produto', new_product_path %></br>
+              <%= link_to 'Cadastrar Lote', new_product_batch_path %></br>
+              <%= link_to 'Aprovar lote', aprove_path %></br>
+              <%= link_to 'Lotes Expirados', expired_batches_path %></br>
+              <%= link_to 'Caixa de Perguntas', product_batch_answers_path(:product_batch_id)%></br>
               <%= link_to 'Bloqueio de Usuário', blocked_users_path%>
+          </div>
           <% end %>
         </nav>
       </div>
@@ -58,13 +73,16 @@
   
     <main>
       <div class="content">
-        <div class="flash-notice">
-          <%= notice %>
-          <%= alert %>
+        <div class="flash-system">
+          <div class="notice">
+            <%= notice %>
+          </div>
+          <div class="alert">
+            <%= alert %>
+          </div>
         </div>
         <%= yield %>
       </div>
     </main>
-    
   </body>
 </html>

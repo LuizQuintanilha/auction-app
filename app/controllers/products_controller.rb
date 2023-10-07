@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       @categories = Category.all
-      flash.now[:notice] = 'Não foi possível cadastrar produto.'
+      flash.now[:alert] = 'Não foi possível cadastrar produto.'
       render 'new'
     end
   end
@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
       redirect_to @product
     else
       @categories = Category.all
-      flash.now[:notice] = 'Não foi possível atualizar dados do produto.'
+      flash.now[:alert] = 'Não foi possível atualizar dados do produto.'
       render 'edit'
     end
   end
