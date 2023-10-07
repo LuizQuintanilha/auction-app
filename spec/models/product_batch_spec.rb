@@ -11,7 +11,7 @@ RSpec.describe ProductBatch, type: :model do
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
       lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Date.today, deadline: 5.days.from_now,
-                              minimum_value: 10.99, minimal_difference: 2.00, start_time: Time.current, end_time: 1.hour.from_now)
+                              minimum_value: 10.99, minimal_difference: 2.00)
 
       result = lote.valid?
 
@@ -26,7 +26,7 @@ RSpec.describe ProductBatch, type: :model do
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
       lote = ProductBatch.new(created_by: luana, code: '', start_date: Date.today, deadline: 5.days.from_now,
-                              minimum_value: 1.99, minimal_difference: 10.59, start_time: Time.current, end_time: 1.hour.from_now)
+                              minimum_value: 1.99, minimal_difference: 10.59)
 
       result = lote.valid?
 
@@ -40,7 +40,7 @@ RSpec.describe ProductBatch, type: :model do
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
       lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: 2.days.ago, deadline: 5.days.from_now,
-                              minimum_value: 1.99, minimal_difference: 10.599, start_time: Time.current, end_time: 1.hour.from_now)
+                              minimum_value: 1.99, minimal_difference: 10.599)
 
       result = lote.valid?
   
@@ -54,7 +54,7 @@ RSpec.describe ProductBatch, type: :model do
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
       lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Date.today, deadline: '',
-                              minimum_value: 1.99, minimal_difference: 10.599, start_time: Time.current, end_time: 1.hour.from_now)
+                              minimum_value: 1.99, minimal_difference: 10.599)
 
       result = lote.valid?
 
@@ -67,8 +67,8 @@ RSpec.describe ProductBatch, type: :model do
                                   depth: 6, description: 'MOUSE OFFICE TGT P90', category: informatica)
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
-      lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Date.today, deadline: 5.days.from_now,
-                              minimum_value: '', minimal_difference: 10.59, start_time: Time.current, end_time: 1.hour.from_now)
+      lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Time.current, deadline: 5.days.from_now,
+                              minimum_value: '', minimal_difference: 10.59)
 
       result = lote.valid?
 
@@ -82,7 +82,7 @@ RSpec.describe ProductBatch, type: :model do
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
       lote = ProductBatch.new(created_by: luana, code: '125AB23', start_date: Date.today, deadline: 5.days.from_now,
-                              minimum_value: 15.99, minimal_difference: 8.99, start_time: Time.current, end_time: 1.hour.from_now)
+                              minimum_value: 15.99, minimal_difference: 8.99)
 
       result = lote.valid?
 

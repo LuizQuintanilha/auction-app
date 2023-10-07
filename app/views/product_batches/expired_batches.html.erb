@@ -8,8 +8,8 @@
       <div class="row">
       <% if batch.bids.any? %>
           <div class="card-batch">
-            Código:<%= link_to  batch.code, product_batch_path(batch.id) %> |
-            Término:<%= batch.deadline.strftime('%d/%m/%Y') %> - <%= batch.end_time.strftime('%H:%M') %>hr
+            Código: <%= link_to  batch.code, product_batch_path(batch.id) %> |
+            Término: <%= batch.deadline %> hr
             <% if batch.wait_finish? %>
               <%= button_to 'Encerrar', close_batch_product_batch_path(batch ), { method: :patch} %>
             <% end %>
@@ -18,8 +18,7 @@
       <% else %>
         <div class="card-batch">
           <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
-          <strong>Término:</strong> <%= batch.deadline.strftime('%d/%m/%Y') %> | 
-          <strong>Hora:</strong>  <%= batch.end_time.strftime('%H:%M') %> |
+          <strong>Término:</strong> <%= batch.deadline %> | 
           <strong>Lote sem Lance</strong>
           <%= button_to 'Excluir Lote', product_batch_path(batch.id), { method: :delete } %>
         </div>

@@ -4,8 +4,10 @@
 
 <div class="error-message">
   <% if @product_batch.errors.any? %>
-    <% @product_batch.errors.full_messages.each.each do |msg| %>
+    <% @product_batch.errors.full_messages.each do |msg| %>
+    <div class="alert">
       <%= msg %>
+    </div>
     <% end %>
   <% end %>
 </div>
@@ -22,11 +24,11 @@
     </div>
     <div class="date">
       <%= f.label :start_date %>
-      <%= f.datetime_local_field :start_date %>
+      <%= f.date_field :start_date %>
     </div>
     <div class="date">
       <%= f.label :deadline %>
-      <%= f.datetime_local_field :deadline %>
+      <%= f.date_field :deadline %>
     </div>
     <div class="valor">
       <%= f.label :minimum_value %>

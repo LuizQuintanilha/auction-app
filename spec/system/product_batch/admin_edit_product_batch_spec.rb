@@ -17,8 +17,7 @@ describe 'Admin edit batch' do
     mouse_product.save
     ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233',
                                 start_date: Date.today, deadline: 5.days.from_now,
-                                minimum_value: 600, minimal_difference: 80,
-                                start_time: Time.current, end_time: 1.hour.from_now)
+                                minimum_value: 600, minimal_difference: 80)
 
     login_as(admin, scope: :admin)
     visit root_path
@@ -26,10 +25,10 @@ describe 'Admin edit batch' do
     click_on 'Editar'
     uncheck 'Mouse'
     check 'Microondas'
-    fill_in 'Code', with: 'ACD111222'
-    fill_in 'Start date', with: Time.zone.today
-    fill_in 'Deadline', with: 5.days.from_now
-    fill_in 'Minimum value', with: 1500
+    fill_in 'Código', with: 'ACD111222'
+    fill_in 'Início', with: Time.zone.today
+    fill_in 'Término', with: 5.days.from_now
+    fill_in 'Valor inicial', with: 1500
     click_on 'Salvar'
     expect(page).to have_content 'Lote editado com sucesso.'
     expect(mouse_product.status).to eq 'available'

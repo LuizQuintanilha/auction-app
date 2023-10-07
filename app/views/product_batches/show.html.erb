@@ -1,10 +1,8 @@
 <h2>Iten(s) para Leilão</h2>
 
 <div>
-<strong>Início:</strong><%= @product_batch.start_date.strftime('%d-%m-%Y') %> 
-       <strong> Hora: </strong> <%= @product_batch.start_time.strftime('%H:%M:%S') %>
-<strong>Término:</strong><%= @product_batch.deadline.strftime('%d-%m-%Y') %> 
-        <strong>Hora:</strong> <%= @product_batch.end_time.strftime('%H:%M:%S') %>
+<strong>Início:</strong><%= @product_batch.start_date%> 
+<strong>Término:</strong><%= @product_batch.deadline %> 
 </div>
 
 <div>

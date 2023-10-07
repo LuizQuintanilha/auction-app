@@ -6,8 +6,7 @@ describe 'From the homepage' do
       luiz = User.create!(email: 'luiz@email.com', password: '123456', cpf: '12662381744')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
-                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                                  start_time: 1.hour.ago, end_time: 2.hours.from_now)
+                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
       lote.approve!
       lote.close_batch!
 
@@ -25,8 +24,7 @@ describe 'From the homepage' do
       luiz = User.create!(email: 'luiz@email.com', password: '123456', cpf: '12662381744')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
-                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                                  start_time: 1.hour.ago, end_time: 2.hours.from_now)
+                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
       lote.approve!
 
       login_as(luiz, scope: :user)
@@ -43,8 +41,7 @@ describe 'From the homepage' do
       luiz = User.create!(email: 'luiz@email.com', password: '123456', cpf: '12662381744')
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
-                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                                  start_time: 1.hour.ago, end_time: 2.hours.from_now)
+                                  deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
       lote.approve!
       lote.close_batch!
 
@@ -65,7 +62,7 @@ describe 'From the homepage' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
                                   deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                                  start_time: 1.hour.ago, end_time: 2.hours.from_now)
+                                 )
       lote.approve!
       lote.close_batch!
 

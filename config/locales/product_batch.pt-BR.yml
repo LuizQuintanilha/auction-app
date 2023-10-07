@@ -11,7 +11,8 @@ pt-BR:
         code: 'Código'
         product_ids: 'Produtos'
         start_time: 'Hora inicial'
-        end_time: 'Hora fical'
+        end_time: 'Hora final'
       product_batch/status:
           approve: 'Aprovado'
           wait_approve: 'Aguardando Aprovação'
+          

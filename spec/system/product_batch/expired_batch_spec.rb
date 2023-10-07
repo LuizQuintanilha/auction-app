@@ -15,7 +15,7 @@ describe 'From the homepage' do
     mouse_product.save
     lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB440055', start_date: Time.zone.today,
                             deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                            start_time: 5.hours.ago, end_time: 2.hours.ago, approved_by: luiz)
+                            approved_by: luiz)
     lote.save(validate: false)
 
     login_as(admin, scope: :admin)
@@ -43,8 +43,7 @@ describe 'From the homepage' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
     luiz = Admin.create!(email: 'l@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
     lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: 3.days.ago,
-                            deadline: 1.hour.ago, minimum_value: 600, minimal_difference: 50,
-                            start_time: 1.hour.ago, end_time: 1.hour.ago, approved_by: luiz)
+                            deadline: 1.hour.ago, minimum_value: 600, minimal_difference: 50, approved_by: luiz)
     lote.save(validate: false)
 
     login_as(admin, scope: :admin)
@@ -68,7 +67,7 @@ describe 'From the homepage' do
     lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin,
                                 code: 'ACB112233', start_date: Time.zone.today,
                                 deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                                start_time: 1.hour.ago, end_time: 1.minute.ago, approved_by: luiz)
+                                approved_by: luiz)
     lote.approve!
     Bid.create!(user_id: 1, value: '1000', product_batch_id: 1)
 
@@ -95,7 +94,7 @@ describe 'From the homepage' do
     lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin, code: 'ACB112233',
                                 start_date: Time.zone.today,
                                 deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                                start_time: 1.hour.ago, end_time: 1.minute.ago, approved_by: luiz)
+                                approved_by: luiz)
 
     lote.approve!
     Bid.create!(user_id: 1, value: '1000', product_batch_id: 1)

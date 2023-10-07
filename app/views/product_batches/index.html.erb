@@ -9,8 +9,8 @@
       <div class="card-batch">
         <div>
           <h3>Código do lote: <%= link_to batch.code, product_batch_path(batch.id) %></h3> 
-          Início: <%= batch.start_date.strftime('%d/%m/%Y') %>-<%= batch.start_time.strftime('%H:%M') %>hr
-          Término:<%= batch.deadline.strftime('%d/%m/%Y') %>-<%= batch.end_time.strftime('%H:%M') %>hr</br>
+          Início: <%= batch.start_date %>hr
+          Término:<%= batch.deadline %>hr</br>
           Status: <%= batch.present_or_future? %>
         </div>
           <% if user_signed_in? %>

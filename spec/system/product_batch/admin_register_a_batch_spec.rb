@@ -9,10 +9,10 @@ describe 'From the homepage' do
     click_on 'Aprovar lote'
     click_on 'Cadastrar Lote'
 
-    expect(page).to have_field('Code')
-    expect(page).to have_field('Start date')
-    expect(page).to have_field('Deadline')
-    expect(page).to have_field('Minimum value')
+    expect(page).to have_field('Código')
+    expect(page).to have_field('Início')
+    expect(page).to have_field('Término')
+    expect(page).to have_field('Diferença mínima')
     expect(page).to have_button 'Salvar'
   end
 
@@ -36,16 +36,16 @@ describe 'From the homepage' do
       visit root_path
       click_on 'Cadastrar Lote'
       check 'Microondas'
-      fill_in 'Code', with: 'ABC123456'
-      fill_in 'Start date', with: Time.zone.today
-      fill_in 'Deadline', with: 3.days.from_now
-      fill_in 'Minimum value', with: 500
-      fill_in 'Minimal difference', with: 80
+      fill_in 'Código', with: 'ABC123456'
+      fill_in 'Início', with: Time.zone.today
+      fill_in 'Término', with: 3.days.from_now
+      fill_in 'Valor inicial', with: 500
+      fill_in 'Diferença mínima', with: 80
       click_on 'Salvar'
 
       expect(page).to have_content 'Lotes Cadastrados '
       expect(page).to have_link('ABC123456')
-      expect(page).to have_content 'Status:'
+      expect(page).to have_content 'Estatus:'
       expect(page).to have_content 'wait_approve'
       expect(page).to have_button 'Aprovar'
     end
@@ -63,10 +63,10 @@ describe 'From the homepage' do
       end
       click_on 'Aprovar lote'
       click_on 'Cadastrar Lote'
-      fill_in 'Code', with: ''
-      fill_in 'Start date', with: ''
-      fill_in 'Deadline', with: 2.days.from_now
-      fill_in 'Minimum value', with: 1.99
+      fill_in 'Código', with: ''
+      fill_in 'Início', with: ''
+      fill_in 'Término', with: 2.days.from_now
+      fill_in 'Valor inicial', with: 1.99
       click_on 'Salvar'
 
       expect(page).to have_content('Deve ser selecionado pelo menos um produto.')

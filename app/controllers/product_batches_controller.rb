@@ -12,7 +12,7 @@ class ProductBatchesController < ApplicationController
   end
 
   def index
-    @product_batches = ProductBatch.where('start_date > ? AND start_time > ?', Time.current, Time.current) &&
+    @product_batches = ProductBatch.where('start_date > ?', Time.current) &&
                        ProductBatch.where(status: 2)
   end
 
@@ -33,7 +33,7 @@ class ProductBatchesController < ApplicationController
     @product_batch.created_by = current_admin
     if @product_batch.product_ids.empty?
       @product_batch.errors.add(:product_ids, 'Deve ser selecionado pelo menos um produto.')
-      flash.now[:notice] = 'Nao foi possível cadastrar o lote.'
+      flash.now[:alert] = 'Nao foi possível cadastrar o lote.'
       render 'new'
     elsif @product_batch.save
       find_product_id
@@ -73,7 +73,7 @@ class ProductBatchesController < ApplicationController
 
   def expired_batches
     @product_batch = ProductBatch.find_by(params[:product_batch_id])
-    @product_batches = ProductBatch.where('deadline <= ? AND end_time < ?', Time.current, Time.current)
+    @product_batches = ProductBatch.where('deadline <= ? ', Time.current)
     @admin = Admin.find_by(email: params[:email])
     @batch_fishined = current_admin if @product_batches.present?
   end
@@ -136,12 +136,10 @@ class ProductBatchesController < ApplicationController
 
   def user_space
     return unless user_signed_in?
-    
-    #@bid = Bid.last&.value
+
     @user = current_user
 
     @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
-
   end
 
   private
@@ -158,8 +156,7 @@ class ProductBatchesController < ApplicationController
   end
 
   def product_batch_params
-    params.require(:product_batch).permit(:start_time, :end_time,
-                                          :code, :start_date,
+    params.require(:product_batch).permit(:code, :start_date,
                                           :deadline, :minimum_value,
                                           :minimal_difference, :status, :expired, product_ids: [])
   end

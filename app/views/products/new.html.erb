@@ -5,9 +5,9 @@
 <div class="error-message">
   <% if @product.errors.any? %>
     <% @product.errors.full_messages.each.each do |msg| %>
-    <div class="alert">
-      <%= msg %>
-    </div>
+      <div class="alert">
+        <%= msg %>
+      </div>
     <% end %>
   <% end %>
 </div>

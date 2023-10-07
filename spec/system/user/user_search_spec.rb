@@ -17,7 +17,7 @@ describe 'From the homepage' do
       lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin, code: 'ACB112233',
                                   start_date: Time.zone.today,
                                   deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                                  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: luiz)
+                                  approved_by: luiz)
 
       lote.approve!
 

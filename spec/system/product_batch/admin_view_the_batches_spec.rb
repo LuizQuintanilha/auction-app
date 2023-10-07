@@ -7,7 +7,7 @@ describe 'Admin view all product batch registered' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       lote = ProductBatch.new(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
                               deadline: 5.days.from_now, minimum_value: 600,
-                              minimal_difference: 50, start_time: 1.hour.from_now, end_time: 2.hours.from_now)
+                              minimal_difference: 50)
       lote.save
       lote.approve!
 
@@ -23,8 +23,7 @@ describe 'Admin view all product batch registered' do
     it 'wait_approve' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
-                           deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
-                           start_time: 1.hour.from_now, end_time: 2.hours.from_now)
+                           deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50)
       visit root_path
       within('nav.admin') do
         click_on 'Admin'
@@ -38,21 +37,19 @@ describe 'Admin view all product batch registered' do
 
       expect(page).to have_content 'Lotes Cadastrados'
       expect(page).to have_content 'ACB112233'
-      expect(page).to have_content 'Status:'
+      expect(page).to have_content 'Estatus:'
       expect(page).to have_content 'wait_approve'
       expect(page).to have_button 'Aprovar'
     end
   end
 
   it "don't have batch's register" do
-    # Arrange
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
 
-    # Act
     login_as(admin, scope: :admin)
     visit root_path
     click_on 'Aprovar lote'
-    # Assert
+
     expect(page).to have_content 'Não existem lotes cadastrados'
   end
 end

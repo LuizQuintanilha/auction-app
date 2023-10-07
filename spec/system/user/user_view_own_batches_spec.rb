@@ -19,7 +19,7 @@ describe 'From the homepage' do
         lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin, code: 'ACB112233',
                                     start_date: Time.zone.today,
                                     deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                                    start_time: 1.hour.ago, end_time: 1.minute.ago, approved_by: luiz)
+                                    approved_by: luiz)
         lote.approve!
         Bid.create!(user_id: 1, value: '610', product_batch_id: 1)
         Bid.create!(user: user, value: '700', product_batch_id: 1)
@@ -54,7 +54,7 @@ describe 'From the homepage' do
         lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin, code: 'ACB112233',
                                     start_date: Time.zone.today,
                                     deadline: Time.zone.today, minimum_value: 600, minimal_difference: 50,
-                                    start_time: 1.hour.ago, end_time: 1.minute.ago, approved_by: luiz)
+                                    approved_by: luiz)
         lote.approve!
         Bid.create!(user: user, value: '700', product_batch_id: 1)
         Bid.create!(user_id: 1, value: '720', product_batch_id: 1)

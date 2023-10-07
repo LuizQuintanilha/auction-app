@@ -23,16 +23,16 @@ describe 'Admin add item for batch' do
     click_on 'Cadastrar Lote'
     check 'Mouse'
     check 'Microondas'
-    fill_in 'Code', with: 'ABC112233'
-    fill_in 'Start date', with: Time.zone.today
-    fill_in 'Deadline', with: 3.days.from_now
-    fill_in 'Minimum value', with: 1000
-    fill_in 'Minimal difference', with: 100
+    fill_in 'Código', with: 'ABC112233'
+    fill_in 'Início', with: Time.now
+    fill_in 'Término', with: 3.days.from_now
+    fill_in 'Valor inicial', with: 1000
+    fill_in 'Diferença mínima', with: 100
     click_on 'Salvar'
-
+   
     expect(current_path).to eq aprove_path
     expect(page).to have_content 'Código do lote: ABC112233'
-    expect(page).to have_content 'Status: wait_approve'
+    expect(page).to have_content 'Estatus: wait_approve'
     expect(page).to have_button 'Aprovar'
   end
 end

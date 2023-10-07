@@ -69,11 +69,12 @@ describe 'User not authenticated' do
                                       minimal_difference: 100,
                                       created_by: luiz,
                                       approved_by: luana,
-                                      start_time: 1.hour.from_now,
-                                      end_time: 2.hours.from_now)
+                                     )
       future_batch.approve!
+      
       visit root_path
       click_on 'Lotes Cadastrados'
+
       expect(page).to have_content 'Lote Futuro'
       expect(page).to have_link 'ABD332211'
     end
@@ -97,7 +98,7 @@ describe 'User not authenticated' do
       file = File.open(file_path)
       mouse_product.photo.attach(io: file, filename: 'mouse_red.jpg')
       mouse_product.save
-      current_batch = ProductBatch.new(
+      current_batch = ProductBatch.create!(
         admin_id: 1,
         code: 'ABD332211',
         start_date: Time.current,
@@ -106,14 +107,15 @@ describe 'User not authenticated' do
         minimal_difference: 100,
         created_by: luiz,
         approved_by: luana,
-        start_time: Time.current,
-        end_time: 1.hour.from_now
       )
+ 
       current_batch.approve!
+
       visit root_path
       click_on 'Lotes Cadastrados'
-      expect(page).to have_content 'Lote em Andamento'
+
       expect(page).to have_link 'ABD332211'
+      expect(page).to have_content 'Lote em Andamento'
     end
     it 'and there no batches registered' do
       visit root_path
