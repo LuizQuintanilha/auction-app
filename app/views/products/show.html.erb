@@ -1,6 +1,9 @@
 <div class="h1">
   <h2><%= @product.name %></h2>
 </div>
+<div class="submit">
+  <%= link_to 'Voltar', products_path %>
+</div>
 
 <div class="card-container">
   <div class='row'>
@@ -21,8 +24,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div>
-  <%= link_to 'Voltar', products_path %>
 </div>

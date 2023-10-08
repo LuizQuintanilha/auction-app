@@ -1,9 +1,10 @@
-<h1>Responder Usuário: </h1>
+<div class="h1">
+  <h2>Responder Usuário: </h2>
+</div>
 
-
+<div class="answer-box">
   <div>
     <strong>Usuário:</strong> <%= @question.user.email  %>
-    <% #binding.pry %>
   </div>
 
   <div>
@@ -14,11 +15,10 @@
     <strong>Dúvida:</strong><%= @question.content %>
   </div>
 
-<%= form_with model: @answer, url: product_batch_answers_path(product_batch_id: @product_batch.id, question_id: @question.id) do |f| %>
-  <div>
-    <%= f.text_area :content, placeholder: 'Digite sua resposta' %>
-  </div>
-
-  <%= f.submit "Enviar Resposta" %>
-  
-<% end %>
+  <%= form_with model: @answer, url: product_batch_answers_path(product_batch_id: @product_batch.id, question_id: @question.id) do |f| %>
+    <div>
+      <%= f.text_area :content, placeholder: 'Digite sua resposta' %>
+    </div>
+    <%= f.submit "Enviar Resposta" %>
+  <% end %>
+</div>
