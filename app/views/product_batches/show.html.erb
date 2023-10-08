@@ -1,56 +1,55 @@
-<h2>Iten(s) para Leilão</h2>
-
-<div>
-<strong>Início:</strong><%= @product_batch.start_date%> 
-<strong>Término:</strong><%= @product_batch.deadline %> 
+d<div class="h1">
+  <h2>Iten(s) para Leilão</h2>
 </div>
 
-<div>
+<div class="submit">
+  <%= link_to 'Voltar', product_batches_path %>
+</div>
+
+<div class="show-batch">
+  <strong>Início: </strong><%= @product_batch.start_date%> 
+  <strong>Término: </strong><%= @product_batch.deadline %> 
   <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
   <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %> |
   <%= @product_batch.present_or_future?  %>
-  
   <% if @product_batch.present_or_future? == 'Lote em Andamento' && user_signed_in? %>
     <%= link_to "Fazer Lance", new_product_batch_bid_path(@product_batch) %>
   <% end %>
-</div>
 
-<div>
-<% @product_batch.products.each do |product| %>
-<div>
-  <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
-</div>
-<div>
-  <strong>Descrição: </strong><%= product.description %> 
-
-</div>
-<% end %>
-<div>
-
-<div>
-<% if @product_batch.bids.any? %>
-  <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
-<% else %>
-  <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
-<% end %>
-<%= link_to 'Voltar', product_batches_path %>
-<%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>
-<div>
-<div>
-<div>
-
-
-<div>
-  <strong>Perguntas dos usuários:</strong>
-  <div>
-    <% @product_batch.questions.each do |cont| %>
-      <% if cont.answer.present? %>
-        <strong>Usuário:</strong> <%= cont.user.email %><br/>
-        <strong>Pergunta:</strong> <%= cont.content %>
-        <strong>Resposta:</strong> <%= cont.answer.content %>
-        <br/>
+    <div>
+      <% @product_batch.products.each do |product| %>
+      <div class="card-containers">
+        <%= link_to product.name, product_path(product.id) %>
+      </div>
       <% end %>
-      <br/>
-    <% end %>
+    </div>
+
+    <div >
+      <% if @product_batch.bids.any? %>
+        <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
+      <% else %>
+        <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="submit">
+          <%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<div class="h1">
+  <h3>Perguntas dos usuários:</h3>
+</div>
+
+<% @product_batch.questions.each do |cont| %>
+    <% if cont.answer.present? %>
+    <div class="show-batch">
+      <strong>Usuário:</strong> <%= cont.user.email %><br/>
+      <strong>Pergunta:</strong> <%= cont.content %><br/>
+      <strong>Resposta:</strong> <%= cont.answer.content %><br/>
+    </div>
+    <% end %>
+<% end %>
+

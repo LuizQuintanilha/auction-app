@@ -1,18 +1,19 @@
 <div class="h1">
-<h2>Produtos Cadastrados</h2>
+  <h2>Produtos Cadastrados</h2>
 </div>
-<div class="card-container">
-  <% if @products.any? %>
-    <% @products.each do |product| %>
-      <div class='row'>
-        <div class="card-product">
-          <strong>Produto:</strong> 
-          <%= link_to product.name, product_path(product.id) %><br/>
-          <%= image_tag url_for(product.photo), class: 'card' %>
+
+<% if @products.any? %>
+  <div class="card-container">
+      <% @products.each do |product| %>
+        <div class="row">
+          <div class="card-batch">
+            <strong>Produto:</strong> 
+            <%= link_to product.name, product_path(product.id) %><br/>
+            <%= image_tag url_for(product.photo), class: 'card' %>
+          </div>
         </div>
-      </div>
-    <% end %>
-  <% else %>
-    <p>Sem produtos cadastrados.</p>
-  <% end %>
-</div>
+      <% end %>
+  </div>
+<% else %>
+  <p>Sem produtos cadastrados.</p>
+<% end %>

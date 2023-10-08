@@ -2,35 +2,39 @@
   <h2>Lotes Cadastrados</h2>
 </div>
 <% if @product_batches.any? %>
-<div class="card-container">
-  <% @product_batches.each do |batch| %>
-  <div class="row">
-    <% if batch.present_or_future? != 'Lote Expirado' %>
-      <div class="card-batch">
-        <div>
-          <h3>Código do lote: <%= link_to batch.code, product_batch_path(batch.id) %></h3> 
-          Início: <%= batch.start_date %>hr
-          Término:<%= batch.deadline %>hr</br>
-          Status: <%= batch.present_or_future? %>
-        </div>
-          <% if user_signed_in? %>
-            <%= form_for(Favorite.new) do |f| %>
-              <%= f.hidden_field :product_batch_id, value: batch.id %>
-              <%= f.hidden_field :user_id, value: current_user.id %>
-              <% if Favorite.exists?(product_batch_id: batch.id, user_id: current_user.id) %>
-                <p>Favoritado</p>
-              <% else %>
-                <%= f.submit 'Favoritar'%>
+  <div class="card-container">
+    <% @product_batches.each do |batch| %>
+      <div class="row">
+        <div class="card-batch">
+        <div class="card">
+          <% if batch.present_or_future? != 'Lote Expirado' %>
+            <h3>Código do lote: <%= link_to batch.code, product_batch_path(batch.id) %></h3><br> 
+            Início: <%= batch.start_date %>hr<br>
+            Término:<%= batch.deadline %>hr<br>
+            Estatus: <%= batch.present_or_future? %><br>
+            <% if user_signed_in? %>
+              <%= form_for(Favorite.new) do |f| %>
+                <%= f.hidden_field :product_batch_id, value: batch.id %>
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <% if Favorite.exists?(product_batch_id: batch.id, user_id: current_user.id) %>
+                  <div class="card-batch">
+                    Favoritado
+                  </div>
+                <% else %>
+                  <div class="submit">
+                    <%= f.submit 'Favoritar'%>
+                  </div>
+                <% end %>
               <% end %>
             <% end %>
+              </div>
           <% end %>
+        </div>
+      </div>  
     <% end %>
-      </div>
-    </div>  
-  <% end %>
+  </div>
 <% else %>
-  <h3>Não existem lotes em andamento</h3>
+  <div class="h1">
+    <h3>Não existem lotes em andamento</h3>
+  </div>
 <% end %>
-</div>
-
-

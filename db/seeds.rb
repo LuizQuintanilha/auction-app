@@ -26,11 +26,11 @@ tv_product = Product.new(name:'SMARTV', weight: 90, width: 12, height: 4,
 sofa_product = Product.new(name:'Sofa', weight: 90, width: 12, height: 4, 
                                   depth: 6, description: sofa, category: moveis)
 
-geladeira_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'geladeira.webp')), filename: 'geladeira.webp')
-microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')), filename: 'microondas.png')
 mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')), filename: 'mouse_red.jpg')
-sofa_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'sofa.webp')), filename: 'sofa.webp')
+microondas_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'microondas.png')), filename: 'microondas.png')
+geladeira_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'geladeira.webp')), filename: 'geladeira.webp')
 tv_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'tv.webp')), filename: 'tv.webp')
+sofa_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'sofa.webp')), filename: 'sofa.webp')
 mouse_product.save
 microondas_product.save
 geladeira_product.save
@@ -40,22 +40,27 @@ sofa_product.save
 
 lote = ProductBatch.create!(product_ids: 1, admin_id: 1, created_by: admin,
   code: 'ACB112233', start_date: Date.today,  
-  deadline: Date.today, minimum_value: 622, minimal_difference: 17, 
-  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+  deadline: 10.hours.from_now, minimum_value: 622, minimal_difference: 17, approved_by: admin_dois)
 
 ProductBatch.create!(product_ids: 2, admin_id: 1, created_by: admin,
-  code: 'ACB321654', start_date: Date.today,  
-  deadline: Date.today, minimum_value: 698, minimal_difference: 3, 
-  start_time: 2.hours.ago, end_time: 1.hour.ago, approved_by: admin_dois)
+  code: 'ACB321654', start_date: 5.hours.ago,  
+  deadline: 1.day.from_now, minimum_value: 698, minimal_difference: 3, approved_by: admin_dois)
 
 lote_dois = ProductBatch.new(product_ids: 3, admin_id: 1, created_by: admin,
-  code: 'ACB112244', start_date: 1.day.ago,  
-  deadline: 1.hour.ago, minimum_value: 600, minimal_difference: 8, 
-  start_time: 1.day.ago, end_time: 1.hour.ago, approved_by: admin_dois)
-lote_dois.save(validates: false)
+  code: 'ACB112244', start_date: Date.today,  
+  deadline: 3.hour.from_now, minimum_value: 600, minimal_difference: 8, approved_by: admin_dois)
+lote_dois.approve!
 
 lote_tres = ProductBatch.new(product_ids: 4, admin_id: 1, created_by: admin,
-  code: 'ACB112255', start_date: 1.hour.from_now,  
-  deadline: 3.hours.from_now, minimum_value: 1200, minimal_difference: 15, 
-  start_time: 1.hour.from_now, end_time: 3.hours.from_now, approved_by: admin_dois)
-lote_tres.save(validates: false)
+  code: 'ACB112255', start_date: 5.hours.ago,  
+  deadline: 3.hours.from_now, minimum_value: 1200, minimal_difference: 15, approved_by: admin_dois)
+lote_tres.approve!
+
+lote_quatro = ProductBatch.new(product_ids: 5, admin_id: 1, created_by: admin,
+  code: 'ACB112210', start_date: 1.hour.from_now,  
+  deadline: 1.day.from_now, minimum_value: 600, minimal_difference: 8, approved_by: admin_dois)
+lote_quatro.approve!
+
+ProductBatch.create!(product_ids: 2, admin_id: 1, created_by: admin,
+  code: 'ACB112277', start_date: Date.today,  
+  deadline: 10.hours.from_now, minimum_value: 622, minimal_difference: 17, approved_by: admin_dois)

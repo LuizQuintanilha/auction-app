@@ -1,21 +1,27 @@
-<h2>Meus Lotes:</h2>
-<div>
+<div class="h1"> 
+  <h2>Meus Lotes:</h2>
+</div>
+
 <% if @product_batches.any?  %>
   <% @product_batches.each do |batch| %>
-    <div>
+    <div class="card-container">
       <% if batch.expired == 'finished' && batch.bids.last.id == @user.bids.last.id %>
-        <div>
-          <h3>Parabéns!!!</h3>
-          <strong> Você é o vencedor do Lote: <%= link_to batch.code, product_batch_path(batch.id) %></strong>
-          <br><strong>Produto(s) Adquirido(s):</strong>
-          <% batch.products.each do |product| %>
-            <li><%= link_to product.description, product_path(product.id) %></li>
-          <% end %>
-          <p>Valor final do lote: R$<%= batch.bids.last.value %></p>
+        <div class="row">
+          <div class="row">
+            <h3>Parabéns!!!</h3>
+            <strong> Você é o vencedor do Lote: <%= link_to batch.code, product_batch_path(batch.id) %></strong>
+            <br><strong>Produto(s) Adquirido(s):</strong>
+            <% batch.products.each do |product| %>
+              <li><%= link_to product.description, product_path(product.id) %></li>
+            <% end %>
+            <p>Valor final do lote: R$<%= batch.bids.last.value %></p>
+          </div>
         </div>
       <% end %>
     </div>  
   <% end %>
 <% else %>
-  <p>Nenhum lote adquirido</p>
+  <div class="h1"> 
+    <h3>Nenhum lote adquirido</h3>
+  </div>
 <% end %>

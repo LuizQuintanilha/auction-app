@@ -1,47 +1,51 @@
-<h1>Editar dados do produto</h1>
+<div class="h1">
+  <h2>Editar dados do produto</h2>
+</div>
 
 <% if @product.errors.any? %>
-  <% @product.errors.full_messages.each.each do |msg| %>
-    <div>
+  <div class="error-message">
+    <% @product.errors.full_messages.each.each do |msg| %>
       <%= msg %>
-    <div>
-  <% end %>
+    <% end %>
+  <div>
 <% end %>
 
 <%= form_with(model: @product) do |f| %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div>
-    <%= f.label :photo %>
-    <%= f.file_field :photo %>
-  </div>
-  <div>
-    <%= f.label :weight %>
-    <%= f.number_field  :weight %>
-  </div>
-  <div>
-    <%= f.label :width %>
-    <%= f.number_field :width %>
-  </div>
-  <div>
-    <%= f.label :height %>
-    <%= f.number_field  :height %>
-  </div>
-  <div>
-    <%= f.label :depth %>
-    <%= f.number_field  :depth %>
-  </div>
-  <div>
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div>
-    <%= f.label :category_id %>
-    <%= f.collection_select(:category_id, @categories, :id, :name) %>
-  </div>
-  <div>
-    <%= f.submit 'Salvar' %>
+  <div class="form">
+    <div class="input-text">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="upload-button">
+      <%= f.label :photo %>
+      <%= f.file_field :photo %>
+    </div>
+    <div class="input-text">
+      <%= f.label :weight %>
+      <%= f.number_field  :weight %>
+    </div>
+    <div class="input-text">
+      <%= f.label :width %>
+      <%= f.number_field :width %>
+    </div>
+    <div class="input-text">
+      <%= f.label :height %>
+      <%= f.number_field  :height %>
+    </div>
+    <div class="input-text">
+      <%= f.label :depth %>
+      <%= f.number_field  :depth %>
+    </div>
+    <div class="input-text">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div class="input-text">
+      <%= f.label :category_id %>
+      <%= f.collection_select(:category_id, @categories, :id, :name) %>
+    </div>
+    <div class="submit">
+      <%= f.submit 'Salvar' %>
+    </div>
   </div>
 <% end %>

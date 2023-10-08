@@ -58,7 +58,7 @@ describe 'From the homepage' do
   end
 
   context 'user not authenticated' do
-    it 'do a question' do
+    it 'cant do a question' do
       admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       lote = ProductBatch.create!(admin_id: 1, created_by: admin, code: 'ACB112233', start_date: Time.zone.today,
                                   deadline: 5.days.from_now, minimum_value: 600, minimal_difference: 50,
@@ -69,11 +69,8 @@ describe 'From the homepage' do
       visit root_path
       click_on 'Lotes Cadastrados'
       click_on 'ACB112233'
-      click_on 'Fazer Pergunta'
 
-      expect(current_path).to eq new_user_session_path
-      expect(page).to have_field 'Email'
-      expect(page).to have_field 'Senha'
+      expect(page).not_to have_link 'Fazer pergunta'
     end
   end
 end

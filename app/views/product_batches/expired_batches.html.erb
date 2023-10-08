@@ -14,7 +14,6 @@
               <%= button_to 'Encerrar', close_batch_product_batch_path(batch ), { method: :patch} %>
             <% end %>
           </div>
-        
       <% else %>
         <div class="card-batch">
           <strong>Código:</strong> <%= link_to  batch.code, product_batch_path(batch.id) %> |
@@ -24,7 +23,9 @@
         </div>
       <% end %>
     <% end %>
-    </div>
+  </div>
 <% else %>
-  <p>Não existem lotes expirados</p>
+  <div class="h1">
+    <h3>Não existem lotes expirados</h3>
+  </div>
 <% end %>

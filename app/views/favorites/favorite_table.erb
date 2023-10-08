@@ -1,8 +1,22 @@
 <% if @favorites.any? %>
-  <% @favorites.each do |favorite| %>
-    <%= link_to favorite.product_batch.code, product_batch_path(favorite.product_batch.id) %>
-    <%= button_to 'Desfavoritar', favorite_path(favorite), method: :delete, id: favorite.id %>
-  <% end %>
+  <div class="card-container">
+    <% @favorites.each do |favorite| %>
+        <div class="row">
+          <div class="card-batch">
+          <div class="card">
+            <div class="link">
+              <%= link_to favorite.product_batch.code, product_batch_path(favorite.product_batch.id) %></br>
+            </div>
+            <div class="submit">
+              <%= button_to 'Desfavoritar', favorite_path(favorite), method: :delete, id: favorite.id %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
-  <p>Lista de Favoritos está vazia</p>
+  <div class="h1"> 
+    <h3>Lista de Favoritos está vazia</h3>
+  </div>
 <% end %>
