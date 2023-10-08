@@ -1,38 +1,6 @@
 .body {
   background-color: gray;
 }
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: auto;
-}
-
-.card-row {
-  display: flex;
-  justify-content: space-between; 
-  width: auto;
-  margin-bottom: 20px;
-}
-
-.card {
-  border-radius: 5px;
-  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
-  padding: 30px;
-  margin: 20px;
-  width: 130px;
-  transition: all 0.3s ease-out;
-}
-
-.card-batch {
-  border-color: black;
-  border-radius: 10px;
-  box-shadow: 7px 7px 13px 0px black;
-  padding: 30px;
-  margin: auto;
-  width: auto;
-  transition: all 0.3s ease-out;
-}
 
 .h1 {
   text-align: center;
@@ -57,8 +25,6 @@
 .header-style {
   text-align: center;
 }
-
-
 
 .login {
   text-align: center;

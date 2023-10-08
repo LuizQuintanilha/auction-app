@@ -1,0 +1,42 @@
+/*Formato dos cards */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: auto;
+  bottom: 35px;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between; 
+  width: auto;
+  margin-bottom: 15px;
+}
+
+.card {
+  background-color: beige;
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px 0px rgba(50, 50, 50, 0.22);
+  padding: 10px;
+  margin: 20px;
+  width: 130px;
+  transition: all 0.3s ease-out;
+}
+
+.card-batch {
+  border-color: black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 0px black;
+  padding: 10px;
+  margin: auto;
+  width: auto;
+  transition: all 0.3s ease-out;
+  text-align: center;
+}
+
+
+.card-product {
+  
+}

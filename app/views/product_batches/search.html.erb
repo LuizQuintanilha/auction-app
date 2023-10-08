@@ -1,20 +1,21 @@
-<h1>Resultado da busca por: <%= @query %></h1>
+<div class="h1"> 
+  <h2>Resultado da busca por: <%= @query %></h2>
+</div>
 
 <% if @product_batches.present? %>
   <p><%= @product_batches.count %> Lote(s) Encontrado(s)</p>
-
   <% @product_batches.each do |batch| %>
-    <div>
+    <div class="card-container">
+    
       <strong>Código do lote: <%= link_to batch.code, product_batch_path(batch.id)%></strong>
-    </div>
-    <div>
       <strong>Produtos:</strong>
         <% batch.products.each do |product| %>
       <%= link_to product.name, product_path(product.id) %> |
         <% end %>
     </div>
-    <p>
   <% end %>
 <% else %>
-  <p>Nenhum lote encontrado para a busca realizada.</p>
+  <div class="h1">  
+    <h3>Nenhum lote encontrado para a busca realizada.</h3>
+  </div>
 <% end %>

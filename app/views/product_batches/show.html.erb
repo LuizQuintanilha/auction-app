@@ -1,43 +1,40 @@
-<h2>Iten(s) para Leilão</h2>
-
-<div>
-<strong>Início:</strong><%= @product_batch.start_date%> 
-<strong>Término:</strong><%= @product_batch.deadline %> 
+<div class="h1">
+  <h2>Iten(s) para Leilão</h2>
 </div>
 
-<div>
-  <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
-  <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %> |
-  <%= @product_batch.present_or_future?  %>
-  
-  <% if @product_batch.present_or_future? == 'Lote em Andamento' && user_signed_in? %>
-    <%= link_to "Fazer Lance", new_product_batch_bid_path(@product_batch) %>
-  <% end %>
+<div class="card-container">
+  <div class="row">
+    <strong>Início: </strong><%= @product_batch.start_date%> 
+    <strong>Término: </strong><%= @product_batch.deadline %> 
+    <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
+    <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %> |
+    <%= @product_batch.present_or_future?  %>
+    <% if @product_batch.present_or_future? == 'Lote em Andamento' && user_signed_in? %>
+      <%= link_to "Fazer Lance", new_product_batch_bid_path(@product_batch) %>
+    <% end %>
+
+    <div>
+      <% @product_batch.products.each do |product| %>
+      <div>
+        <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
+      </div>
+      <div>
+        <strong>Descrição: </strong><%= product.description %> 
+      </div>
+      <% end %>
+    </div>
+    <div>
+      <% if @product_batch.bids.any? %>
+        <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
+      <% else %>
+        <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
+      <% end %>
+      <%= link_to 'Voltar', product_batches_path %>
+      <%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>
+    </div>
+  </div>
 </div>
 
-<div>
-<% @product_batch.products.each do |product| %>
-<div>
-  <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
-</div>
-<div>
-  <strong>Descrição: </strong><%= product.description %> 
-
-</div>
-<% end %>
-<div>
-
-<div>
-<% if @product_batch.bids.any? %>
-  <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
-<% else %>
-  <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
-<% end %>
-<%= link_to 'Voltar', product_batches_path %>
-<%= link_to 'Fazer Pergunta', new_product_batch_question_path(@product_batch.id) %>
-<div>
-<div>
-<div>
 
 
 <div>

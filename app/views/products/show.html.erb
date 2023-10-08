@@ -1,28 +1,26 @@
-<h1><%= @product.name %></h1>
+<div class="h1">
+  <h2><%= @product.name %></h2>
+</div>
 
-<div>
-  <%= image_tag url_for(@product.photo), class: 'card' %>
-<div>
-<div>
-  <strong>Código:</strong> <%= @product.code %>
-</div>
-<div>
-  <strong>Categoria:</strong> <%= @product.category.name %>
-</div>
-<div>
-  <strong>Descrição:</strong> <%= @product.description %>
-</div>
-<div>
-  <strong>Dimensão: altura, largura, profundidade:</strong> <%= @product.height %>cm x <%= @product.width %>cm x <%= @product.depth %>cm
-</div>
-<div>
-  <strong>Peso:</strong> <%= @product.weight %>g
-</div>
-  <strong>Status:</strong> <%= @product.status %>
-</div>
-</div>
-<div>
-  <%= link_to 'Editar', edit_product_path%>
+<div class="card-container">
+  <div class='row'>
+    <div class="card-product">
+      <div class="card-batch">
+        <%= image_tag url_for(@product.photo), class: 'card' %><br>
+        Código: <%= @product.code %><br>
+        Categoria:<%= @product.category.name %><br>
+        Descrição: <%= @product.description %><br>
+        Dimensão: altura, largura, profundidade:<%= @product.height %>cm x <%= @product.width %>cm x <%= @product.depth %>cm<br>
+        Peso:<%= @product.weight %>g<br>
+        Estatus: <%= @product.status %>
+        <div class="submit">
+          <% if admin_signed_in? %>
+            <%= link_to 'Editar', edit_product_path%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div>
