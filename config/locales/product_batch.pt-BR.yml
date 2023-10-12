@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      product_batch: Produto do lote
+      product_batch: 'Produto do lote'
     attributes:
       product_batch:
         start_date: 'Início'

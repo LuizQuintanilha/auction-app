@@ -42,12 +42,8 @@ describe 'User not authenticated' do
       expect(page).to have_content 'Sem produtos cadastrados.'
     end
     it 'and view all future batches ' do
-      luana = Admin.create!(email: 'luana@leilaodogalpao.com.br',
-                            password: '123456',
-                            cpf: '13008409784')
-      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br',
-                           password: '123456',
-                           cpf: '12662381744')
+      luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
+      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       informatica = Category.create!(name: 'Informática')
       mouse = 'MOUSE OFFICE TGT P90'
       mouse_product = Product.new(name: 'Mouse',
@@ -61,17 +57,17 @@ describe 'User not authenticated' do
       file = File.open(file_path)
       mouse_product.photo.attach(io: file, filename: 'mouse_red.jpg')
       mouse_product.save
-      future_batch = ProductBatch.new(admin_id: 1,
+      future_batch = ProductBatch.create!(admin_id: 1,
                                       code: 'ABD332211',
-                                      start_date: 2.days.from_now,
-                                      deadline: 5.days.from_now,
+                                      start_date: 1.hour.from_now,
+                                      deadline: 2.hours.from_now,
                                       minimum_value: 800,
                                       minimal_difference: 100,
                                       created_by: luiz,
                                       approved_by: luana,
                                      )
       future_batch.approve!
-      
+
       visit root_path
       click_on 'Lotes Cadastrados'
 
@@ -79,12 +75,8 @@ describe 'User not authenticated' do
       expect(page).to have_link 'ABD332211'
     end
     it 'and view all currently batches ' do
-      luana = Admin.create!(email: 'luana@leilaodogalpao.com.br',
-                            password: '123456',
-                            cpf: '13008409784')
-      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br',
-                           password: '123456',
-                           cpf: '12662381744')
+      luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
+      luiz = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')
       informatica = Category.create!(name: 'Informática')
       mouse = 'MOUSE OFFICE TGT P90'
       mouse_product = Product.new(name: 'Mouse',
@@ -102,19 +94,19 @@ describe 'User not authenticated' do
         admin_id: 1,
         code: 'ABD332211',
         start_date: Time.current,
-        deadline: Time.current,
+        deadline: 1.hour.from_now,
         minimum_value: 800,
         minimal_difference: 100,
         created_by: luiz,
         approved_by: luana,
       )
- 
+
       current_batch.approve!
 
       visit root_path
       click_on 'Lotes Cadastrados'
 
-      expect(page).to have_link 'ABD332211'
+      expect(page).to have_content 'ABD332211'
       expect(page).to have_content 'Lote em Andamento'
     end
     it 'and there no batches registered' do

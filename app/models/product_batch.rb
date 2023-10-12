@@ -38,7 +38,7 @@ class ProductBatch < ApplicationRecord
   end
 
   def present_or_future?
-    if start_date <= Time.now
+    if start_date <= Time.now && deadline >= Time.current
       'Lote em Andamento'
     elsif start_date > Time.current && deadline > Time.current
       'Lote Futuro'
@@ -65,6 +65,6 @@ class ProductBatch < ApplicationRecord
   def created_by_different_from_approved_by
     return unless created_by_id == approved_by_id
 
-    errors.add(:approved_by_id, 'Não poder ser o mesmo admin.')
+    errors.add(:approved_by_id, 'Não poder ser o mesmo administrador a aprovar um lote criado.')
   end
 end

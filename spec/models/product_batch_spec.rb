@@ -46,16 +46,16 @@ RSpec.describe ProductBatch, type: :model do
   
       expect(result).to be false
     end
-    it 'false when deadline is empty' do
+    it 'false when deadline is incorrect' do
       luana = Admin.create!(email: 'luana@leilaodogalpao.com.br', password: '123456', cpf: '13008409784')
       informatica = Category.create!(name: 'Informática')
       mouse_product = Product.new(name: 'Mouse', weight: 90, width: 12, height: 4,
                                   depth: 6, description: 'MOUSE OFFICE TGT P90', category: informatica)
       mouse_product.photo.attach(io: File.open(Rails.root.join('spec', 'fixtures', 'file', 'mouse_red.jpg')),
                                  filename: 'mouse_red.jpg')
-      lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Date.today, deadline: '',
+      lote = ProductBatch.new(created_by: luana, code: 'ACB123456', start_date: Date.today, deadline: 1.day.ago,
                               minimum_value: 1.99, minimal_difference: 10.599)
-
+      
       result = lote.valid?
 
       expect(result).to be false

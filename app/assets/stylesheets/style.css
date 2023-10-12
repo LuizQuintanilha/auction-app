@@ -105,6 +105,10 @@
 
 .notice {
   color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: 18px;
 }
 
 .alert {

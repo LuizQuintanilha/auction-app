@@ -2,13 +2,15 @@
   <h2>Usuários Bloqueados</h2>
 </div>
 
+
+<div class="card-container">
 <% @users.each do |user| %>
     <%= form_with(model: user, url: blocked_user_path(user), method: :patch) do |f| %>
     <div class="card-container">
       <div class="row">
         <div class="card-batch">
-          Email: <%= user.email %></br>
-          CPF: <%= user.cpf %></br>
+          Email: <%= user.email %><br>
+          CPF: <%= user.cpf %><br>
           <div class="submit">
             <% if user.blocked? %>
               <%= f.submit 'Desbloquear' %>
@@ -19,5 +21,5 @@
         </div>
       </div>
     <% end %>
-    </div>
 <% end %>
+</div>

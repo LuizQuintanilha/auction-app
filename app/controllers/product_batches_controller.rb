@@ -4,7 +4,7 @@ class ProductBatchesController < ApplicationController
   before_action :set_product_batch,
                 only: %i[destroy show wait_approve edit update approve destroy waiting_close
                          close_batch]
-
+                         
   def authenticate_user!
     return if admin_signed_in? || user_signed_in?
 
@@ -67,7 +67,7 @@ class ProductBatchesController < ApplicationController
       @product_batch.approve!
       redirect_to @product_batch, notice: 'Aprovado'
     else
-      redirect_to aprove_path, notice: 'Admin não pode ser o mesmo'
+      redirect_to aprove_path, alert: 'Admin não pode ser o mesmo'
     end
   end
 
@@ -101,7 +101,7 @@ class ProductBatchesController < ApplicationController
       flash[:notice] = 'Lote editado com sucesso.'
       redirect_to aprove_path
     else
-      flash.now[:notice] = 'Nao foi possível editar o lote.'
+      flash.now[:alert] = 'Nao foi possível editar o lote.'
       render 'edit'
     end
   end
@@ -124,7 +124,7 @@ class ProductBatchesController < ApplicationController
       @product_batch.product_batch_items.destroy_all
       @product_batch.destroy
     end
-    redirect_to expired_batches_path, notice: 'Sucessfully'
+    redirect_to expired_batches_path, notice: 'Excluído com sucesso.'
   end
 
   def search
