@@ -1,23 +1,30 @@
-
-<h2>Fazer Lances</h2>
-
-<%= form_with model: @bid, url: product_batch_bids_path(@product_batch) do |f| %>
-
-  <%= f.label :value %>
-  <%= f.number_field :value, step: 'any' %>
-  <%= f.submit "Dar Lance" %>
-
-<% end %>
-  <p>Diferença mínima entre lances: R$<%= @product_batch.minimal_difference %></p>
-  <% if @product_batch.bids.any? %>
-    <p>Valor atual do lote: R$<%= @product_batch.bids.last.value %></p>
-  <% else %>
-    <p>Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %></p>
-  <% end %>
-
-<% @product_batch.products.each do |product| %>
-<div>
-  <strong>Produto: </strong><%= link_to product.name, product_path(product.id) %> 
+<div class="h1">
+  <h2>Fazer Lances</h2>
 </div>
-<% end %>
-<%= link_to 'Voltar', product_batches_path %>
+
+<div class="submit">
+  <%= link_to 'Voltar', product_batches_path %>
+</div>
+
+<div class="card-container">
+  <div class="row">
+    <div class="card-batch">
+    <%= form_with model: @bid, url: product_batch_bids_path(@product_batch) do |f| %>
+      <%= f.label :value %>
+      <%= f.number_field :value, step: 'any' %>
+      <%= f.submit "Dar Lance" %>
+    <% end %>
+    Diferença mínima entre lances: R$<%= @product_batch.minimal_difference %>0<br>
+    <% if @product_batch.bids.any? %>
+      Valor atual do lote: R$<%= @product_batch.bids.last.value %>0<br>
+    <% else %>
+      Valor atual do lote: R$<%= @product_batch.bids.last&.value || @product_batch.minimum_value %><br>
+    <% end %>
+
+    Produto(s): <br>
+    <% @product_batch.products.each do |product| %>
+      <%= link_to product.name, product_path(product.id) %><br>
+    <% end %>
+    </div>
+  </div>
+</div>

@@ -50,7 +50,7 @@ describe 'From the homepage' do
     visit expired_batches_path
     click_on 'Excluir Lote'
 
-    expect(page).to have_content 'Sucessfully'
+    expect(page).to have_content 'Excluído com sucesso.'
   end
   it 'admin approve a batch with a bid' do
     admin = Admin.create!(email: 'luiz@leilaodogalpao.com.br', password: '123456', cpf: '12662381744')

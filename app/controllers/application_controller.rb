@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def check_blocked_user
     return unless user_signed_in? && current_user.blocked?
 
-    flash.now[:notice] = 'Sua conta está suspensa.'
+    flash.now[:alert] = 'Sua conta está suspensa.'
     sign_out current_user
     redirect_to new_user_session_path
   end

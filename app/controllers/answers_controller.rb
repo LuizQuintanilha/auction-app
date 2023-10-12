@@ -27,7 +27,7 @@ class AnswersController < ApplicationController
       redirect_to product_batch_answers_path(product_batch_id: @question.product_batch_id),
                   notice: 'Resposta enviada com sucesso.'
     else
-      flash[:notice] = 'A resposta não pode estar em branco ou ter menos que 6 caracteres.'
+      flash[:alert] = 'A resposta não pode estar em branco ou ter menos que 6 caracteres.'
       render :new
     end
   end

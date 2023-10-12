@@ -8,9 +8,10 @@
       <div class="row">
       <% if batch.bids.any? %>
           <div class="card-batch">
-            Código: <%= link_to  batch.code, product_batch_path(batch.id) %> |
-            Término: <%= batch.deadline %> hr
+            <strong>Código: </strong><%= link_to  batch.code, product_batch_path(batch.id) %><br>
+            <strong>Término: </strong><%= batch.deadline %> hr<br>
             <% if batch.wait_finish? %>
+               <strong>Valor final: </strong>R$<%= batch.bids.last&.value %>0<br>
               <%= button_to 'Encerrar', close_batch_product_batch_path(batch ), { method: :patch} %>
             <% end %>
           </div>

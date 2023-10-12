@@ -2,6 +2,7 @@
   <h2>Usuários Bloqueados</h2>
 </div>
 
+
 <div class="card-container">
 <% @users.each do |user| %>
     <%= form_with(model: user, url: blocked_user_path(user), method: :patch) do |f| %>

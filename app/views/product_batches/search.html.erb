@@ -2,18 +2,27 @@
   <h2>Resultado da busca por: <%= @query %></h2>
 </div>
 
+<div class="h1"> 
 <% if @product_batches.present? %>
-  <p><%= @product_batches.count %> Lote(s) Encontrado(s)</p>
+  <h3><%= @product_batches.count %> Lote(s) Encontrado(s)</h3>
+</div>
+
+  <div class="card-container">
   <% @product_batches.each do |batch| %>
-    <div class="card-container">
-    
-      <strong>Código do lote: <%= link_to batch.code, product_batch_path(batch.id)%></strong>
+      <div class="row">
+      <div class="card-batch">
+      <strong>Código do lote:</strong>  <%= link_to batch.code, product_batch_path(batch.id)%><br>
+      <strong>Estatus:</strong>  <%= batch.present_or_future? %><br>
       <strong>Produtos:</strong>
         <% batch.products.each do |product| %>
-      <%= link_to product.name, product_path(product.id) %> |
+          <%= link_to product.name, product_path(product.id) %>
         <% end %>
-    </div>
+      <br>  
+      <strong>Valor atual do lote:</strong> R$<%= batch.bids.last&.value || batch.minimum_value %>0<br>  
+      </div>
+      </div>
   <% end %>
+  </div>
 <% else %>
   <div class="h1">  
     <h3>Nenhum lote encontrado para a busca realizada.</h3>

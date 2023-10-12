@@ -7,13 +7,21 @@
       <% if batch.bids.any? %>
       <div class="card-batch">
         <% winning_bid = batch.bids.last %>
-        <strong>Código do Lote: </strong> <%= link_to batch.code, product_batch_path(batch.id) %> | 
+        <strong>Código do Lote: </strong> <%= link_to batch.code, product_batch_path(batch.id) %><br>
+        <strong>Valor final:</strong> R$<%= batch.bids.last&.value  %><br>
+        <strong>Produtos do lote:</strong>
+        <ul>
+          <% batch.products.each do |p| %>
+            <li><%= link_to p.name, product_path(p.id) %></li>
+          <% end %>
+        </ul>
       <% end %>
       </div>
     </div>
   <% end %>
 </div>
-  <% if @product_batches.none? { |batch| batch.bids.any? } %>
-  <div class="h1">
-    <h3>Sem lotes vencedores</h3>
-  <% end %>
+
+<% if @product_batches.none? { |batch| batch.bids.any? } %>
+<div class="h1">
+  <h3>Sem lotes vencedores</h3>
+<% end %>

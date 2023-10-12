@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     @question = @product_batch.questions.build(question_params)
     @question.user = current_user
     if @question.content.blank?
-      redirect_to product_batch_path(@product_batch), notice: 'Erro ao enviar a pergunta.'
+      redirect_to product_batch_path(@product_batch), alert: 'Erro ao enviar a pergunta.'
     else
       @question.save
       redirect_to product_batch_path(@product_batch), notice: 'Pergunta enviada com sucesso.'
@@ -25,7 +25,7 @@ class QuestionsController < ApplicationController
     @product_batch = @question.product_batch
     @question.destroy
     redirect_to product_batch_answers_path(product_batch_id: @product_batch.id),
-                notice: 'Pergunta excluída com sucesso.'
+                alert: 'Pergunta excluída com sucesso.'
   end
 
   private
