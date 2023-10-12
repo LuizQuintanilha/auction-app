@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      product: Produto
+      product: 'Produto'
     attributes:
       product:
         name: 'Nome'

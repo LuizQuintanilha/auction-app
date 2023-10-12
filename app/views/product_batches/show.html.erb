@@ -7,11 +7,12 @@ d<div class="h1">
 </div>
 
 <div class="show-batch">
-  <strong>Início: </strong><%= @product_batch.start_date%> 
-  <strong>Término: </strong><%= @product_batch.deadline %> 
-  <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %> 
-  <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %> |
-  <%= @product_batch.present_or_future?  %>
+  <strong>Início: </strong><%= @product_batch.start_date%><br> 
+  <strong>Término: </strong><%= @product_batch.deadline %><br>
+  <strong>Lance Mínimo: </strong>R$:<%= @product_batch.minimum_value %><br>
+  <strong>Diferença mínima: </strong>R$:<%= @product_batch.minimal_difference %><br>
+  <strong>Estatus: </strong><%= @product_batch.present_or_future?  %><br>
+  <strong>Produto(s): </strong>
   <% if @product_batch.present_or_future? == 'Lote em Andamento' && user_signed_in? %>
     <%= link_to "Fazer Lance", new_product_batch_bid_path(@product_batch) %>
   <% end %>

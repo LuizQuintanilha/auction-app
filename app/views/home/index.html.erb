@@ -7,7 +7,7 @@
       <div class="card-batch">
         <h2>Código do lote:</h2>
         <strong><%= link_to batch.code, product_batch_path(batch.id) %></strong><br/>
-        <h4>Status: <%= batch.present_or_future? %></h4>
+        <h4>Estatus: <%= batch.present_or_future? %></h4>
         <% batch.products.each do |prod| %>
           |<%= link_to prod.name, product_path(prod.id) %>|
         <% end %>

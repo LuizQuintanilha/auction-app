@@ -7,10 +7,10 @@
       <div class="row">
         <div class="card-batch">
           <h4>Código do lote: <%= link_to batch.code, product_batch_path(batch.id) %></h4>
-          Início:<%= batch.start_date %>hr
-          Término:<%= batch.deadline %>hr</br>
-          Estatus: <%= batch.status %>
-          Criado por: <%= batch.created_by.email if batch.created_by %>
+          Início:<%= batch.start_date %>hr<br>
+          Término:<%= batch.deadline %>hr<br>
+          Estatus: <%= batch.status %><br>
+          Criado por: <%= batch.created_by.email if batch.created_by %><br>
           <% if batch.approved_by.present? %>
             Aprovado por:<%= batch.approved_by.email if batch.approved_by%>
           <% end %>
