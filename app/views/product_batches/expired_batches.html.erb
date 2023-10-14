@@ -3,9 +3,9 @@
 </div>
 
 <% if @product_batches.any? %>
-  <div class="card-container">
     <% @product_batches.each do |batch| %>
-      <div class="row">
+  <div class="card-container">
+      <div class="card-row">
       <% if batch.bids.any? %>
           <div class="card-batch">
             <strong>Código: </strong><%= link_to  batch.code, product_batch_path(batch.id) %><br>

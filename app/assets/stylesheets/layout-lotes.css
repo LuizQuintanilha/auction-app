@@ -37,18 +37,6 @@
   bottom: 15px;
 }
 
-.answer-box {
-  background-color: aliceblue;
-  border-color: rgb(68, 66, 66);
-  border-radius: 10px;
-  border: 2px solid black;
-  box-sizing: border-box;
-  padding: 6px;
-  font-size: 16px;
-  width: 250px;
-  height: auto;
-  word-wrap: break-word; 
-}
 
 .show-batch {
   background-color: aliceblue;
@@ -74,7 +62,47 @@
   bottom: 15px;
 }
 
+.question-box {
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  background-color: lightgray;
+  border-color: rgb(68, 66, 66);
+  border-radius: 10px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  width: 400px;
+  height: 400px;
+  word-wrap: break-word; 
+  left: 0;
+  right: 0;
+}
 
+.answer-box {
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  background-color: lightgray;
+  border-color: rgb(68, 66, 66);
+  border-radius: 10px;
+  border: 2px solid black;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  width: 400px;
+  height: 400px;
+  word-wrap: break-word; 
+  left: 0;
+  right: 0;
+}
+
+
+.input-question {
+  font-size: 16px;
+  font-weight: bold;
+}
 
 
 

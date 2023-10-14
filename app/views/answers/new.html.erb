@@ -3,22 +3,18 @@
 </div>
 
 <div class="answer-box">
-  <div>
-    <strong>Usuário:</strong> <%= @question.user.email  %>
+  <div class="h1">
+    <strong>Usuário:</strong> <%= @question.user.email  %><br>
+    <strong>Lote:</strong> <%= @question.product_batch.code %><br>
+    <strong>Dúvida:</strong><%= @question.content %><br>
+ 
+    <%= form_with model: @answer, url: product_batch_answers_path(product_batch_id: @product_batch.id, question_id: @question.id) do |f| %>
+      <div class="input-question">
+        <%= f.text_area :content, placeholder: 'Digite sua resposta', rows: 18 %>
+      </div>
+      <div class="submit">
+        <%= f.submit "Enviar Resposta" %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <strong>Lote:</strong> <%= @question.product_batch.code %>
-  </div>
-
-  <div>
-    <strong>Dúvida:</strong><%= @question.content %>
-  </div>
-
-  <%= form_with model: @answer, url: product_batch_answers_path(product_batch_id: @product_batch.id, question_id: @question.id) do |f| %>
-    <div>
-      <%= f.text_area :content, placeholder: 'Digite sua resposta' %>
-    </div>
-    <%= f.submit "Enviar Resposta" %>
-  <% end %>
 </div>

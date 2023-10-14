@@ -3,16 +3,13 @@
 </div>
 
 <% if @questions.any? %> 
-  <div class="card-container">
     <% @questions.each do |q| %>
-      <div class='row'>
+  <div class="card-container">
+      <div class='card-row'>
         <div class="card-batch">
-          Usuário: <%= q.user.email %></br>
-          Lote: <%= q.product_batch.code %></br>
-          Dúvida: 
-          <div class="answer-box">
-            <%= q.content %>
-          </div>
+          <strong>Usuário:</strong> <%= q.user.email %></br>
+          <strong>Lote:</strong> <%= q.product_batch.code %></br>
+          <strong>Dúvida:</strong> <br><%= q.content %>
           <div class="submit">
             <%= link_to 'Responder', new_product_batch_answer_path(product_batch_id: q.product_batch_id, question_id: q.id, user_id: q.user_id) %>
           </div>

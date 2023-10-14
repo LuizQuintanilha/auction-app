@@ -1,14 +1,17 @@
 <div class="h1">
   <h2>Enviar Pergunta</h2>
 </div>
-<div class="form">
+
+<div class="question-box">
   <%= form_with(model: @question, url: product_batch_questions_path(@product_batch), method: :post) do |form| %>
-    <div class="input-text">
-      <%= form.label :content, "Pergunta" %>
-      <%= form.text_area :content, rows: 4 %>
+  <div class="h1">
+      <h3><%= form.label :content, "Pergunta" %></h3>
+    <div class="input-question">
+      <%= form.text_area :content, rows: 18 %>
     </div>
     <div class="submit">
       <%= form.submit "Enviar" %>
     </div>
   <% end %>
+  </div>
 </div>

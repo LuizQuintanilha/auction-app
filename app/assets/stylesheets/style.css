@@ -108,7 +108,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font: 18px;
+  font: 22px;
 }
 
 .alert {
@@ -116,6 +116,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font: 22px;
 }
 
 .input-text {
@@ -151,7 +152,7 @@
 
 .submit {
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 5px 5px;
   border-radius: 5px;
 }
 

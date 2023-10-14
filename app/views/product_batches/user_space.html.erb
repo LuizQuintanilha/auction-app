@@ -3,23 +3,23 @@
 </div>
 
 <% if @product_batches.any?  %>
-  <div class="card-container">
-  <% @product_batches.each do |batch| %>
-      <% if batch.bids.last.id == @user.bids.last.id %>
-        <div class="row">
-          <div class="card-batch">
-            <h3>Parabéns!!!</h3>
-            <strong> Você é o vencedor do Lote: <%= link_to batch.code, product_batch_path(batch.id) %></strong>
-            <br><strong>Produto(s) Adquirido(s):</strong>
-            <% batch.products.each do |product| %>  
-              <li><%= link_to product.name, product_path(product.id) %></li>
-            <% end %>
-            <strong>Valor final do lote:</strong> R$<%= batch.bids.last.value %>0
+    <% @product_batches.each do |batch| %>
+    <div class="card-container">
+        <% if batch.bids.last.id == @user.bids.last.id %>
+          <div class="card-row">
+            <div class="card-batch">
+              <h3>Parabéns!!!</h3>
+              <strong> Você é o vencedor do Lote: <%= link_to batch.code, product_batch_path(batch.id) %></strong>
+              <br><strong>Produto(s) Adquirido(s):</strong>
+              <% batch.products.each do |product| %>  
+                <li><%= link_to product.name, product_path(product.id) %></li>
+              <% end %>
+              <strong>Valor final do lote:</strong> R$<%= batch.bids.last.value %>0
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
     </div>  
-  <% end %>
+    <% end %>
 <% else %>
   <div class="h1"> 
     <h3>Nenhum lote adquirido</h3>
