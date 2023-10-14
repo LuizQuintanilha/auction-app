@@ -15,7 +15,7 @@ class BidsController < ApplicationController
         @bid.save
         redirect_to product_batch_path(@product_batch), notice: 'Lance criado com sucesso'
       else
-        redirect_to new_product_batch_bid_path(@product_batch), alert: 'Deve ser maior que valor inicial'
+        redirect_to new_product_batch_bid_path(@product_batch), alert: 'Lance deve ser maior que valor inicial'
       end
     else
       @product_batch.present_or_future? == 'Lote em Andamento' && @product_batch.bids.length >= 1

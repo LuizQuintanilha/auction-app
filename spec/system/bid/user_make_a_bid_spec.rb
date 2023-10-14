@@ -84,7 +84,7 @@ describe 'From the homepage' do
           fill_in 'Value', with: '590'
           click_on 'Dar Lance'
 
-          expect(page).to have_content 'Deve ser maior que valor inicial'
+          expect(page).to have_content 'Lance deve ser maior que valor inicial'
           expect(page).to have_content 'Valor atual do lote: R$600.0'
         end
         it 'when the bids is not the first bid' do

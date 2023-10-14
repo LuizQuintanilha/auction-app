@@ -139,7 +139,7 @@ class ProductBatchesController < ApplicationController
 
     @user = current_user
 
-    @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct
+    @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct && ProductBatch.where(expired: 2)
   end
 
   private

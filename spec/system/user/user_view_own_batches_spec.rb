@@ -33,7 +33,7 @@ describe 'From the homepage' do
         expect(current_path).to eq user_space_path
         expect(page).to have_content 'Parabéns!!!'
         expect(page).to have_content "Você é o vencedor do Lote: #{lote.code}"
-        expect(page).to have_content "Produto(s) Adquirido(s): #{mouse_product.description}"
+        expect(page).to have_content "Produto(s) Adquirido(s): #{mouse_product.name}"
         expect(page).to have_content "Valor final do lote: R$#{lote.bids.maximum(:value)}"
       end
     end

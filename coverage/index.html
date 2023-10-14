@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-10-12T12:30:29-03:00">2023-10-12T12:30:29-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-10-14T12:08:08-03:00">2023-10-14T12:08:08-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -1955,7 +1955,7 @@
 
             
 
-            <code class="ruby">        redirect_to new_product_batch_bid_path(@product_batch), alert: &#39;Deve ser maior que valor inicial&#39;</code>
+            <code class="ruby">        redirect_to new_product_batch_bid_path(@product_batch), alert: &#39;Lance deve ser maior que valor inicial&#39;</code>
           </li>
         </div>
       
@@ -4576,7 +4576,7 @@
 
             
 
-            <code class="ruby">    @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct</code>
+            <code class="ruby">    @product_batches = ProductBatch.joins(:bids).where(bids: { user_id: @user.id }).distinct &amp;&amp; ProductBatch.where(expired: 2)</code>
           </li>
         </div>
       
