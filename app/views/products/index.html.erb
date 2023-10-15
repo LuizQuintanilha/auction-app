@@ -5,7 +5,7 @@
 <% if @products.any? %>
   <div class="card-container">
       <% @products.each do |product| %>
-        <div class="row">
+        <div class="card-row">
           <div class="card-batch">
             <strong>Produto:</strong> 
             <%= link_to product.name, product_path(product.id) %><br/>
@@ -16,4 +16,17 @@
   </div>
 <% else %>
   <p>Sem produtos cadastrados.</p>
+<% end %>
+
+<% if @product_models.any? %>
+  <div class="card-container">
+    <% @product_models.each do |pm| %>
+      <div class="card-row">
+        <div class="card-batch">
+          <strong>Produto:</strong> 
+          <%= link_to pm["name"], product_model_path(pm["id"]) %><br/>
+        </div>
+      </div>
+  </div>
+  <% end %>
 <% end %>

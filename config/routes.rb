@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admins
   root to: 'home#index'
+  resources :product_models, only: %i[index show]
   resources :products, only: %i[index new create show edit update]
   resources :product_batches, only: %i[index new create show edit update destroy] do
     patch :approve, :wait_approve, on: :member
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
     resources :questions, only: %i[new create] do
       delete :destroy, on: :member
     end
-
     resources :answers, only: %i[index new create]
     get 'search', on: :collection
   end

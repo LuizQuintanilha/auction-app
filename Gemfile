@@ -11,6 +11,7 @@ gem 'devise'
 gem 'activestorage'
 gem 'pry-byebug'
 gem 'simplecov', require: false, group: :test
+gem 'faraday'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
