@@ -651,10 +651,19 @@
           null,
           1,
           10,
+          10,
+          10,
           null,
           null,
           1,
           5,
+          5,
+          5,
+          5,
+          5,
+          null,
+          0,
+          null,
           null,
           null,
           1,
@@ -790,8 +799,30 @@
           null,
           null
         ]
+      },
+      "/home/luiz/treina_dev/auction-app/app/controllers/product_models_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1697296088
+    "timestamp": 1698582657
   }
 }
